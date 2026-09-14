@@ -1,200 +1,590 @@
 <!doctype html>
 <html lang="ja">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
   <title>まこマッチ 💕</title>
-  <link rel="stylesheet" href="/style.css">
+
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
 </head>
 
 <body>
+
 <header>
   <div class="brand">まこマッチ 💕</div>
 </header>
 
 <main>
 
-  <!-- ログイン・登録 -->
+  <!-- =========================
+       ログイン・新規登録
+  ========================== -->
+
   <section id="auth" class="card">
+
     <h1>18歳以上のための出会い</h1>
+
     <p class="muted">
       安心して使えることを大切にしたマッチングサイトです。
     </p>
 
     <div class="tabs">
-      <button class="tab active" onclick="setMode('login')">ログイン</button>
-      <button class="tab" onclick="setMode('register')">新規登録</button>
+
+      <button
+        class="tab active"
+        onclick="setMode('login')"
+      >
+        ログイン
+      </button>
+
+      <button
+        class="tab"
+        onclick="setMode('register')"
+      >
+        新規登録
+      </button>
+
     </div>
+
+
+    <!-- =========================
+         ログイン
+    ========================== -->
 
     <div id="loginForm">
-      <label>ユーザー名</label>
-      <input id="loginUsername" autocomplete="username">
 
-      <label>パスワード</label>
-      <input id="loginPassword" type="password" autocomplete="current-password">
-
-      <button class="primary" onclick="login()">ログイン</button>
-    </div>
-
-    <div id="registerForm" hidden>
-      <label>ユーザー名</label>
-      <input id="registerUsername" autocomplete="username">
-
-      <label>パスワード</label>
-      <input id="registerPassword" type="password" autocomplete="new-password">
-
-      <label>年齢</label>
-      <input id="registerAge" type="number" min="18" placeholder="18歳以上">
-
-      <label>性別</label>
-      <select id="registerGender">
-        <option value="">選択してください</option>
-        <option value="男性">男性</option>
-        <option value="女性">女性</option>
-        <option value="その他">その他</option>
-      </select>
-
-      <label>地域</label>
-      <select id="registerArea">
-        <option value="">選択してください</option>
-        <option>北海道</option>
-        <option>東北</option>
-        <option>関東</option>
-        <option>中部</option>
-        <option>近畿</option>
-        <option>中国</option>
-        <option>四国</option>
-        <option>九州・沖縄</option>
-      </select>
-
-      <label class="check">
-        <input id="agreeTerms" type="checkbox">
-        利用規約・プライバシーポリシーに同意する
+      <label for="loginUsername">
+        メールアドレス
       </label>
 
-      <p>
-        <a href="/terms" target="_blank">利用規約</a>
-        ・
-        <a href="/privacy" target="_blank">プライバシーポリシー</a>
-      </p>
+      <input
+        id="loginUsername"
+        type="email"
+        autocomplete="username"
+        inputmode="email"
+        placeholder="example@example.com"
+      >
 
-      <button class="primary" onclick="register()">新規登録</button>
+      <label for="loginPassword">
+        パスワード
+      </label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="パスワード"
+      >
+
+      <button
+        class="primary"
+        onclick="login()"
+      >
+        ログイン
+      </button>
+
     </div>
 
-    <div id="authMessage" class="message"></div>
+
+    <!-- =========================
+         新規登録
+    ========================== -->
+
+    <div id="registerForm" hidden>
+
+      <label for="registerUsername">
+        メールアドレス
+      </label>
+
+      <input
+        id="registerUsername"
+        type="email"
+        autocomplete="username"
+        inputmode="email"
+        placeholder="example@example.com"
+      >
+
+      <label for="registerPassword">
+        パスワード
+      </label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="8文字以上"
+      >
+
+      <label for="registerAge">
+        年齢
+      </label>
+
+      <input
+        id="registerAge"
+        type="number"
+        min="18"
+        max="120"
+        inputmode="numeric"
+        placeholder="18歳以上"
+      >
+
+      <label for="registerGender">
+        性別
+      </label>
+
+      <select id="registerGender">
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option value="男性">
+          男性
+        </option>
+
+        <option value="女性">
+          女性
+        </option>
+
+        <option value="その他">
+          その他
+        </option>
+
+      </select>
+
+
+      <label for="registerArea">
+        地域
+      </label>
+
+      <select id="registerArea">
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option>
+          北海道
+        </option>
+
+        <option>
+          東北
+        </option>
+
+        <option>
+          関東
+        </option>
+
+        <option>
+          中部
+        </option>
+
+        <option>
+          近畿
+        </option>
+
+        <option>
+          中国
+        </option>
+
+        <option>
+          四国
+        </option>
+
+        <option>
+          九州・沖縄
+        </option>
+
+      </select>
+
+
+      <label class="check">
+
+        <input
+          id="agreeTerms"
+          type="checkbox"
+        >
+
+        利用規約・プライバシーポリシーに同意する
+
+      </label>
+
+
+      <p>
+
+        <a
+          href="/terms"
+          target="_blank"
+        >
+          利用規約
+        </a>
+
+        ・
+
+        <a
+          href="/privacy"
+          target="_blank"
+        >
+          プライバシーポリシー
+        </a>
+
+      </p>
+
+
+      <button
+        class="primary"
+        onclick="register()"
+      >
+        新規登録
+      </button>
+
+    </div>
+
+
+    <div
+      id="authMessage"
+      class="message"
+    ></div>
+
   </section>
 
 
-  <!-- ログイン後 -->
-  <section id="app" hidden>
+  <!-- =========================
+       ログイン後
+  ========================== -->
+
+  <section
+    id="app"
+    hidden
+  >
+
+
+    <!-- =========================
+         上部
+    ========================== -->
 
     <section class="card">
+
       <div class="topbar">
+
         <div>
-          <h2>まこマッチ 💕</h2>
-          <div id="meInfo" class="muted"></div>
+
+          <h2>
+            まこマッチ 💕
+          </h2>
+
+          <div
+            id="meInfo"
+            class="muted"
+          ></div>
+
         </div>
 
-        <button class="secondary" onclick="logout()">ログアウト</button>
+        <button
+          class="secondary"
+          onclick="logout()"
+        >
+          ログアウト
+        </button>
+
       </div>
+
     </section>
 
 
-    <!-- プロフィール -->
+    <!-- =========================
+         プロフィール
+    ========================== -->
+
     <section class="card">
-      <h2>👤 プロフィール</h2>
 
-      <label>ニックネーム</label>
-      <input id="profileName">
+      <h2>
+        👤 プロフィール
+      </h2>
 
-      <label>年齢</label>
-      <input id="profileAge" type="number" min="18">
 
-      <label>性別</label>
+      <label for="profileName">
+        ニックネーム
+      </label>
+
+      <input
+        id="profileName"
+        placeholder="ニックネーム"
+      >
+
+
+      <label for="profileAge">
+        年齢
+      </label>
+
+      <input
+        id="profileAge"
+        type="number"
+        min="18"
+        max="120"
+      >
+
+
+      <label for="profileGender">
+        性別
+      </label>
+
       <select id="profileGender">
-        <option value="">選択してください</option>
-        <option value="男性">男性</option>
-        <option value="女性">女性</option>
-        <option value="その他">その他</option>
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option value="男性">
+          男性
+        </option>
+
+        <option value="女性">
+          女性
+        </option>
+
+        <option value="その他">
+          その他
+        </option>
+
       </select>
 
-      <label>地域</label>
+
+      <label for="profileArea">
+        地域
+      </label>
+
       <select id="profileArea">
-        <option value="">選択してください</option>
-        <option>北海道</option>
-        <option>東北</option>
-        <option>関東</option>
-        <option>中部</option>
-        <option>近畿</option>
-        <option>中国</option>
-        <option>四国</option>
-        <option>九州・沖縄</option>
+
+        <option value="">
+          選択してください
+        </option>
+
+        <option>
+          北海道
+        </option>
+
+        <option>
+          東北
+        </option>
+
+        <option>
+          関東
+        </option>
+
+        <option>
+          中部
+        </option>
+
+        <option>
+          近畿
+        </option>
+
+        <option>
+          中国
+        </option>
+
+        <option>
+          四国
+        </option>
+
+        <option>
+          九州・沖縄
+        </option>
+
       </select>
 
-      <label>自己紹介</label>
-      <textarea id="profileBio" rows="4"></textarea>
 
-      <button class="primary" onclick="saveProfile()">プロフィールを保存</button>
+      <label for="profileBio">
+        自己紹介
+      </label>
 
-      <div id="profileMessage" class="message"></div>
+      <textarea
+        id="profileBio"
+        rows="4"
+        placeholder="自己紹介を書いてみよう"
+      ></textarea>
+
+
+      <button
+        class="primary"
+        onclick="saveProfile()"
+      >
+        プロフィールを保存
+      </button>
+
+
+      <div
+        id="profileMessage"
+        class="message"
+      ></div>
+
     </section>
 
 
-    <!-- 検索 -->
+    <!-- =========================
+         相手を探す
+    ========================== -->
+
     <section class="card">
-      <h2>🔎 相手を探す</h2>
 
-      <label>キーワード</label>
-      <input id="searchText" placeholder="名前や自己紹介">
+      <h2>
+        🔎 相手を探す
+      </h2>
 
-      <label>性別</label>
+
+      <label for="searchText">
+        キーワード
+      </label>
+
+      <input
+        id="searchText"
+        placeholder="名前や自己紹介"
+      >
+
+
+      <label for="searchGender">
+        性別
+      </label>
+
       <select id="searchGender">
-        <option value="">すべて</option>
-        <option value="男性">男性</option>
-        <option value="女性">女性</option>
-        <option value="その他">その他</option>
+
+        <option value="">
+          すべて
+        </option>
+
+        <option value="男性">
+          男性
+        </option>
+
+        <option value="女性">
+          女性
+        </option>
+
+        <option value="その他">
+          その他
+        </option>
+
       </select>
 
-      <label>地域</label>
+
+      <label for="searchArea">
+        地域
+      </label>
+
       <select id="searchArea">
-        <option value="">すべて</option>
-        <option>北海道</option>
-        <option>東北</option>
-        <option>関東</option>
-        <option>中部</option>
-        <option>近畿</option>
-        <option>中国</option>
-        <option>四国</option>
-        <option>九州・沖縄</option>
+
+        <option value="">
+          すべて
+        </option>
+
+        <option>
+          北海道
+        </option>
+
+        <option>
+          東北
+        </option>
+
+        <option>
+          関東
+        </option>
+
+        <option>
+          中部
+        </option>
+
+        <option>
+          近畿
+        </option>
+
+        <option>
+          中国
+        </option>
+
+        <option>
+          四国
+        </option>
+
+        <option>
+          九州・沖縄
+        </option>
+
       </select>
 
-      <button class="primary" onclick="searchUsers()">検索</button>
+
+      <button
+        class="primary"
+        onclick="searchUsers()"
+      >
+        検索
+      </button>
+
     </section>
 
 
-    <!-- おすすめ -->
+    <!-- =========================
+         おすすめ
+    ========================== -->
+
     <section>
-      <h2>💕 おすすめの人</h2>
+
+      <h2>
+        💕 おすすめの人
+      </h2>
+
       <div id="users"></div>
+
     </section>
 
 
-    <!-- マッチ -->
+    <!-- =========================
+         マッチ
+    ========================== -->
+
     <section class="card">
-      <h2>💞 マッチ</h2>
+
+      <h2>
+        💞 マッチ
+      </h2>
+
       <div id="matches"></div>
+
     </section>
 
 
-    <!-- チャット -->
-    <section class="card">
-      <h2>💬 チャット</h2>
+    <!-- =========================
+         チャット
+    ========================== -->
 
-      <div id="chatTitle" class="muted">
+    <section class="card">
+
+      <h2>
+        💬 チャット
+      </h2>
+
+
+      <div
+        id="chatTitle"
+        class="muted"
+      >
         マッチした相手を選んでください
       </div>
 
-      <div id="messages" class="messages"></div>
+
+      <div
+        id="messages"
+        class="messages"
+      ></div>
+
 
       <textarea
         id="messageText"
@@ -202,33 +592,63 @@
         placeholder="メッセージを入力"
       ></textarea>
 
-      <button class="primary" onclick="sendMessage()">送信</button>
+
+      <button
+        class="primary"
+        onclick="sendMessage()"
+      >
+        送信
+      </button>
+
     </section>
 
 
-    <!-- アカウント削除 -->
+    <!-- =========================
+         アカウント削除
+    ========================== -->
+
     <section class="card danger">
-      <h2>⚠️ アカウント削除</h2>
+
+      <h2>
+        ⚠️ アカウント削除
+      </h2>
 
       <p>
-        アカウントを削除すると、プロフィールやマッチなどのデータが削除されます。
+        アカウントを削除すると、
+        プロフィールやマッチなどの
+        データが削除されます。
       </p>
+
 
       <input
         id="deletePassword"
         type="password"
+        autocomplete="current-password"
         placeholder="現在のパスワード"
       >
 
-      <button class="dangerButton" onclick="deleteAccount()">
+
+      <button
+        class="dangerButton"
+        onclick="deleteAccount()"
+      >
         アカウントを削除する
       </button>
+
     </section>
 
   </section>
 
 </main>
 
-<script src="/app.js"></script>
+
+<!-- =========================
+     JavaScript
+     ?v=3 でキャッシュ対策
+========================== -->
+
+<script src="/app.js?v=3"></script>
+
 </body>
+
 </html>
