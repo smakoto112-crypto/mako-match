@@ -6,64 +6,229 @@
   <title>まこマッチ 💕</title>
   <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
-<header><div class="brand">まこマッチ <span>💕</span></div><button id="logout" class="ghost hidden">ログアウト</button></header>
+<header>
+  <div class="brand">まこマッチ 💕</div>
+</header>
 
 <main>
+
+  <!-- ログイン・登録 -->
   <section id="auth" class="card">
     <h1>18歳以上のための出会い</h1>
-    <p class="muted">安心して使えることを大切にしたマッチングサイト。</p>
-    <div class="tabs"><button class="tab active" data-mode="login">ログイン</button><button class="tab" data-mode="register">新規登録</button></div>
+    <p class="muted">
+      安心して使えることを大切にしたマッチングサイトです。
+    </p>
 
-    <form id="authForm">
-      <label>メールアドレス<input id="email" type="email" required autocomplete="email"></label>
-      <label>パスワード<input id="password" type="password" minlength="8" required autocomplete="current-password"></label>
-      <div id="registerFields" class="hidden">
-        <label>ニックネーム<input id="nickname" maxlength="30"></label>
-        <label>生年月日<input id="birthDate" type="date"></label>
-        <label>自己紹介<textarea id="bio" maxlength="500" placeholder="趣味や好きなことなど"></textarea></label>
-        <p class="notice">18歳未満の方は登録できません。年齢確認が必要なサービスとして公開する場合は、別途正式な本人・年齢確認を実装してください。</p>
-      </div>
-      <button class="primary" id="authSubmit">ログイン</button>
-      <p id="authError" class="error"></p>
-    </form>
+    <div class="tabs">
+      <button class="tab active" onclick="setMode('login')">ログイン</button>
+      <button class="tab" onclick="setMode('register')">新規登録</button>
+    </div>
+
+    <div id="loginForm">
+      <label>ユーザー名</label>
+      <input id="loginUsername" autocomplete="username">
+
+      <label>パスワード</label>
+      <input id="loginPassword" type="password" autocomplete="current-password">
+
+      <button class="primary" onclick="login()">ログイン</button>
+    </div>
+
+    <div id="registerForm" hidden>
+      <label>ユーザー名</label>
+      <input id="registerUsername" autocomplete="username">
+
+      <label>パスワード</label>
+      <input id="registerPassword" type="password" autocomplete="new-password">
+
+      <label>年齢</label>
+      <input id="registerAge" type="number" min="18" placeholder="18歳以上">
+
+      <label>性別</label>
+      <select id="registerGender">
+        <option value="">選択してください</option>
+        <option value="男性">男性</option>
+        <option value="女性">女性</option>
+        <option value="その他">その他</option>
+      </select>
+
+      <label>地域</label>
+      <select id="registerArea">
+        <option value="">選択してください</option>
+        <option>北海道</option>
+        <option>東北</option>
+        <option>関東</option>
+        <option>中部</option>
+        <option>近畿</option>
+        <option>中国</option>
+        <option>四国</option>
+        <option>九州・沖縄</option>
+      </select>
+
+      <label class="check">
+        <input id="agreeTerms" type="checkbox">
+        利用規約・プライバシーポリシーに同意する
+      </label>
+
+      <p>
+        <a href="/terms" target="_blank">利用規約</a>
+        ・
+        <a href="/privacy" target="_blank">プライバシーポリシー</a>
+      </p>
+
+      <button class="primary" onclick="register()">新規登録</button>
+    </div>
+
+    <div id="authMessage" class="message"></div>
   </section>
 
-  <section id="app" class="hidden">
-    <div class="welcome card"><div><strong id="hello"></strong><p class="muted">気になる人に「いいね」してみよう。</p></div></div>
 
-    <nav class="nav">
-      <button class="navbtn active" data-page="discover">探す</button>
-      <button class="navbtn" data-page="matches">マッチ</button>
-      <button class="navbtn" data-page="profile">プロフィール</button>
-    </nav>
+  <!-- ログイン後 -->
+  <section id="app" hidden>
 
-    <section id="discover" class="page">
-      <div class="toolbar"><input id="search" placeholder="名前や自己紹介で検索"><button id="searchBtn">検索</button></div>
-      <div id="users" class="grid"></div>
-    </section>
+    <section class="card">
+      <div class="topbar">
+        <div>
+          <h2>まこマッチ 💕</h2>
+          <div id="meInfo" class="muted"></div>
+        </div>
 
-    <section id="matches" class="page hidden">
-      <div id="matchList" class="list"></div>
-      <div id="chat" class="card hidden">
-        <div class="chatHead"><button id="backMatches">←</button><strong id="chatTitle"></strong></div>
-        <div id="messages" class="messages"></div>
-        <form id="messageForm" class="messageForm"><input id="messageInput" maxlength="1000" placeholder="メッセージを書く…" required><button>送信</button></form>
+        <button class="secondary" onclick="logout()">ログアウト</button>
       </div>
     </section>
 
-    <section id="profile" class="page hidden">
-      <form id="profileForm" class="card">
-        <h2>プロフィール</h2>
-        <label>ニックネーム<input id="pNickname" maxlength="30" required></label>
-        <label>自己紹介<textarea id="pBio" maxlength="500"></textarea></label>
-        <p class="muted">生年月日は登録後に変更できません。</p>
-        <button class="primary">保存</button>
-        <p id="profileMsg"></p>
-      </form>
+
+    <!-- プロフィール -->
+    <section class="card">
+      <h2>👤 プロフィール</h2>
+
+      <label>ニックネーム</label>
+      <input id="profileName">
+
+      <label>年齢</label>
+      <input id="profileAge" type="number" min="18">
+
+      <label>性別</label>
+      <select id="profileGender">
+        <option value="">選択してください</option>
+        <option value="男性">男性</option>
+        <option value="女性">女性</option>
+        <option value="その他">その他</option>
+      </select>
+
+      <label>地域</label>
+      <select id="profileArea">
+        <option value="">選択してください</option>
+        <option>北海道</option>
+        <option>東北</option>
+        <option>関東</option>
+        <option>中部</option>
+        <option>近畿</option>
+        <option>中国</option>
+        <option>四国</option>
+        <option>九州・沖縄</option>
+      </select>
+
+      <label>自己紹介</label>
+      <textarea id="profileBio" rows="4"></textarea>
+
+      <button class="primary" onclick="saveProfile()">プロフィールを保存</button>
+
+      <div id="profileMessage" class="message"></div>
     </section>
+
+
+    <!-- 検索 -->
+    <section class="card">
+      <h2>🔎 相手を探す</h2>
+
+      <label>キーワード</label>
+      <input id="searchText" placeholder="名前や自己紹介">
+
+      <label>性別</label>
+      <select id="searchGender">
+        <option value="">すべて</option>
+        <option value="男性">男性</option>
+        <option value="女性">女性</option>
+        <option value="その他">その他</option>
+      </select>
+
+      <label>地域</label>
+      <select id="searchArea">
+        <option value="">すべて</option>
+        <option>北海道</option>
+        <option>東北</option>
+        <option>関東</option>
+        <option>中部</option>
+        <option>近畿</option>
+        <option>中国</option>
+        <option>四国</option>
+        <option>九州・沖縄</option>
+      </select>
+
+      <button class="primary" onclick="searchUsers()">検索</button>
+    </section>
+
+
+    <!-- おすすめ -->
+    <section>
+      <h2>💕 おすすめの人</h2>
+      <div id="users"></div>
+    </section>
+
+
+    <!-- マッチ -->
+    <section class="card">
+      <h2>💞 マッチ</h2>
+      <div id="matches"></div>
+    </section>
+
+
+    <!-- チャット -->
+    <section class="card">
+      <h2>💬 チャット</h2>
+
+      <div id="chatTitle" class="muted">
+        マッチした相手を選んでください
+      </div>
+
+      <div id="messages" class="messages"></div>
+
+      <textarea
+        id="messageText"
+        rows="3"
+        placeholder="メッセージを入力"
+      ></textarea>
+
+      <button class="primary" onclick="sendMessage()">送信</button>
+    </section>
+
+
+    <!-- アカウント削除 -->
+    <section class="card danger">
+      <h2>⚠️ アカウント削除</h2>
+
+      <p>
+        アカウントを削除すると、プロフィールやマッチなどのデータが削除されます。
+      </p>
+
+      <input
+        id="deletePassword"
+        type="password"
+        placeholder="現在のパスワード"
+      >
+
+      <button class="dangerButton" onclick="deleteAccount()">
+        アカウントを削除する
+      </button>
+    </section>
+
   </section>
+
 </main>
+
 <script src="/app.js"></script>
 </body>
 </html>
