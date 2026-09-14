@@ -1,0 +1,12 @@
+const Database=require("better-sqlite3"),fs=require("fs"),path=require("path");
+fs.mkdirSync(path.join(__dirname,"data"),{recursive:true});
+const db=new Database(path.join(__dirname,"data","mako-match.db"));
+db.pragma("journal_mode=WAL"); db.pragma("foreign_keys=ON");
+db.exec(`
+CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT,nickname TEXT NOT NULL,email TEXT NOT NULL UNIQUE,password_hash TEXT NOT NULL,age INTEGER NOT NULL CHECK(age>=18),bio TEXT NOT NULL DEFAULT '',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS likes(from_user INTEGER NOT NULL,to_user INTEGER NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(from_user,to_user),FOREIGN KEY(from_user) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(to_user) REFERENCES users(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS blocks(blocker INTEGER NOT NULL,blocked INTEGER NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(blocker,blocked),FOREIGN KEY(blocker) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(blocked) REFERENCES users(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS messages(id INTEGER PRIMARY KEY AUTOINCREMENT,sender INTEGER NOT NULL,receiver INTEGER NOT NULL,body TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(sender) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(receiver) REFERENCES users(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS reports(id INTEGER PRIMARY KEY AUTOINCREMENT,reporter INTEGER NOT NULL,target INTEGER NOT NULL,reason TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(reporter) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(target) REFERENCES users(id) ON DELETE CASCADE);
+`);
+module.exports=db;
