@@ -11,522 +11,222 @@
 
   <title>まこマッチ 💕</title>
 
-  <link
-    rel="stylesheet"
-    href="/style.css"
-  >
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans JP",
+        sans-serif;
+      background: #f7f3f8;
+      color: #333;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      background: white;
+    }
+
+    header {
+      padding: 22px 18px;
+      background: linear-gradient(
+        135deg,
+        #ff7aa8,
+        #9b8cff
+      );
+      color: white;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .sub {
+      opacity: .9;
+      margin-top: 5px;
+    }
+
+    main {
+      padding: 16px;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 5px 18px #0000000d;
+    }
+
+    .form-title {
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin: 6px 0 10px;
+      font: inherit;
+      background: white;
+    }
+
+    select {
+      appearance: auto;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .like {
+      background: #ff5c91;
+      color: white;
+    }
+
+    .block {
+      background: #eee;
+      color: #555;
+      margin-left: 6px;
+    }
+
+    .profile {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eee;
+      font-size: 30px;
+      flex-shrink: 0;
+    }
+
+    .name {
+      font-weight: 700;
+    }
+
+    .age {
+      color: #777;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f2eaff;
+      padding: 5px 9px;
+      border-radius: 20px;
+      margin: 4px 3px 0 0;
+      font-size: 12px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .saved-location {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f7f3ff;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .post {
+      background: #fff4f7;
+    }
+
+    #posts {
+      margin-top: 10px;
+    }
+
+    .loading {
+      color: #888;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .error {
+      color: #e44;
+      background: #fff0f0;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="brand">まこマッチ 💕</div>
-</header>
+<div class="app">
 
-<main>
-
-  <!-- =========================
-       ログイン・新規登録
-  ========================== -->
-
-  <section id="auth" class="card">
-
-    <h1>18歳以上のための出会い</h1>
-
-    <p class="muted">
-      安心して使えることを大切にしたマッチングサイトです。
-    </p>
-
-    <div class="tabs">
-
-      <button
-        class="tab active"
-        onclick="setMode('login')"
-      >
-        ログイン
-      </button>
-
-      <button
-        class="tab"
-        onclick="setMode('register')"
-      >
-        新規登録
-      </button>
-
+  <header>
+    <h1>まこマッチ 💕</h1>
+    <div class="sub">
+      18歳以上限定・安心して話せる場所
     </div>
+  </header>
 
+  <main>
 
-    <!-- =========================
-         ログイン
-    ========================== -->
+    <!-- プロフィール -->
+    <div class="card">
 
-    <div id="loginForm">
+      <h2>プロフィール</h2>
 
-      <label for="loginUsername">
-        メールアドレス
-      </label>
-
-      <input
-        id="loginUsername"
-        type="email"
-        autocomplete="username"
-        inputmode="email"
-        placeholder="example@example.com"
-      >
-
-      <label for="loginPassword">
-        パスワード
-      </label>
-
-      <input
-        id="loginPassword"
-        type="password"
-        autocomplete="current-password"
-        placeholder="パスワード"
-      >
-
-      <button
-        class="primary"
-        onclick="login()"
-      >
-        ログイン
-      </button>
-
-    </div>
-
-
-    <!-- =========================
-         新規登録
-    ========================== -->
-
-    <div id="registerForm" hidden>
-
-      <label for="registerUsername">
-        メールアドレス
-      </label>
-
-      <input
-        id="registerUsername"
-        type="email"
-        autocomplete="username"
-        inputmode="email"
-        placeholder="example@example.com"
-      >
-
-      <label for="registerPassword">
-        パスワード
-      </label>
-
-      <input
-        id="registerPassword"
-        type="password"
-        autocomplete="new-password"
-        placeholder="8文字以上"
-      >
-
-      <label for="registerAge">
-        年齢
-      </label>
-
-      <input
-        id="registerAge"
-        type="number"
-        min="18"
-        max="120"
-        inputmode="numeric"
-        placeholder="18歳以上"
-      >
-
-      <label for="registerGender">
-        性別
-      </label>
-
-      <select id="registerGender">
-
-        <option value="">
-          選択してください
-        </option>
-
-        <option value="男性">
-          男性
-        </option>
-
-        <option value="女性">
-          女性
-        </option>
-
-        <option value="その他">
-          その他
-        </option>
-
-      </select>
-
-
-      <label for="registerArea">
-        地域
-      </label>
-
-      <select id="registerArea">
-
-        <option value="">
-          選択してください
-        </option>
-
-        <option value="北海道">
-          北海道
-        </option>
-
-        <option value="青森県">
-          青森県
-        </option>
-
-        <option value="岩手県">
-          岩手県
-        </option>
-
-        <option value="宮城県">
-          宮城県
-        </option>
-
-        <option value="秋田県">
-          秋田県
-        </option>
-
-        <option value="山形県">
-          山形県
-        </option>
-
-        <option value="福島県">
-          福島県
-        </option>
-
-        <option value="茨城県">
-          茨城県
-        </option>
-
-        <option value="栃木県">
-          栃木県
-        </option>
-
-        <option value="群馬県">
-          群馬県
-        </option>
-
-        <option value="埼玉県">
-          埼玉県
-        </option>
-
-        <option value="千葉県">
-          千葉県
-        </option>
-
-        <option value="千葉県千葉市">
-          千葉県千葉市
-        </option>
-
-        <option value="千葉県船橋市">
-          千葉県船橋市
-        </option>
-
-        <option value="千葉県市川市">
-          千葉県市川市
-        </option>
-
-        <option value="千葉県松戸市">
-          千葉県松戸市
-        </option>
-
-        <option value="千葉県柏市">
-          千葉県柏市
-        </option>
-
-        <option value="千葉県成田市">
-          千葉県成田市
-        </option>
-
-        <option value="千葉県佐倉市">
-          千葉県佐倉市
-        </option>
-
-        <option value="千葉県八千代市">
-          千葉県八千代市
-        </option>
-
-        <option value="東京都">
-          東京都
-        </option>
-
-        <option value="神奈川県">
-          神奈川県
-        </option>
-
-        <option value="新潟県">
-          新潟県
-        </option>
-
-        <option value="富山県">
-          富山県
-        </option>
-
-        <option value="石川県">
-          石川県
-        </option>
-
-        <option value="福井県">
-          福井県
-        </option>
-
-        <option value="山梨県">
-          山梨県
-        </option>
-
-        <option value="長野県">
-          長野県
-        </option>
-
-        <option value="岐阜県">
-          岐阜県
-        </option>
-
-        <option value="静岡県">
-          静岡県
-        </option>
-
-        <option value="愛知県">
-          愛知県
-        </option>
-
-        <option value="三重県">
-          三重県
-        </option>
-
-        <option value="滋賀県">
-          滋賀県
-        </option>
-
-        <option value="京都府">
-          京都府
-        </option>
-
-        <option value="大阪府">
-          大阪府
-        </option>
-
-        <option value="兵庫県">
-          兵庫県
-        </option>
-
-        <option value="奈良県">
-          奈良県
-        </option>
-
-        <option value="和歌山県">
-          和歌山県
-        </option>
-
-        <option value="鳥取県">
-          鳥取県
-        </option>
-
-        <option value="島根県">
-          島根県
-        </option>
-
-        <option value="岡山県">
-          岡山県
-        </option>
-
-        <option value="広島県">
-          広島県
-        </option>
-
-        <option value="山口県">
-          山口県
-        </option>
-
-        <option value="徳島県">
-          徳島県
-        </option>
-
-        <option value="香川県">
-          香川県
-        </option>
-
-        <option value="愛媛県">
-          愛媛県
-        </option>
-
-        <option value="高知県">
-          高知県
-        </option>
-
-        <option value="福岡県">
-          福岡県
-        </option>
-
-        <option value="佐賀県">
-          佐賀県
-        </option>
-
-        <option value="長崎県">
-          長崎県
-        </option>
-
-        <option value="熊本県">
-          熊本県
-        </option>
-
-        <option value="大分県">
-          大分県
-        </option>
-
-        <option value="宮崎県">
-          宮崎県
-        </option>
-
-        <option value="鹿児島県">
-          鹿児島県
-        </option>
-
-        <option value="沖縄県">
-          沖縄県
-        </option>
-
-      </select>
-
-
-      <label class="check">
-
-        <input
-          id="agreeTerms"
-          type="checkbox"
-        >
-
-        利用規約・プライバシーポリシーに同意する
-
-      </label>
-
-
-      <p>
-
-        <a
-          href="/terms"
-          target="_blank"
-        >
-          利用規約
-        </a>
-
-        ・
-
-        <a
-          href="/privacy"
-          target="_blank"
-        >
-          プライバシーポリシー
-        </a>
-
-      </p>
-
-
-      <button
-        class="primary"
-        onclick="register()"
-      >
-        新規登録
-      </button>
-
-    </div>
-
-
-    <div
-      id="authMessage"
-      class="message"
-    ></div>
-
-  </section>
-
-
-  <!-- =========================
-       ログイン後
-  ========================== -->
-
-  <section
-    id="app"
-    hidden
-  >
-
-    <!-- =========================
-         上部
-    ========================== -->
-
-    <section class="card">
-
-      <div class="topbar">
-
-        <div>
-
-          <h2>
-            まこマッチ 💕
-          </h2>
-
-          <div
-            id="meInfo"
-            class="muted"
-          ></div>
-
-        </div>
-
-        <button
-          class="secondary"
-          onclick="logout()"
-        >
-          ログアウト
-        </button>
-
+      <div class="form-title">
+        ニックネーム
       </div>
 
-    </section>
-
-
-    <!-- =========================
-         プロフィール
-    ========================== -->
-
-    <section class="card">
-
-      <h2>
-        👤 プロフィール
-      </h2>
-
-
-      <label for="profileName">
-        ニックネーム
-      </label>
-
       <input
-        id="profileName"
+        id="myName"
         placeholder="ニックネーム"
       >
 
-
-      <label for="profileAge">
+      <div class="form-title">
         年齢
-      </label>
+      </div>
 
       <input
-        id="profileAge"
+        id="myAge"
         type="number"
         min="18"
-        max="120"
+        placeholder="年齢（18歳以上）"
       >
 
-
-      <label for="profileGender">
+      <div class="form-title">
         性別
-      </label>
+      </div>
 
-      <select id="profileGender">
-
+      <select id="myGender">
         <option value="">
           選択してください
         </option>
@@ -543,671 +243,890 @@
           その他
         </option>
 
+        <option value="回答しない">
+          回答しない
+        </option>
       </select>
 
 
-      <label for="profileArea">
-        地域
-      </label>
+      <div class="form-title">
+        都道府県
+      </div>
 
-      <select id="profileArea">
-
+      <select id="prefecture">
         <option value="">
-          選択してください
+          読み込み中...
         </option>
-
-        <option value="北海道">
-          北海道
-        </option>
-
-        <option value="青森県">
-          青森県
-        </option>
-
-        <option value="岩手県">
-          岩手県
-        </option>
-
-        <option value="宮城県">
-          宮城県
-        </option>
-
-        <option value="秋田県">
-          秋田県
-        </option>
-
-        <option value="山形県">
-          山形県
-        </option>
-
-        <option value="福島県">
-          福島県
-        </option>
-
-        <option value="茨城県">
-          茨城県
-        </option>
-
-        <option value="栃木県">
-          栃木県
-        </option>
-
-        <option value="群馬県">
-          群馬県
-        </option>
-
-        <option value="埼玉県">
-          埼玉県
-        </option>
-
-        <option value="千葉県">
-          千葉県
-        </option>
-
-        <option value="千葉県千葉市">
-          千葉県千葉市
-        </option>
-
-        <option value="千葉県船橋市">
-          千葉県船橋市
-        </option>
-
-        <option value="千葉県市川市">
-          千葉県市川市
-        </option>
-
-        <option value="千葉県松戸市">
-          千葉県松戸市
-        </option>
-
-        <option value="千葉県柏市">
-          千葉県柏市
-        </option>
-
-        <option value="千葉県成田市">
-          千葉県成田市
-        </option>
-
-        <option value="千葉県佐倉市">
-          千葉県佐倉市
-        </option>
-
-        <option value="千葉県八千代市">
-          千葉県八千代市
-        </option>
-
-        <option value="東京都">
-          東京都
-        </option>
-
-        <option value="神奈川県">
-          神奈川県
-        </option>
-
-        <option value="新潟県">
-          新潟県
-        </option>
-
-        <option value="富山県">
-          富山県
-        </option>
-
-        <option value="石川県">
-          石川県
-        </option>
-
-        <option value="福井県">
-          福井県
-        </option>
-
-        <option value="山梨県">
-          山梨県
-        </option>
-
-        <option value="長野県">
-          長野県
-        </option>
-
-        <option value="岐阜県">
-          岐阜県
-        </option>
-
-        <option value="静岡県">
-          静岡県
-        </option>
-
-        <option value="愛知県">
-          愛知県
-        </option>
-
-        <option value="三重県">
-          三重県
-        </option>
-
-        <option value="滋賀県">
-          滋賀県
-        </option>
-
-        <option value="京都府">
-          京都府
-        </option>
-
-        <option value="大阪府">
-          大阪府
-        </option>
-
-        <option value="兵庫県">
-          兵庫県
-        </option>
-
-        <option value="奈良県">
-          奈良県
-        </option>
-
-        <option value="和歌山県">
-          和歌山県
-        </option>
-
-        <option value="鳥取県">
-          鳥取県
-        </option>
-
-        <option value="島根県">
-          島根県
-        </option>
-
-        <option value="岡山県">
-          岡山県
-        </option>
-
-        <option value="広島県">
-          広島県
-        </option>
-
-        <option value="山口県">
-          山口県
-        </option>
-
-        <option value="徳島県">
-          徳島県
-        </option>
-
-        <option value="香川県">
-          香川県
-        </option>
-
-        <option value="愛媛県">
-          愛媛県
-        </option>
-
-        <option value="高知県">
-          高知県
-        </option>
-
-        <option value="福岡県">
-          福岡県
-        </option>
-
-        <option value="佐賀県">
-          佐賀県
-        </option>
-
-        <option value="長崎県">
-          長崎県
-        </option>
-
-        <option value="熊本県">
-          熊本県
-        </option>
-
-        <option value="大分県">
-          大分県
-        </option>
-
-        <option value="宮崎県">
-          宮崎県
-        </option>
-
-        <option value="鹿児島県">
-          鹿児島県
-        </option>
-
-        <option value="沖縄県">
-          沖縄県
-        </option>
-
       </select>
 
 
-      <label for="profileBio">
+      <div class="form-title">
+        市区町村
+      </div>
+
+      <select
+        id="municipality"
+        disabled
+      >
+        <option value="">
+          先に都道府県を選択してください
+        </option>
+      </select>
+
+
+      <div class="form-title">
         自己紹介
-      </label>
+      </div>
 
       <textarea
-        id="profileBio"
-        rows="4"
-        placeholder="自己紹介を書いてみよう"
+        id="myBio"
+        rows="3"
+        placeholder="自己紹介"
       ></textarea>
 
 
       <button
-        class="primary"
+        class="like"
         onclick="saveProfile()"
       >
         プロフィールを保存
       </button>
 
-
       <div
-        id="profileMessage"
-        class="message"
+        id="saved"
+        class="small"
       ></div>
 
-    </section>
+      <div
+        id="savedLocation"
+        class="saved-location"
+        style="display:none;"
+      ></div>
+
+    </div>
 
 
-    <!-- =========================
-         相手を探す
-    ========================== -->
+    <!-- おすすめ -->
+    <h2>
+      おすすめの人
+    </h2>
 
-    <section class="card">
+    <div id="profiles"></div>
+
+
+    <!-- 雑談 -->
+    <div class="card post">
 
       <h2>
-        🔎 相手を探す
+        雑談コーナー 💬
       </h2>
-
-
-      <label for="searchText">
-        キーワード
-      </label>
 
       <input
-        id="searchText"
-        placeholder="名前や自己紹介"
+        id="postName"
+        placeholder="名前（任意）"
       >
-
-
-      <label for="searchGender">
-        性別
-      </label>
-
-      <select id="searchGender">
-
-        <option value="">
-          すべて
-        </option>
-
-        <option value="男性">
-          男性
-        </option>
-
-        <option value="女性">
-          女性
-        </option>
-
-        <option value="その他">
-          その他
-        </option>
-
-      </select>
-
-
-      <label for="searchArea">
-        地域
-      </label>
-
-      <select id="searchArea">
-
-        <option value="">
-          すべて
-        </option>
-
-        <option value="北海道">
-          北海道
-        </option>
-
-        <option value="青森県">
-          青森県
-        </option>
-
-        <option value="岩手県">
-          岩手県
-        </option>
-
-        <option value="宮城県">
-          宮城県
-        </option>
-
-        <option value="秋田県">
-          秋田県
-        </option>
-
-        <option value="山形県">
-          山形県
-        </option>
-
-        <option value="福島県">
-          福島県
-        </option>
-
-        <option value="茨城県">
-          茨城県
-        </option>
-
-        <option value="栃木県">
-          栃木県
-        </option>
-
-        <option value="群馬県">
-          群馬県
-        </option>
-
-        <option value="埼玉県">
-          埼玉県
-        </option>
-
-        <option value="千葉県">
-          千葉県
-        </option>
-
-        <option value="千葉県千葉市">
-          千葉県千葉市
-        </option>
-
-        <option value="千葉県船橋市">
-          千葉県船橋市
-        </option>
-
-        <option value="千葉県市川市">
-          千葉県市川市
-        </option>
-
-        <option value="千葉県松戸市">
-          千葉県松戸市
-        </option>
-
-        <option value="千葉県柏市">
-          千葉県柏市
-        </option>
-
-        <option value="千葉県成田市">
-          千葉県成田市
-        </option>
-
-        <option value="千葉県佐倉市">
-          千葉県佐倉市
-        </option>
-
-        <option value="千葉県八千代市">
-          千葉県八千代市
-        </option>
-
-        <option value="東京都">
-          東京都
-        </option>
-
-        <option value="神奈川県">
-          神奈川県
-        </option>
-
-        <option value="新潟県">
-          新潟県
-        </option>
-
-        <option value="富山県">
-          富山県
-        </option>
-
-        <option value="石川県">
-          石川県
-        </option>
-
-        <option value="福井県">
-          福井県
-        </option>
-
-        <option value="山梨県">
-          山梨県
-        </option>
-
-        <option value="長野県">
-          長野県
-        </option>
-
-        <option value="岐阜県">
-          岐阜県
-        </option>
-
-        <option value="静岡県">
-          静岡県
-        </option>
-
-        <option value="愛知県">
-          愛知県
-        </option>
-
-        <option value="三重県">
-          三重県
-        </option>
-
-        <option value="滋賀県">
-          滋賀県
-        </option>
-
-        <option value="京都府">
-          京都府
-        </option>
-
-        <option value="大阪府">
-          大阪府
-        </option>
-
-        <option value="兵庫県">
-          兵庫県
-        </option>
-
-        <option value="奈良県">
-          奈良県
-        </option>
-
-        <option value="和歌山県">
-          和歌山県
-        </option>
-
-        <option value="鳥取県">
-          鳥取県
-        </option>
-
-        <option value="島根県">
-          島根県
-        </option>
-
-        <option value="岡山県">
-          岡山県
-        </option>
-
-        <option value="広島県">
-          広島県
-        </option>
-
-        <option value="山口県">
-          山口県
-        </option>
-
-        <option value="徳島県">
-          徳島県
-        </option>
-
-        <option value="香川県">
-          香川県
-        </option>
-
-        <option value="愛媛県">
-          愛媛県
-        </option>
-
-        <option value="高知県">
-          高知県
-        </option>
-
-        <option value="福岡県">
-          福岡県
-        </option>
-
-        <option value="佐賀県">
-          佐賀県
-        </option>
-
-        <option value="長崎県">
-          長崎県
-        </option>
-
-        <option value="熊本県">
-          熊本県
-        </option>
-
-        <option value="大分県">
-          大分県
-        </option>
-
-        <option value="宮崎県">
-          宮崎県
-        </option>
-
-        <option value="鹿児島県">
-          鹿児島県
-        </option>
-
-        <option value="沖縄県">
-          沖縄県
-        </option>
-
-      </select>
-
-
-      <button
-        class="primary"
-        onclick="searchUsers()"
-      >
-        検索
-      </button>
-
-    </section>
-
-
-    <!-- =========================
-         おすすめ
-    ========================== -->
-
-    <section>
-
-      <h2>
-        💕 おすすめの人
-      </h2>
-
-      <div id="users"></div>
-
-    </section>
-
-
-    <!-- =========================
-         マッチ
-    ========================== -->
-
-    <section class="card">
-
-      <h2>
-        💞 マッチ
-      </h2>
-
-      <div id="matches"></div>
-
-    </section>
-
-
-    <!-- =========================
-         チャット
-    ========================== -->
-
-    <section class="card">
-
-      <h2>
-        💬 チャット
-      </h2>
-
-
-      <div
-        id="chatTitle"
-        class="muted"
-      >
-        マッチした相手を選んでください
-      </div>
-
-
-      <div
-        id="messages"
-        class="messages"
-      ></div>
-
 
       <textarea
-        id="messageText"
+        id="postText"
         rows="3"
-        placeholder="メッセージを入力"
+        placeholder="気軽にひとこと投稿しよう"
       ></textarea>
 
-
       <button
-        class="primary"
-        onclick="sendMessage()"
+        class="like"
+        onclick="addPost()"
       >
-        送信
+        投稿する
       </button>
 
-    </section>
+      <div id="posts"></div>
+
+    </div>
+
+  </main>
+
+</div>
 
 
-    <!-- =========================
-         アカウント削除
-    ========================== -->
+<script>
 
-    <section class="card danger">
-
-      <h2>
-        ⚠️ アカウント削除
-      </h2>
-
-      <p>
-        アカウントを削除すると、
-        プロフィールやマッチなどの
-        データが削除されます。
-      </p>
+  /*
+   * 全国の都道府県データ
+   */
+  const PREF_URL =
+    "https://code4fukui.github.io/localgovjp/prefjp.json";
 
 
-      <input
-        id="deletePassword"
-        type="password"
-        autocomplete="current-password"
-        placeholder="現在のパスワード"
-      >
+  /*
+   * 全国の市区町村データ
+   *
+   * 市・区・町・村まで入っています。
+   */
+  const CITY_URL =
+    "https://code4fukui.github.io/localgovjp/localgovjp.json";
 
 
-      <button
-        class="dangerButton"
-        onclick="deleteAccount()"
-      >
-        アカウントを削除する
-      </button>
+  const prefecture =
+    document.getElementById("prefecture");
 
-    </section>
+  const municipality =
+    document.getElementById("municipality");
 
-  </section>
+  const myName =
+    document.getElementById("myName");
 
-</main>
+  const myAge =
+    document.getElementById("myAge");
+
+  const myGender =
+    document.getElementById("myGender");
+
+  const myBio =
+    document.getElementById("myBio");
+
+  const saved =
+    document.getElementById("saved");
+
+  const savedLocation =
+    document.getElementById("savedLocation");
 
 
-<script src="/app.js?v=4"></script>
+  let municipalities = [];
+
+
+
+  /*
+   * 都道府県を読み込む
+   */
+  async function loadPrefectures() {
+
+    try {
+
+      const response =
+        await fetch(PREF_URL);
+
+      if (!response.ok) {
+        throw new Error(
+          "都道府県データ取得失敗"
+        );
+      }
+
+      const prefectures =
+        await response.json();
+
+
+      prefecture.innerHTML =
+        '<option value="">選択してください</option>';
+
+
+      prefectures.forEach(pref => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          pref.pid;
+
+        option.textContent =
+          pref.pref;
+
+        prefecture.appendChild(option);
+
+      });
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      prefecture.innerHTML =
+        '<option value="">読み込み失敗</option>';
+
+    }
+
+  }
+
+
+
+  /*
+   * 市区町村を読み込む
+   */
+  async function loadMunicipalities() {
+
+    try {
+
+      const response =
+        await fetch(CITY_URL);
+
+      if (!response.ok) {
+        throw new Error(
+          "市区町村データ取得失敗"
+        );
+      }
+
+      municipalities =
+        await response.json();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      municipality.innerHTML =
+        '<option value="">読み込み失敗</option>';
+
+    }
+
+  }
+
+
+
+  /*
+   * 都道府県を選択したとき
+   */
+  prefecture.addEventListener(
+    "change",
+    function () {
+
+      const selectedPid =
+        this.value;
+
+
+      municipality.innerHTML =
+        '<option value="">市区町村を選択してください</option>';
+
+
+      municipality.disabled =
+        true;
+
+
+      if (!selectedPid) {
+        return;
+      }
+
+
+      /*
+       * 選択した都道府県だけに絞る
+       */
+      const cities =
+        municipalities.filter(
+          city =>
+            String(city.pid) ===
+            String(selectedPid)
+        );
+
+
+      cities.forEach(city => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          city.city;
+
+        option.textContent =
+          city.city;
+
+        municipality.appendChild(
+          option
+        );
+
+      });
+
+
+      municipality.disabled =
+        false;
+
+    }
+  );
+
+
+
+  /*
+   * プロフィール保存
+   */
+  function saveProfile() {
+
+    const name =
+      myName.value.trim();
+
+    const age =
+      Number(myAge.value);
+
+    const gender =
+      myGender.value;
+
+    const pref =
+      prefecture.options[
+        prefecture.selectedIndex
+      ]?.textContent || "";
+
+    const city =
+      municipality.value;
+
+    const bio =
+      myBio.value.trim();
+
+
+    /*
+     * 名前チェック
+     */
+    if (!name) {
+
+      alert(
+        "ニックネームを入力してください。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 年齢チェック
+     */
+    if (!age || age < 18) {
+
+      alert(
+        "18歳以上のみ登録できます。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 性別チェック
+     */
+    if (!gender) {
+
+      alert(
+        "性別を選択してください。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 都道府県チェック
+     */
+    if (!prefecture.value) {
+
+      alert(
+        "都道府県を選択してください。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 市区町村チェック
+     */
+    if (!city) {
+
+      alert(
+        "市区町村を選択してください。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 保存
+     */
+    const profile = {
+
+      name: name,
+
+      age: age,
+
+      gender: gender,
+
+      prefecture: pref,
+
+      municipality: city,
+
+      bio: bio
+
+    };
+
+
+    localStorage.setItem(
+      "makoProfile",
+      JSON.stringify(profile)
+    );
+
+
+    saved.textContent =
+      "プロフィールを保存しました！💕";
+
+
+    savedLocation.style.display =
+      "block";
+
+
+    savedLocation.innerHTML =
+      "📍 " +
+      escapeHtml(pref) +
+      " " +
+      escapeHtml(city);
+
+
+  }
+
+
+
+  /*
+   * 保存したプロフィールを表示
+   */
+  function loadProfile() {
+
+    const data =
+      localStorage.getItem(
+        "makoProfile"
+      );
+
+
+    if (!data) {
+      return;
+    }
+
+
+    try {
+
+      const profile =
+        JSON.parse(data);
+
+
+      myName.value =
+        profile.name || "";
+
+      myAge.value =
+        profile.age || "";
+
+      myGender.value =
+        profile.gender || "";
+
+      myBio.value =
+        profile.bio || "";
+
+
+      /*
+       * 都道府県を探して選択
+       */
+      if (profile.prefecture) {
+
+        const options =
+          Array.from(
+            prefecture.options
+          );
+
+
+        const option =
+          options.find(
+            o =>
+              o.textContent ===
+              profile.prefecture
+          );
+
+
+        if (option) {
+
+          prefecture.value =
+            option.value;
+
+          prefecture.dispatchEvent(
+            new Event("change")
+          );
+
+
+          /*
+           * 市区町村を選択
+           */
+          setTimeout(() => {
+
+            municipality.value =
+              profile.municipality || "";
+
+          }, 100);
+
+        }
+
+      }
+
+
+      if (
+        profile.prefecture &&
+        profile.municipality
+      ) {
+
+        savedLocation.style.display =
+          "block";
+
+        savedLocation.innerHTML =
+          "📍 " +
+          escapeHtml(
+            profile.prefecture
+          ) +
+          " " +
+          escapeHtml(
+            profile.municipality
+          );
+
+      }
+
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+
+
+  /*
+   * おすすめユーザー
+   */
+  const people = [
+
+    {
+      name: "あおい",
+      age: 22,
+      icon: "🌸",
+      bio: "映画とカフェが好きです！",
+      tags: [
+        "映画",
+        "カフェ"
+      ]
+    },
+
+    {
+      name: "ゆう",
+      age: 25,
+      icon: "🎮",
+      bio: "ゲーム好き。のんびり話せる人募集中！",
+      tags: [
+        "ゲーム",
+        "雑談"
+      ]
+    },
+
+    {
+      name: "みさき",
+      age: 21,
+      icon: "🐰",
+      bio: "音楽を聴くのが好きです♪",
+      tags: [
+        "音楽",
+        "旅行"
+      ]
+    }
+
+  ];
+
+
+
+  function renderProfiles() {
+
+    const box =
+      document.getElementById(
+        "profiles"
+      );
+
+
+    box.innerHTML =
+      people.map(
+        p => `
+
+        <div class="card">
+
+          <div class="profile">
+
+            <div class="avatar">
+              ${p.icon}
+            </div>
+
+            <div>
+
+              <div class="name">
+                ${escapeHtml(p.name)}
+
+                <span class="age">
+                  ${p.age}歳
+                </span>
+              </div>
+
+              <div>
+                ${escapeHtml(p.bio)}
+              </div>
+
+            </div>
+
+          </div>
+
+          <div>
+
+            ${p.tags.map(
+              t =>
+                `<span class="tag">
+                  #${escapeHtml(t)}
+                </span>`
+            ).join("")}
+
+          </div>
+
+          <br>
+
+          <button
+            class="like"
+            onclick="like('${escapeJs(p.name)}')"
+          >
+            ❤️ いいね
+          </button>
+
+          <button
+            class="block"
+            onclick="block('${escapeJs(p.name)}')"
+          >
+            🚫 ブロック
+          </button>
+
+        </div>
+
+      `
+      ).join("");
+
+  }
+
+
+
+  /*
+   * いいね
+   */
+  function like(name) {
+
+    alert(
+      name +
+      "さんに「いいね！」しました 💕"
+    );
+
+  }
+
+
+
+  /*
+   * ブロック
+   */
+  function block(name) {
+
+    alert(
+      name +
+      "さんをブロックしました。"
+    );
+
+  }
+
+
+
+  /*
+   * 雑談投稿
+   */
+  function addPost() {
+
+    const name =
+      document
+        .getElementById("postName")
+        .value
+        .trim() || "匿名";
+
+
+    const text =
+      document
+        .getElementById("postText")
+        .value
+        .trim();
+
+
+    if (!text) {
+
+      alert(
+        "投稿内容を入力してください。"
+      );
+
+      return;
+
+    }
+
+
+    const posts =
+      JSON.parse(
+        localStorage.getItem(
+          "makoPosts"
+        ) || "[]"
+      );
+
+
+    posts.unshift({
+
+      name: name,
+
+      text: text,
+
+      time:
+        new Date()
+          .toLocaleString("ja-JP")
+
+    });
+
+
+    localStorage.setItem(
+      "makoPosts",
+      JSON.stringify(posts)
+    );
+
+
+    document
+      .getElementById("postText")
+      .value = "";
+
+
+    renderPosts();
+
+  }
+
+
+
+  /*
+   * 雑談表示
+   */
+  function renderPosts() {
+
+    const posts =
+      JSON.parse(
+        localStorage.getItem(
+          "makoPosts"
+        ) || "[]"
+      );
+
+
+    document.getElementById(
+      "posts"
+    ).innerHTML =
+
+      posts.map(
+        p => `
+
+          <div class="card">
+
+            <b>
+              ${escapeHtml(p.name)}
+            </b>
+
+            <div>
+              ${escapeHtml(p.text)}
+            </div>
+
+            <div class="small">
+              ${escapeHtml(p.time)}
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+  }
+
+
+
+  /*
+   * HTMLエスケープ
+   */
+  function escapeHtml(text) {
+
+    return String(text).replace(
+      /[&<>"']/g,
+      function (char) {
+
+        return {
+
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+
+        }[char];
+
+      }
+    );
+
+  }
+
+
+
+  /*
+   * JavaScript文字列用
+   */
+  function escapeJs(text) {
+
+    return String(text)
+      .replace(/\\/g, "\\\\")
+      .replace(/'/g, "\\'");
+
+  }
+
+
+
+  /*
+   * 起動
+   */
+  async function init() {
+
+    const loading =
+      document.createElement("div");
+
+    loading.className =
+      "loading";
+
+    loading.textContent =
+      "地域データを読み込んでいます…";
+
+    document
+      .querySelector("main")
+      .prepend(loading);
+
+
+    await Promise.all([
+      loadPrefectures(),
+      loadMunicipalities()
+    ]);
+
+
+    loading.remove();
+
+
+    loadProfile();
+
+    renderProfiles();
+
+    renderPosts();
+
+  }
+
+
+  init();
+
+</script>
 
 </body>
-
 </html>
