@@ -1,25 +1,1081 @@
-const express=require("express"),helmet=require("helmet"),rateLimit=require("express-rate-limit"),crypto=require("crypto"),db=require("./db"),path=require("path");
-const app=express(),PORT=Number(process.env.PORT||3000),SECRET=process.env.SESSION_SECRET||"dev-only-change-me";
-app.set("trust proxy",1);app.use(helmet({crossOriginResourcePolicy:false}));app.use(express.json({limit:"32kb"}));app.use(express.urlencoded({extended:false}));app.use(rateLimit({windowMs:900000,limit:300,standardHeaders:true}));app.use(express.static("public"));
-function clean(v,n){return String(v??"").trim().slice(0,n)}
-function hash(p){const s=crypto.randomBytes(16),h=crypto.pbkdf2Sync(p,s,210000,32,"sha256");return s.toString("base64")+":"+h.toString("base64")}
-function verify(p,x){try{const[a,b]=x.split(":"),s=Buffer.from(a,"base64"),e=Buffer.from(b,"base64"),h=crypto.pbkdf2Sync(p,s,210000,32,"sha256");return e.length===h.length&&crypto.timingSafeEqual(e,h)}catch{return false}}
-function token(id){const d=id+"."+Date.now(),sig=crypto.createHmac("sha256",SECRET).update(d).digest("hex");return Buffer.from(d+"."+sig).toString("base64url")}
-function userFrom(req){try{const r=Buffer.from(String(req.headers.authorization||"").replace(/^Bearer\s+/i,""),"base64url").toString().split("."),d=r[0]+"."+r[1],e=crypto.createHmac("sha256",SECRET).update(d).digest("hex");if(r.length!==3||!crypto.timingSafeEqual(Buffer.from(r[2]),Buffer.from(e))||Date.now()-Number(r[1])>1209600000)return null;return db.prepare("SELECT id,nickname,email,age,bio FROM users WHERE id=?").get(Number(r[0]))||null}catch{return null}}
-function auth(req,res,next){req.user=userFrom(req);if(!req.user)return res.status(401).json({error:"ログインが必要です"});next()}
-function blocked(a,b){return !!db.prepare("SELECT 1 FROM blocks WHERE (blocker=? AND blocked=?) OR (blocker=? AND blocked=?)").get(a,b,b,a)}
-function matched(a,b){return !!db.prepare("SELECT 1 FROM likes x JOIN likes y ON x.to_user=y.from_user AND x.from_user=y.to_user WHERE x.from_user=? AND x.to_user=?").get(a,b)}
+const express = require("express");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+const db = require("./db");
+const path = require("path");
 
-app.get("/api/me",auth,(q,s)=>s.json({user:q.user}));
-app.post("/api/register",(q,s)=>{const n=clean(q.body.nickname,30),e=clean(q.body.email,120).toLowerCase(),p=String(q.body.password||""),a=Number(q.body.age);if(!n||!e.includes("@")||p.length<8||!Number.isInteger(a)||a<18)return s.status(400).json({error:"18歳以上・8文字以上のパスワードなど入力を確認してください"});try{const x=db.prepare("INSERT INTO users(nickname,email,password_hash,age,bio) VALUES(?,?,?,?,?)").run(n,e,hash(p),a,clean(q.body.bio,500));s.json({token:token(x.lastInsertRowid)})}catch(e){s.status(409).json({error:"そのメールアドレスは登録済みです"})}});
-app.post("/api/login",(q,s)=>{const e=clean(q.body.email,120).toLowerCase(),p=String(q.body.password||""),u=db.prepare("SELECT * FROM users WHERE email=?").get(e);if(!u||!verify(p,u.password_hash))return s.status(401).json({error:"メールアドレスまたはパスワードが違います"});s.json({token:token(u.id)})});
-app.put("/api/profile",auth,(q,s)=>{const n=clean(q.body.nickname,30),a=Number(q.body.age);if(!n||!Number.isInteger(a)||a<18)return s.status(400).json({error:"プロフィールを確認してください"});db.prepare("UPDATE users SET nickname=?,age=?,bio=? WHERE id=?").run(n,a,clean(q.body.bio,500),q.user.id);s.json({ok:true})});
-app.get("/api/users",auth,(q,s)=>{const x=clean(q.query.q,50),min=Math.max(18,Number(q.query.minAge)||18),max=Math.min(120,Number(q.query.maxAge)||120);s.json({users:db.prepare(`SELECT id,nickname,age,bio FROM users WHERE id<>? AND age BETWEEN ? AND ? AND id NOT IN(SELECT blocked FROM blocks WHERE blocker=?) AND id NOT IN(SELECT blocker FROM blocks WHERE blocked=?) AND(nickname LIKE ? OR bio LIKE ?) ORDER BY id DESC LIMIT 100`).all(q.user.id,min,max,q.user.id,q.user.id,"%"+x+"%","%"+x+"%")})});
-app.post("/api/like/:id",auth,(q,s)=>{const b=Number(q.params.id);if(!b||b===q.user.id||blocked(q.user.id,b))return s.status(400).json({error:"いいねできません"});if(!db.prepare("SELECT id FROM users WHERE id=?").get(b))return s.status(404).json({error:"ユーザーが見つかりません"});db.prepare("INSERT OR IGNORE INTO likes VALUES(?,?,CURRENT_TIMESTAMP)").run(q.user.id,b);s.json({matched:matched(q.user.id,b)})});
-app.get("/api/matches",auth,(q,s)=>s.json({matches:db.prepare(`SELECT u.id,u.nickname,u.age,u.bio FROM users u WHERE u.id IN(SELECT x.to_user FROM likes x JOIN likes y ON x.to_user=y.from_user AND x.from_user=y.to_user WHERE x.from_user=?) AND u.id NOT IN(SELECT blocked FROM blocks WHERE blocker=?) AND u.id NOT IN(SELECT blocker FROM blocks WHERE blocked=?)`).all(q.user.id,q.user.id,q.user.id)}));
-app.get("/api/messages/:id",auth,(q,s)=>{const b=Number(q.params.id);if(!matched(q.user.id,b)||blocked(q.user.id,b))return s.status(403).json({error:"マッチ相手のみ利用できます"});s.json({messages:db.prepare(`SELECT id,sender,receiver,body,created_at FROM messages WHERE(sender=? AND receiver=?)OR(sender=? AND receiver=?) ORDER BY id ASC LIMIT 200`).all(q.user.id,b,b,q.user.id)})});
-app.post("/api/messages/:id",auth,(q,s)=>{const b=Number(q.params.id),body=clean(q.body.body,1000);if(!body||!matched(q.user.id,b)||blocked(q.user.id,b))return s.status(400).json({error:"送信できません"});db.prepare("INSERT INTO messages(sender,receiver,body) VALUES(?,?,?)").run(q.user.id,b,body);s.json({ok:true})});
-app.post("/api/block/:id",auth,(q,s)=>{const b=Number(q.params.id);if(!b||b===q.user.id)return s.status(400).json({error:"ブロックできません"});db.prepare("INSERT OR IGNORE INTO blocks VALUES(?,?,CURRENT_TIMESTAMP)").run(q.user.id,b);s.json({ok:true})});
-app.post("/api/report/:id",auth,(q,s)=>{const b=Number(q.params.id),r=clean(q.body.reason,500);if(!b||b===q.user.id||!r)return s.status(400).json({error:"通報理由を入力してください"});db.prepare("INSERT INTO reports(reporter,target,reason) VALUES(?,?,?)").run(q.user.id,b,r);s.json({ok:true})});
-app.get("*",(q,s)=>q.path.startsWith("/api/")?s.status(404).json({error:"Not found"}):s.sendFile(path.join(__dirname,"public","index.html")));
-app.listen(PORT,()=>console.log("まこマッチ running on "+PORT));
+const app = express();
+
+const PORT = Number(process.env.PORT || 3000);
+const SESSION_SECRET =
+  process.env.SESSION_SECRET || "dev-only-change-me";
+
+const sessions = new Map();
+
+app.disable("x-powered-by");
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+);
+
+app.use(express.json({ limit: "20kb" }));
+
+// APIへのアクセス制限
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 300,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+app.use("/api/", apiLimiter);
+
+
+// ==============================
+// フロントエンド
+// ==============================
+
+// GitHubのルートに
+// index.html
+// app.js
+// style.css
+// がある構成に対応
+
+app.get("/style.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "style.css"));
+});
+
+app.get("/app.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "app.js"));
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+
+// ==============================
+// 共通関数
+// ==============================
+
+function ageAtLeast18(birthDate) {
+  const d = new Date(`${birthDate}T00:00:00`);
+
+  if (Number.isNaN(d.getTime())) {
+    return false;
+  }
+
+  const now = new Date();
+
+  let age = now.getFullYear() - d.getFullYear();
+
+  const month =
+    now.getMonth() - d.getMonth();
+
+  if (
+    month < 0 ||
+    (month === 0 && now.getDate() < d.getDate())
+  ) {
+    age--;
+  }
+
+  return age >= 18;
+}
+
+
+function clean(value, max) {
+  return String(value ?? "")
+    .trim()
+    .slice(0, max);
+}
+
+
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+
+// ==============================
+// セッション
+// ==============================
+
+function signSession(id) {
+  return crypto
+    .createHmac("sha256", SESSION_SECRET)
+    .update(id)
+    .digest("hex");
+}
+
+
+function makeSession(userId) {
+  const id = crypto
+    .randomBytes(32)
+    .toString("hex");
+
+  const sig = signSession(id);
+
+  sessions.set(id, {
+    userId,
+    expires:
+      Date.now() +
+      7 * 24 * 60 * 60 * 1000
+  });
+
+  return `${id}.${sig}`;
+}
+
+
+function getUserFromSession(req) {
+  const authorization =
+    req.headers.authorization || "";
+
+  if (!authorization.startsWith("Bearer ")) {
+    return null;
+  }
+
+  const token =
+    authorization.slice(7);
+
+  const [id, sig] =
+    token.split(".");
+
+  if (!id || !sig) {
+    return null;
+  }
+
+  if (signSession(id) !== sig) {
+    return null;
+  }
+
+  const session =
+    sessions.get(id);
+
+  if (!session) {
+    return null;
+  }
+
+  if (session.expires < Date.now()) {
+    sessions.delete(id);
+    return null;
+  }
+
+  return db
+    .prepare(
+      `
+      SELECT
+        id,
+        email,
+        nickname,
+        birth_date,
+        bio,
+        created_at
+      FROM users
+      WHERE id=?
+      `
+    )
+    .get(session.userId);
+}
+
+
+function auth(req, res, next) {
+  const user =
+    getUserFromSession(req);
+
+  if (!user) {
+    return res
+      .status(401)
+      .json({
+        error: "ログインが必要です"
+      });
+  }
+
+  req.user = user;
+
+  next();
+}
+
+
+// ==============================
+// ブロック確認
+// ==============================
+
+function blockedEither(a, b) {
+  return !!db
+    .prepare(
+      `
+      SELECT 1
+      FROM blocks
+      WHERE
+        (blocker_id=? AND blocked_id=?)
+        OR
+        (blocker_id=? AND blocked_id=?)
+      `
+    )
+    .get(a, b, b, a);
+}
+
+
+// ==============================
+// マッチ確認
+// ==============================
+
+function matchForUsers(a, b) {
+  return db
+    .prepare(
+      `
+      SELECT *
+      FROM matches
+      WHERE
+        (user1_id=? AND user2_id=?)
+        OR
+        (user1_id=? AND user2_id=?)
+      `
+    )
+    .get(a, b, b, a);
+}
+
+
+// ==============================
+// 新規登録
+// ==============================
+
+app.post("/api/register", async (req, res) => {
+  const email =
+    clean(req.body.email, 200)
+      .toLowerCase();
+
+  const password =
+    String(req.body.password || "");
+
+  const nickname =
+    clean(req.body.nickname, 30);
+
+  const birthDate =
+    clean(req.body.birthDate, 10);
+
+  const bio =
+    clean(req.body.bio, 500);
+
+
+  if (
+    !validEmail(email) ||
+    password.length < 8 ||
+    nickname.length < 1 ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(
+      birthDate
+    )
+  ) {
+    return res
+      .status(400)
+      .json({
+        error:
+          "入力内容を確認してください（パスワードは8文字以上）"
+      });
+  }
+
+
+  if (!ageAtLeast18(birthDate)) {
+    return res
+      .status(400)
+      .json({
+        error:
+          "まこマッチは18歳以上のみ利用できます"
+      });
+  }
+
+
+  try {
+    const hash =
+      await bcrypt.hash(
+        password,
+        12
+      );
+
+
+    const result =
+      db
+        .prepare(
+          `
+          INSERT INTO users
+          (
+            email,
+            password_hash,
+            nickname,
+            birth_date,
+            bio
+          )
+          VALUES
+          (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+          )
+          `
+        )
+        .run(
+          email,
+          hash,
+          nickname,
+          birthDate,
+          bio
+        );
+
+
+    const token =
+      makeSession(
+        result.lastInsertRowid
+      );
+
+
+    res
+      .status(201)
+      .json({
+        token
+      });
+
+  } catch (error) {
+
+    if (
+      String(error.message)
+        .includes("UNIQUE")
+    ) {
+      return res
+        .status(409)
+        .json({
+          error:
+            "そのメールアドレスはすでに登録されています"
+        });
+    }
+
+
+    console.error(error);
+
+    res
+      .status(500)
+      .json({
+        error:
+          "登録に失敗しました"
+      });
+  }
+});
+
+
+// ==============================
+// ログイン
+// ==============================
+
+app.post("/api/login", async (req, res) => {
+  const email =
+    clean(req.body.email, 200)
+      .toLowerCase();
+
+  const password =
+    String(req.body.password || "");
+
+
+  const user =
+    db
+      .prepare(
+        "SELECT * FROM users WHERE email=?"
+      )
+      .get(email);
+
+
+  if (
+    !user ||
+    !(await bcrypt.compare(
+      password,
+      user.password_hash
+    ))
+  ) {
+    return res
+      .status(401)
+      .json({
+        error:
+          "メールアドレスまたはパスワードが違います"
+      });
+  }
+
+
+  res.json({
+    token:
+      makeSession(user.id)
+  });
+});
+
+
+// ==============================
+// ログアウト
+// ==============================
+
+app.post("/api/logout", auth, (req, res) => {
+  const raw =
+    req.headers.authorization
+      .slice(7);
+
+  const id =
+    raw.split(".")[0];
+
+  sessions.delete(id);
+
+  res.json({
+    ok: true
+  });
+});
+
+
+// ==============================
+// 自分のプロフィール
+// ==============================
+
+app.get("/api/me", auth, (req, res) => {
+  res.json(req.user);
+});
+
+
+app.put("/api/me", auth, (req, res) => {
+  const nickname =
+    clean(req.body.nickname, 30);
+
+  const bio =
+    clean(req.body.bio, 500);
+
+
+  if (!nickname) {
+    return res
+      .status(400)
+      .json({
+        error:
+          "ニックネームを入力してください"
+      });
+  }
+
+
+  db
+    .prepare(
+      `
+      UPDATE users
+      SET nickname=?,
+          bio=?
+      WHERE id=?
+      `
+    )
+    .run(
+      nickname,
+      bio,
+      req.user.id
+    );
+
+
+  const user =
+    db
+      .prepare(
+        `
+        SELECT
+          id,
+          email,
+          nickname,
+          birth_date,
+          bio,
+          created_at
+        FROM users
+        WHERE id=?
+        `
+      )
+      .get(req.user.id);
+
+
+  res.json(user);
+});
+
+
+// ==============================
+// ユーザー検索
+// ==============================
+
+app.get("/api/users", auth, (req, res) => {
+  const q =
+    clean(req.query.q, 50);
+
+
+  let users;
+
+
+  if (q) {
+
+    users =
+      db
+        .prepare(
+          `
+          SELECT
+            id,
+            nickname,
+            birth_date,
+            bio,
+            created_at
+          FROM users
+          WHERE
+            id != ?
+            AND
+            (
+              nickname LIKE ?
+              OR
+              bio LIKE ?
+            )
+          ORDER BY created_at DESC
+          LIMIT 50
+          `
+        )
+        .all(
+          req.user.id,
+          `%${q}%`,
+          `%${q}%`
+        );
+
+  } else {
+
+    users =
+      db
+        .prepare(
+          `
+          SELECT
+            id,
+            nickname,
+            birth_date,
+            bio,
+            created_at
+          FROM users
+          WHERE id != ?
+          ORDER BY created_at DESC
+          LIMIT 50
+          `
+        )
+        .all(req.user.id);
+  }
+
+
+  res.json(
+    users.filter(
+      user =>
+        !blockedEither(
+          req.user.id,
+          user.id
+        )
+    )
+  );
+});
+
+
+// ==============================
+// いいね
+// ==============================
+
+app.post(
+  "/api/users/:id/like",
+  auth,
+  (req, res) => {
+
+    const target =
+      Number(req.params.id);
+
+
+    if (
+      !Number.isInteger(target) ||
+      target === req.user.id
+    ) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "対象が不正です"
+        });
+    }
+
+
+    const targetUser =
+      db
+        .prepare(
+          "SELECT id FROM users WHERE id=?"
+        )
+        .get(target);
+
+
+    if (!targetUser) {
+      return res
+        .status(404)
+        .json({
+          error:
+            "ユーザーが見つかりません"
+        });
+    }
+
+
+    if (
+      blockedEither(
+        req.user.id,
+        target
+      )
+    ) {
+      return res
+        .status(403)
+        .json({
+          error:
+            "このユーザーとは操作できません"
+        });
+    }
+
+
+    db
+      .prepare(
+        `
+        INSERT OR IGNORE INTO likes
+        (
+          from_user_id,
+          to_user_id
+        )
+        VALUES
+        (?,?)
+        `
+      )
+      .run(
+        req.user.id,
+        target
+      );
+
+
+    const mutual =
+      !!db
+        .prepare(
+          `
+          SELECT 1
+          FROM likes
+          WHERE
+            from_user_id=?
+            AND
+            to_user_id=?
+          `
+        )
+        .get(
+          target,
+          req.user.id
+        );
+
+
+    if (mutual) {
+
+      const a =
+        Math.min(
+          req.user.id,
+          target
+        );
+
+      const b =
+        Math.max(
+          req.user.id,
+          target
+        );
+
+
+      db
+        .prepare(
+          `
+          INSERT OR IGNORE INTO matches
+          (
+            user1_id,
+            user2_id
+          )
+          VALUES
+          (?,?)
+          `
+        )
+        .run(a, b);
+    }
+
+
+    res.json({
+      liked: true,
+      matched: mutual
+    });
+  }
+);
+
+
+// ==============================
+// マッチ一覧
+// ==============================
+
+app.get("/api/matches", auth, (req, res) => {
+
+  const rows =
+    db
+      .prepare(
+        `
+        SELECT
+          m.id,
+
+          CASE
+            WHEN m.user1_id=?
+            THEN m.user2_id
+            ELSE m.user1_id
+          END AS other_id,
+
+          u.nickname
+
+        FROM matches m
+
+        JOIN users u
+        ON u.id =
+          CASE
+            WHEN m.user1_id=?
+            THEN m.user2_id
+            ELSE m.user1_id
+          END
+
+        WHERE
+          m.user1_id=?
+          OR
+          m.user2_id=?
+
+        ORDER BY
+          m.created_at DESC
+        `
+      )
+      .all(
+        req.user.id,
+        req.user.id,
+        req.user.id,
+        req.user.id
+      );
+
+
+  res.json(rows);
+});
+
+
+// ==============================
+// メッセージ一覧
+// ==============================
+
+app.get(
+  "/api/matches/:id/messages",
+  auth,
+  (req, res) => {
+
+    const match =
+      db
+        .prepare(
+          "SELECT * FROM matches WHERE id=?"
+        )
+        .get(
+          Number(req.params.id)
+        );
+
+
+    if (
+      !match ||
+      (
+        match.user1_id !== req.user.id &&
+        match.user2_id !== req.user.id
+      )
+    ) {
+      return res
+        .status(403)
+        .json({
+          error:
+            "アクセスできません"
+        });
+    }
+
+
+    const messages =
+      db
+        .prepare(
+          `
+          SELECT
+            id,
+            sender_id,
+            body,
+            created_at
+          FROM messages
+          WHERE match_id=?
+          ORDER BY id ASC
+          LIMIT 200
+          `
+        )
+        .all(match.id);
+
+
+    res.json(messages);
+  }
+);
+
+
+// ==============================
+// メッセージ送信
+// ==============================
+
+app.post(
+  "/api/matches/:id/messages",
+  auth,
+  (req, res) => {
+
+    const match =
+      db
+        .prepare(
+          "SELECT * FROM matches WHERE id=?"
+        )
+        .get(
+          Number(req.params.id)
+        );
+
+
+    if (
+      !match ||
+      (
+        match.user1_id !== req.user.id &&
+        match.user2_id !== req.user.id
+      )
+    ) {
+      return res
+        .status(403)
+        .json({
+          error:
+            "アクセスできません"
+        });
+    }
+
+
+    const body =
+      clean(req.body.body, 1000);
+
+
+    if (!body) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "メッセージを入力してください"
+        });
+    }
+
+
+    const other =
+      match.user1_id === req.user.id
+        ? match.user2_id
+        : match.user1_id;
+
+
+    if (
+      blockedEither(
+        req.user.id,
+        other
+      )
+    ) {
+      return res
+        .status(403)
+        .json({
+          error:
+            "ブロック中です"
+        });
+    }
+
+
+    const result =
+      db
+        .prepare(
+          `
+          INSERT INTO messages
+          (
+            match_id,
+            sender_id,
+            body
+          )
+          VALUES
+          (?,?,?)
+          `
+        )
+        .run(
+          match.id,
+          req.user.id,
+          body
+        );
+
+
+    const message =
+      db
+        .prepare(
+          `
+          SELECT
+            id,
+            sender_id,
+            body,
+            created_at
+          FROM messages
+          WHERE id=?
+          `
+        )
+        .get(
+          result.lastInsertRowid
+        );
+
+
+    res
+      .status(201)
+      .json(message);
+  }
+);
+
+
+// ==============================
+// ブロック
+// ==============================
+
+app.post(
+  "/api/users/:id/block",
+  auth,
+  (req, res) => {
+
+    const target =
+      Number(req.params.id);
+
+
+    if (
+      !Number.isInteger(target) ||
+      target === req.user.id
+    ) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "対象が不正です"
+        });
+    }
+
+
+    db
+      .prepare(
+        `
+        INSERT OR IGNORE INTO blocks
+        (
+          blocker_id,
+          blocked_id
+        )
+        VALUES
+        (?,?)
+        `
+      )
+      .run(
+        req.user.id,
+        target
+      );
+
+
+    res.json({
+      ok: true
+    });
+  }
+);
+
+
+// ==============================
+// 通報
+// ==============================
+
+app.post(
+  "/api/users/:id/report",
+  auth,
+  (req, res) => {
+
+    const target =
+      Number(req.params.id);
+
+    const reason =
+      clean(
+        req.body.reason,
+        500
+      );
+
+
+    if (
+      !Number.isInteger(target) ||
+      target === req.user.id ||
+      !reason
+    ) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "通報内容を確認してください"
+        });
+    }
+
+
+    db
+      .prepare(
+        `
+        INSERT INTO reports
+        (
+          reporter_id,
+          reported_id,
+          reason
+        )
+        VALUES
+        (?,?,?)
+        `
+      )
+      .run(
+        req.user.id,
+        target,
+        reason
+      );
+
+
+    res
+      .status(201)
+      .json({
+        ok: true
+      });
+  }
+);
+
+
+// ==============================
+// フロントエンドのフォールバック
+// ==============================
+
+// 「*」ではなく正規表現を使用。
+// Express / path-to-regexp の
+// Missing parameter name エラーを回避。
+
+app.get(
+  /^(?!\/api(?:\/|$)).*/,
+  (req, res) => {
+    res.sendFile(
+      path.join(
+        __dirname,
+        "index.html"
+      )
+    );
+  }
+);
+
+
+// ==============================
+// サーバー起動
+// ==============================
+
+app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
+    console.log(
+      `まこマッチ: http://localhost:${PORT}`
+    );
+  }
+);
