@@ -90,13 +90,9 @@
 
     .card {
       background: white;
-
       border: 1px solid #eee;
-
       border-radius: 20px;
-
       padding: 16px;
-
       margin-bottom: 14px;
 
       box-shadow:
@@ -115,19 +111,11 @@
     textarea,
     select {
       width: 100%;
-
       padding: 12px 13px;
-
-      border:
-        1px solid #ddd;
-
+      border: 1px solid #ddd;
       border-radius: 12px;
-
-      margin:
-        5px 0 10px;
-
+      margin: 5px 0 10px;
       background: white;
-
       outline: none;
     }
 
@@ -147,18 +135,13 @@
 
     button {
       border: 0;
-
       border-radius: 13px;
-
-      padding:
-        11px 15px;
-
+      padding: 11px 15px;
       font-weight: 700;
     }
 
     .primary {
       width: 100%;
-
       color: white;
 
       background:
@@ -172,6 +155,11 @@
     .like {
       background: #ff5c91;
       color: white;
+    }
+
+    .liked {
+      background: #ffd6e4;
+      color: #d94f7e;
     }
 
     .block {
@@ -201,11 +189,8 @@
 
     .message {
       padding: 10px;
-
       border-radius: 12px;
-
-      margin:
-        7px 0;
+      margin: 7px 0;
     }
 
     .success {
@@ -220,22 +205,16 @@
 
     .profile {
       display: flex;
-
       gap: 12px;
-
       align-items: center;
     }
 
     .avatar {
       width: 58px;
       height: 58px;
-
       flex-shrink: 0;
-
       display: grid;
-
       place-items: center;
-
       border-radius: 50%;
 
       background:
@@ -259,27 +238,17 @@
 
     .tag {
       display: inline-block;
-
       background: #f1ebff;
-
       color: #6652c7;
-
-      padding:
-        5px 9px;
-
+      padding: 5px 9px;
       border-radius: 20px;
-
-      margin:
-        4px 3px 0 0;
-
+      margin: 4px 3px 0 0;
       font-size: 12px;
     }
 
     .actions {
       display: flex;
-
       gap: 8px;
-
       margin-top: 12px;
     }
 
@@ -289,19 +258,14 @@
 
     .account {
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       gap: 10px;
     }
 
     .accountEmail {
       font-size: 13px;
-
       color: #666;
-
       overflow-wrap: anywhere;
     }
 
@@ -315,17 +279,13 @@
 
     .loading {
       padding: 15px;
-
       text-align: center;
-
       color: #888;
     }
 
     .location {
       margin-top: 8px;
-
       color: #777;
-
       font-size: 13px;
     }
 
@@ -335,22 +295,15 @@
 
     .postItem {
       background: white;
-
-      border:
-        1px solid #eee;
-
+      border: 1px solid #eee;
       border-radius: 14px;
-
       padding: 12px;
-
       margin-top: 10px;
     }
 
     .postHeader {
       display: flex;
-
       justify-content: space-between;
-
       gap: 8px;
     }
 
@@ -368,23 +321,16 @@
 
     .chatMessages {
       height: 330px;
-
       overflow-y: auto;
-
       padding: 10px;
-
       background: #fafafa;
-
       border-radius: 15px;
-
       margin-bottom: 10px;
     }
 
     .chatRow {
       display: flex;
-
-      margin:
-        7px 0;
+      margin: 7px 0;
     }
 
     .chatRow.mine {
@@ -393,12 +339,8 @@
 
     .chatBubble {
       max-width: 78%;
-
-      padding:
-        9px 12px;
-
+      padding: 9px 12px;
       border-radius: 15px;
-
       background: #eee;
     }
 
@@ -408,15 +350,12 @@
 
     .chatTime {
       font-size: 10px;
-
       color: #999;
-
       margin-top: 3px;
     }
 
     .chatInputRow {
       display: flex;
-
       gap: 7px;
     }
 
@@ -430,57 +369,62 @@
 
     .tabs {
       display: flex;
-
       gap: 7px;
-
       overflow-x: auto;
-
       margin-bottom: 15px;
     }
 
     .tab {
       white-space: nowrap;
-
       background: #f2eefb;
-
       color: #6755b9;
     }
 
     .tab.active {
       background: #ff6f9f;
-
       color: white;
     }
 
     .checkboxRow {
       display: flex;
-
       align-items: flex-start;
-
       gap: 8px;
-
       font-size: 13px;
-
-      margin:
-        5px 0 12px;
+      margin: 5px 0 12px;
     }
 
     .checkboxRow input {
       width: auto;
-
       margin-top: 3px;
     }
 
     .empty {
       padding: 20px;
-
       text-align: center;
-
       color: #999;
-
       background: #fafafa;
-
       border-radius: 15px;
+    }
+
+    .unreadBadge {
+      display: inline-block;
+      min-width: 22px;
+      padding: 3px 7px;
+      border-radius: 20px;
+      background: #ff4f87;
+      color: white;
+      font-size: 11px;
+      text-align: center;
+      margin-left: 5px;
+    }
+
+    .lastMessage {
+      margin-top: 8px;
+      color: #777;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
   </style>
@@ -506,9 +450,7 @@
 
   <main>
 
-    <!-- ========================= -->
     <!-- ログイン -->
-    <!-- ========================= -->
 
     <section
       id="authSection"
@@ -531,9 +473,7 @@
         autocomplete="current-password"
       >
 
-      <div
-        class="checkboxRow"
-      >
+      <div class="checkboxRow">
 
         <input
           id="ageConfirm"
@@ -572,17 +512,12 @@
     </section>
 
 
-    <!-- ========================= -->
     <!-- ログイン後 -->
-    <!-- ========================= -->
 
     <section
       id="appSection"
       class="hidden"
     >
-
-
-      <!-- アカウント -->
 
       <div class="card">
 
@@ -655,9 +590,7 @@
       </div>
 
 
-      <!-- ========================= -->
       <!-- プロフィール -->
-      <!-- ========================= -->
 
       <section
         id="profileTab"
@@ -666,13 +599,9 @@
 
         <div class="card">
 
-          <h2>
-            👤 プロフィール
-          </h2>
+          <h2>👤 プロフィール</h2>
 
-          <label>
-            ニックネーム
-          </label>
+          <label>ニックネーム</label>
 
           <input
             id="myName"
@@ -680,10 +609,7 @@
             maxlength="30"
           >
 
-
-          <label>
-            年齢
-          </label>
+          <label>年齢</label>
 
           <input
             id="myAge"
@@ -693,10 +619,7 @@
             placeholder="18歳以上"
           >
 
-
-          <label>
-            性別
-          </label>
+          <label>性別</label>
 
           <select id="myGender">
 
@@ -718,10 +641,7 @@
 
           </select>
 
-
-          <label>
-            都道府県
-          </label>
+          <label>都道府県</label>
 
           <select id="prefecture">
 
@@ -731,10 +651,7 @@
 
           </select>
 
-
-          <label>
-            市区町村
-          </label>
+          <label>市区町村</label>
 
           <select
             id="municipality"
@@ -747,10 +664,7 @@
 
           </select>
 
-
-          <label>
-            自己紹介
-          </label>
+          <label>自己紹介</label>
 
           <textarea
             id="myBio"
@@ -759,7 +673,6 @@
             placeholder="よろしくお願いします！"
           ></textarea>
 
-
           <button
             id="saveProfileButton"
             class="primary"
@@ -767,13 +680,11 @@
             プロフィールを保存 💕
           </button>
 
-
           <div
             id="profileMessage"
             class="small"
             style="margin-top:10px"
           ></div>
-
 
           <div
             id="myLocation"
@@ -785,22 +696,16 @@
       </section>
 
 
-      <!-- ========================= -->
       <!-- おすすめ -->
-      <!-- ========================= -->
 
       <section
         id="peopleTab"
         class="tabContent hidden"
       >
 
-        <h2>
-          💕 おすすめの人
-        </h2>
+        <h2>💕 おすすめの人</h2>
 
-        <div
-          id="profiles"
-        >
+        <div id="profiles">
 
           <div class="loading">
             読み込み中...
@@ -811,22 +716,16 @@
       </section>
 
 
-      <!-- ========================= -->
       <!-- マッチ -->
-      <!-- ========================= -->
 
       <section
         id="matchTab"
         class="tabContent hidden"
       >
 
-        <h2>
-          💖 マッチした人
-        </h2>
+        <h2>💖 マッチした人</h2>
 
-        <div
-          id="matches"
-        >
+        <div id="matches">
 
           <div class="loading">
             読み込み中...
@@ -837,22 +736,16 @@
       </section>
 
 
-      <!-- ========================= -->
       <!-- チャット -->
-      <!-- ========================= -->
 
       <section
         id="chatTab"
         class="tabContent hidden"
       >
 
-        <h2>
-          💬 二人だけのチャット
-        </h2>
+        <h2>💬 二人だけのチャット</h2>
 
-        <div
-          id="chatArea"
-        >
+        <div id="chatArea">
 
           <div class="empty">
             マッチした人を選ぶと<br>
@@ -864,9 +757,7 @@
       </section>
 
 
-      <!-- ========================= -->
       <!-- 雑談 -->
-      <!-- ========================= -->
 
       <section
         id="talkTab"
@@ -875,9 +766,7 @@
 
         <div class="card post">
 
-          <h2>
-            🗣️ 雑談コーナー
-          </h2>
+          <h2>🗣️ 雑談コーナー</h2>
 
           <textarea
             id="postText"
@@ -895,13 +784,9 @@
 
         </div>
 
-
-        <div
-          id="posts"
-        ></div>
+        <div id="posts"></div>
 
       </section>
-
 
     </section>
 
@@ -913,9 +798,9 @@
 <script type="module">
 
   /*
-   * ==========================================
+   * ========================================
    * Firebase
-   * ==========================================
+   * ========================================
    */
 
   import {
@@ -946,8 +831,7 @@
     collection,
     getDocs,
     onSnapshot,
-    serverTimestamp,
-    query
+    serverTimestamp
   }
   from
     "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -982,221 +866,30 @@
   const app =
     initializeApp(firebaseConfig);
 
-
   const auth =
     getAuth(app);
-
 
   const db =
     getFirestore(app);
 
 
   /*
-   * ==========================================
-   * 市区町村データ
-   * ==========================================
+   * ========================================
+   * 市区町村
+   * ========================================
    */
 
   const CITY_URL =
     "https://code4fukui.github.io/localgovjp/localgovjp.json";
 
-
   const prefecture =
-    document.getElementById(
-      "prefecture"
-    );
-
+    document.getElementById("prefecture");
 
   const municipality =
-    document.getElementById(
-      "municipality"
-    );
-
+    document.getElementById("municipality");
 
   let municipalities = [];
 
-
-  /*
-   * ==========================================
-   * 現在のユーザー
-   * ==========================================
-   */
-
-  let currentUser = null;
-
-  let currentProfile = null;
-
-  let selectedMatchId = null;
-
-  let selectedMatchUser = null;
-
-  let unsubscribeChat = null;
-
-  let unsubscribePosts = null;
-
-
-  /*
-   * ==========================================
-   * DOM
-   * ==========================================
-   */
-
-  const authSection =
-    document.getElementById(
-      "authSection"
-    );
-
-
-  const appSection =
-    document.getElementById(
-      "appSection"
-    );
-
-
-  const authMessage =
-    document.getElementById(
-      "authMessage"
-    );
-
-
-  const accountEmail =
-    document.getElementById(
-      "accountEmail"
-    );
-
-
-  const profilesBox =
-    document.getElementById(
-      "profiles"
-    );
-
-
-  const matchesBox =
-    document.getElementById(
-      "matches"
-    );
-
-
-  const chatArea =
-    document.getElementById(
-      "chatArea"
-    );
-
-
-  const postsBox =
-    document.getElementById(
-      "posts"
-    );
-
-
-  /*
-   * ==========================================
-   * HTMLエスケープ
-   * ==========================================
-   */
-
-  function escapeHtml(value) {
-
-    return String(value ?? "")
-      .replace(
-        /[&<>"']/g,
-        function(char) {
-
-          return {
-
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-
-          }[char];
-
-        }
-      );
-
-  }
-
-
-  /*
-   * ==========================================
-   * エラーメッセージ
-   * ==========================================
-   */
-
-  function firebaseErrorMessage(error) {
-
-    const code =
-      error?.code || "";
-
-
-    if (
-      code ===
-      "auth/email-already-in-use"
-    ) {
-
-      return "このメールアドレスはすでに登録されています。";
-
-    }
-
-
-    if (
-      code ===
-      "auth/invalid-email"
-    ) {
-
-      return "メールアドレスを確認してください。";
-
-    }
-
-
-    if (
-      code ===
-      "auth/weak-password"
-    ) {
-
-      return "パスワードは6文字以上にしてください。";
-
-    }
-
-
-    if (
-      code ===
-      "auth/invalid-credential" ||
-      code ===
-      "auth/wrong-password" ||
-      code ===
-      "auth/user-not-found"
-    ) {
-
-      return "メールアドレスまたはパスワードが違います。";
-
-    }
-
-
-    if (
-      code ===
-      "permission-denied"
-    ) {
-
-      return "Firebaseの権限設定を確認してください。";
-
-    }
-
-
-    return (
-      error?.message ||
-      "エラーが発生しました。"
-    );
-
-  }
-
-
-  /*
-   * ==========================================
-   * 都道府県・市区町村
-   * ==========================================
-   */
 
   async function loadMunicipalities() {
 
@@ -1205,23 +898,17 @@
       const response =
         await fetch(CITY_URL);
 
-
       if (!response.ok) {
-
         throw new Error(
           "市区町村データ取得失敗"
         );
-
       }
-
 
       municipalities =
         await response.json();
 
-
       const prefMap =
         new Map();
-
 
       municipalities.forEach(
         city => {
@@ -1241,52 +928,41 @@
         }
       );
 
-
       prefecture.innerHTML =
         '<option value="">選択してください</option>';
-
 
       Array.from(
         prefMap.entries()
       )
-        .sort(
-          (a, b) =>
-            Number(a[0]) -
-            Number(b[0])
-        )
-        .forEach(
-          ([pid, pref]) => {
+      .sort(
+        (a,b) =>
+          Number(a[0]) -
+          Number(b[0])
+      )
+      .forEach(
+        ([pid,pref]) => {
 
-            const option =
-              document.createElement(
-                "option"
-              );
-
-
-            option.value =
-              pid;
-
-
-            option.textContent =
-              pref;
-
-
-            prefecture.appendChild(
-              option
+          const option =
+            document.createElement(
+              "option"
             );
 
-          }
-        );
+          option.value = pid;
+          option.textContent = pref;
 
+          prefecture.appendChild(
+            option
+          );
 
-    } catch (error) {
+        }
+      );
+
+    } catch(error) {
 
       console.error(error);
 
-
       prefecture.innerHTML =
         '<option value="">読み込み失敗</option>';
-
 
       municipality.innerHTML =
         '<option value="">読み込み失敗</option>';
@@ -1305,14 +981,11 @@
           prefecture.value
         );
 
-
       municipality.innerHTML =
         '<option value="">選択してください</option>';
 
-
       municipality.disabled =
         true;
-
 
       if (!pid) {
 
@@ -1323,22 +996,20 @@
 
       }
 
-
       const cities =
         municipalities
-          .filter(
-            city =>
-              String(city.pid) === pid
-          )
-          .sort(
-            (a, b) =>
-              String(a.city)
-                .localeCompare(
-                  String(b.city),
-                  "ja"
-                )
-          );
-
+        .filter(
+          city =>
+            String(city.pid) === pid
+        )
+        .sort(
+          (a,b) =>
+            String(a.city)
+              .localeCompare(
+                String(b.city),
+                "ja"
+              )
+        );
 
       cities.forEach(
         city => {
@@ -1348,14 +1019,11 @@
               "option"
             );
 
-
           option.value =
             city.city;
 
-
           option.textContent =
             city.city;
-
 
           municipality.appendChild(
             option
@@ -1363,7 +1031,6 @@
 
         }
       );
-
 
       municipality.disabled =
         false;
@@ -1373,9 +1040,168 @@
 
 
   /*
-   * ==========================================
+   * ========================================
+   * 状態
+   * ========================================
+   */
+
+  let currentUser = null;
+
+  let currentProfile = null;
+
+  let selectedMatchId = null;
+
+  let selectedMatchUser = null;
+
+  let unsubscribeChat = null;
+
+
+  /*
+   * ========================================
+   * DOM
+   * ========================================
+   */
+
+  const authSection =
+    document.getElementById(
+      "authSection"
+    );
+
+  const appSection =
+    document.getElementById(
+      "appSection"
+    );
+
+  const authMessage =
+    document.getElementById(
+      "authMessage"
+    );
+
+  const accountEmail =
+    document.getElementById(
+      "accountEmail"
+    );
+
+  const profilesBox =
+    document.getElementById(
+      "profiles"
+    );
+
+  const matchesBox =
+    document.getElementById(
+      "matches"
+    );
+
+  const chatArea =
+    document.getElementById(
+      "chatArea"
+    );
+
+  const postsBox =
+    document.getElementById(
+      "posts"
+    );
+
+
+  /*
+   * ========================================
+   * HTMLエスケープ
+   * ========================================
+   */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(
+        /[&<>"']/g,
+        char => {
+
+          return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+          }[char];
+
+        }
+      );
+
+  }
+
+
+  /*
+   * ========================================
+   * Firebaseエラー
+   * ========================================
+   */
+
+  function firebaseErrorMessage(error) {
+
+    const code =
+      error?.code || "";
+
+    if (
+      code ===
+      "auth/email-already-in-use"
+    ) {
+
+      return "このメールアドレスはすでに登録されています。";
+
+    }
+
+    if (
+      code ===
+      "auth/invalid-email"
+    ) {
+
+      return "メールアドレスを確認してください。";
+
+    }
+
+    if (
+      code ===
+      "auth/weak-password"
+    ) {
+
+      return "パスワードは6文字以上にしてください。";
+
+    }
+
+    if (
+      code ===
+      "auth/invalid-credential" ||
+      code ===
+      "auth/wrong-password" ||
+      code ===
+      "auth/user-not-found"
+    ) {
+
+      return "メールアドレスまたはパスワードが違います。";
+
+    }
+
+    if (
+      code ===
+      "permission-denied"
+    ) {
+
+      return "Firebaseの権限設定を確認してください。";
+
+    }
+
+    return (
+      error?.message ||
+      "エラーが発生しました。"
+    );
+
+  }
+
+
+  /*
+   * ========================================
    * 認証
-   * ==========================================
+   * ========================================
    */
 
   document
@@ -1390,18 +1216,15 @@
             .value
             .trim();
 
-
         const password =
           document
             .getElementById("password")
             .value;
 
-
         const ageConfirm =
           document
             .getElementById("ageConfirm")
             .checked;
-
 
         if (!ageConfirm) {
 
@@ -1415,7 +1238,6 @@
 
         }
 
-
         if (!email || !password) {
 
           authMessage.textContent =
@@ -1428,12 +1250,10 @@
 
         }
 
-
         try {
 
           authMessage.textContent =
             "登録中...";
-
 
           const result =
             await createUserWithEmailAndPassword(
@@ -1441,7 +1261,6 @@
               email,
               password
             );
-
 
           await setDoc(
             doc(
@@ -1465,29 +1284,22 @@
 
             },
             {
-              merge: true
+              merge:true
             }
           );
-
 
           authMessage.textContent =
             "登録しました！💕";
 
-
           authMessage.className =
             "message success";
 
-
-        } catch (error) {
+        } catch(error) {
 
           console.error(error);
 
-
           authMessage.textContent =
-            firebaseErrorMessage(
-              error
-            );
-
+            firebaseErrorMessage(error);
 
           authMessage.className =
             "message error";
@@ -1510,18 +1322,15 @@
             .value
             .trim();
 
-
         const password =
           document
             .getElementById("password")
             .value;
 
-
         const ageConfirm =
           document
             .getElementById("ageConfirm")
             .checked;
-
 
         if (!ageConfirm) {
 
@@ -1535,7 +1344,6 @@
 
         }
 
-
         if (!email || !password) {
 
           authMessage.textContent =
@@ -1548,12 +1356,10 @@
 
         }
 
-
         try {
 
           authMessage.textContent =
             "ログイン中...";
-
 
           await signInWithEmailAndPassword(
             auth,
@@ -1561,21 +1367,15 @@
             password
           );
 
-
           authMessage.textContent =
             "";
 
-
-        } catch (error) {
+        } catch(error) {
 
           console.error(error);
 
-
           authMessage.textContent =
-            firebaseErrorMessage(
-              error
-            );
-
+            firebaseErrorMessage(error);
 
           authMessage.className =
             "message error";
@@ -1599,9 +1399,9 @@
 
 
   /*
-   * ==========================================
-   * プロフィール読み込み
-   * ==========================================
+   * ========================================
+   * 自分のプロフィール
+   * ========================================
    */
 
   async function loadMyProfile() {
@@ -1609,7 +1409,6 @@
     if (!currentUser) {
       return;
     }
-
 
     const snap =
       await getDoc(
@@ -1620,7 +1419,6 @@
         )
       );
 
-
     if (!snap.exists()) {
 
       currentProfile = null;
@@ -1629,28 +1427,23 @@
 
     }
 
-
     currentProfile =
       snap.data();
-
 
     document
       .getElementById("myName")
       .value =
       currentProfile.name || "";
 
-
     document
       .getElementById("myAge")
       .value =
       currentProfile.age || "";
 
-
     document
       .getElementById("myGender")
       .value =
       currentProfile.gender || "";
-
 
     if (
       currentProfile.prefecturePid
@@ -1661,14 +1454,12 @@
           currentProfile.prefecturePid
         );
 
-
       prefecture.dispatchEvent(
         new Event("change")
       );
 
-
       setTimeout(
-        function() {
+        () => {
 
           municipality.value =
             currentProfile.municipality ||
@@ -1680,23 +1471,15 @@
 
     }
 
-
     document
       .getElementById("myBio")
       .value =
       currentProfile.bio || "";
 
-
     updateLocationText();
 
   }
 
-
-  /*
-   * ==========================================
-   * プロフィール保存
-   * ==========================================
-   */
 
   document
     .getElementById(
@@ -1711,22 +1494,14 @@
   async function saveProfile() {
 
     if (!currentUser) {
-
-      alert(
-        "ログインしてください。"
-      );
-
       return;
-
     }
-
 
     const name =
       document
         .getElementById("myName")
         .value
         .trim();
-
 
     const age =
       Number(
@@ -1735,18 +1510,13 @@
           .value
       );
 
-
     const gender =
       document
         .getElementById("myGender")
         .value;
 
-
     const prefecturePid =
-      document
-        .getElementById("prefecture")
-        .value;
-
+      prefecture.value;
 
     const prefectureName =
       prefecture
@@ -1755,11 +1525,8 @@
         ]
         ?.textContent || "";
 
-
     const municipalityName =
-      municipality
-        .value;
-
+      municipality.value;
 
     const bio =
       document
@@ -1767,13 +1534,11 @@
         .value
         .trim();
 
-
     const message =
       document
         .getElementById(
           "profileMessage"
         );
-
 
     if (!name) {
 
@@ -1786,7 +1551,6 @@
       return;
 
     }
-
 
     if (
       !Number.isInteger(age) ||
@@ -1803,7 +1567,6 @@
 
     }
 
-
     if (!gender) {
 
       message.textContent =
@@ -1815,7 +1578,6 @@
       return;
 
     }
-
 
     if (!prefecturePid) {
 
@@ -1829,7 +1591,6 @@
 
     }
 
-
     if (!municipalityName) {
 
       message.textContent =
@@ -1841,7 +1602,6 @@
       return;
 
     }
-
 
     try {
 
@@ -1859,17 +1619,11 @@
           email:
             currentUser.email,
 
-          name:
-            name,
+          name,
+          age,
+          gender,
 
-          age:
-            age,
-
-          gender:
-            gender,
-
-          prefecturePid:
-            prefecturePid,
+          prefecturePid,
 
           prefecture:
             prefectureName,
@@ -1877,18 +1631,16 @@
           municipality:
             municipalityName,
 
-          bio:
-            bio,
+          bio,
 
           updatedAt:
             serverTimestamp()
 
         },
         {
-          merge: true
+          merge:true
         }
       );
-
 
       currentProfile = {
 
@@ -1902,38 +1654,33 @@
         age,
         gender,
         prefecturePid,
+
         prefecture:
           prefectureName,
+
         municipality:
           municipalityName,
+
         bio
 
       };
 
-
       message.textContent =
         "プロフィールを保存しました！💕";
-
 
       message.className =
         "message success";
 
-
       updateLocationText();
-
 
       await loadPeople();
 
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
 
-
       message.textContent =
-        firebaseErrorMessage(
-          error
-        );
-
+        firebaseErrorMessage(error);
 
       message.className =
         "message error";
@@ -1950,7 +1697,6 @@
         "myLocation"
       );
 
-
     if (
       currentProfile &&
       currentProfile.prefecture &&
@@ -1965,8 +1711,7 @@
 
     } else {
 
-      location.textContent =
-        "";
+      location.textContent = "";
 
     }
 
@@ -1974,9 +1719,64 @@
 
 
   /*
-   * ==========================================
-   * ユーザー一覧
-   * ==========================================
+   * ========================================
+   * ブロック一覧
+   * ========================================
+   */
+
+  async function getAllBlockedIds() {
+
+    const result =
+      new Set();
+
+    if (!currentUser) {
+      return result;
+    }
+
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "blocks"
+        )
+      );
+
+    snapshot.forEach(
+      item => {
+
+        const data =
+          item.data();
+
+        if (
+          data.from ===
+          currentUser.uid
+        ) {
+
+          result.add(data.to);
+
+        }
+
+        if (
+          data.to ===
+          currentUser.uid
+        ) {
+
+          result.add(data.from);
+
+        }
+
+      }
+    );
+
+    return result;
+
+  }
+
+
+  /*
+   * ========================================
+   * おすすめ
+   * ========================================
    */
 
   async function loadPeople() {
@@ -1985,10 +1785,8 @@
       return;
     }
 
-
     profilesBox.innerHTML =
       '<div class="loading">読み込み中...</div>';
-
 
     try {
 
@@ -2000,16 +1798,47 @@
           )
         );
 
+      const blockedIds =
+        await getAllBlockedIds();
+
+      const likesSnapshot =
+        await getDocs(
+          collection(
+            db,
+            "likes"
+          )
+        );
+
+      const likedIds =
+        new Set();
+
+      likesSnapshot.forEach(
+        item => {
+
+          const data =
+            item.data();
+
+          if (
+            data.from ===
+            currentUser.uid
+          ) {
+
+            likedIds.add(
+              data.to
+            );
+
+          }
+
+        }
+      );
 
       const users = [];
-
 
       snapshot.forEach(
         item => {
 
           const data =
             item.data();
-
 
           if (
             item.id ===
@@ -2018,41 +1847,29 @@
             return;
           }
 
-
           if (
-            data.blocked === true
+            blockedIds.has(
+              item.id
+            )
           ) {
             return;
           }
 
-
           users.push({
-            id: item.id,
-            ...data
+            id:item.id,
+            ...data,
+
+            alreadyLiked:
+              likedIds.has(
+                item.id
+              )
+
           });
 
         }
       );
 
-
-      /*
-       * ブロックした相手を除外
-       */
-
-      const blockedIds =
-        await getMyBlockedIds();
-
-
-      const filtered =
-        users.filter(
-          user =>
-            !blockedIds.has(
-              user.id
-            )
-        );
-
-
-      if (!filtered.length) {
+      if (!users.length) {
 
         profilesBox.innerHTML =
           '<div class="empty">まだ他のユーザーがいません。<br>新しいユーザーが登録するとここに表示されます💕</div>';
@@ -2061,22 +1878,14 @@
 
       }
 
-
       profilesBox.innerHTML =
-        filtered
-          .map(
-            user =>
-              renderUserCard(
-                user
-              )
-          )
+        users
+          .map(renderUserCard)
           .join("");
 
-
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
-
 
       profilesBox.innerHTML =
         '<div class="message error">ユーザーを読み込めませんでした。</div>';
@@ -2100,6 +1909,24 @@
         `
         : "";
 
+    const likeButton =
+      user.alreadyLiked
+        ? `
+          <button
+            class="liked"
+            disabled
+          >
+            ❤️ いいね済み
+          </button>
+        `
+        : `
+          <button
+            class="like"
+            onclick="sendLike('${user.id}')"
+          >
+            ❤️ いいね
+          </button>
+        `;
 
     return `
 
@@ -2124,9 +1951,7 @@
 
                 ${
                   user.age
-                    ? escapeHtml(
-                        user.age
-                      ) +
+                    ? escapeHtml(user.age) +
                       "歳"
                     : ""
                 }
@@ -2151,30 +1976,20 @@
 
         </div>
 
-
         ${location}
 
-
         <p>
-
           ${
             escapeHtml(
               user.bio ||
               "よろしくお願いします！"
             )
           }
-
         </p>
-
 
         <div class="actions">
 
-          <button
-            class="like"
-            onclick="sendLike('${user.id}')"
-          >
-            ❤️ いいね
-          </button>
+          ${likeButton}
 
           <button
             class="block"
@@ -2193,9 +2008,9 @@
 
 
   /*
-   * ==========================================
-   * いいね
-   * ==========================================
+   * ========================================
+   * いいね・マッチ
+   * ========================================
    */
 
   window.sendLike =
@@ -2205,7 +2020,6 @@
         return;
       }
 
-
       try {
 
         const likeId =
@@ -2213,12 +2027,10 @@
           "_" +
           targetUid;
 
-
         const reverseLikeId =
           targetUid +
           "_" +
           currentUser.uid;
-
 
         await setDoc(
           doc(
@@ -2237,9 +2049,11 @@
             createdAt:
               serverTimestamp()
 
+          },
+          {
+            merge:true
           }
         );
-
 
         const reverse =
           await getDoc(
@@ -2250,15 +2064,15 @@
             )
           );
 
-
-        if (reverse.exists()) {
+        if (
+          reverse.exists()
+        ) {
 
           const matchId =
             makeMatchId(
               currentUser.uid,
               targetUid
             );
-
 
           await setDoc(
             doc(
@@ -2268,8 +2082,7 @@
             ),
             {
 
-              matchId:
-                matchId,
+              matchId,
 
               users: [
                 currentUser.uid,
@@ -2284,23 +2097,19 @@
 
             },
             {
-              merge: true
+              merge:true
             }
           );
-
 
           alert(
             "💕 マッチしました！\nチャットできます！"
           );
 
-
           await loadMatches();
-
 
           openTab(
             "matchTab"
           );
-
 
         } else {
 
@@ -2308,16 +2117,16 @@
             "❤️ いいねしました！\n相手もいいねするとマッチします💕"
           );
 
+          await loadPeople();
+
         }
 
-      } catch (error) {
+      } catch(error) {
 
         console.error(error);
 
         alert(
-          firebaseErrorMessage(
-            error
-          )
+          firebaseErrorMessage(error)
         );
 
       }
@@ -2326,9 +2135,9 @@
 
 
   /*
-   * ==========================================
+   * ========================================
    * ブロック
-   * ==========================================
+   * ========================================
    */
 
   window.blockUser =
@@ -2338,17 +2147,14 @@
         return;
       }
 
-
       const ok =
         confirm(
           "このユーザーをブロックしますか？"
         );
 
-
       if (!ok) {
         return;
       }
-
 
       try {
 
@@ -2356,7 +2162,6 @@
           currentUser.uid +
           "_" +
           targetUid;
-
 
         await setDoc(
           doc(
@@ -2378,24 +2183,20 @@
           }
         );
 
-
         alert(
           "🚫 ブロックしました。"
         );
 
-
         await loadPeople();
 
+        await loadMatches();
 
-      } catch (error) {
+      } catch(error) {
 
         console.error(error);
 
-
         alert(
-          firebaseErrorMessage(
-            error
-          )
+          firebaseErrorMessage(error)
         );
 
       }
@@ -2403,57 +2204,10 @@
     };
 
 
-  async function getMyBlockedIds() {
-
-    const result =
-      new Set();
-
-
-    if (!currentUser) {
-      return result;
-    }
-
-
-    const snapshot =
-      await getDocs(
-        collection(
-          db,
-          "blocks"
-        )
-      );
-
-
-    snapshot.forEach(
-      item => {
-
-        const data =
-          item.data();
-
-
-        if (
-          data.from ===
-          currentUser.uid
-        ) {
-
-          result.add(
-            data.to
-          );
-
-        }
-
-      }
-    );
-
-
-    return result;
-
-  }
-
-
   /*
-   * ==========================================
+   * ========================================
    * マッチID
-   * ==========================================
+   * ========================================
    */
 
   function makeMatchId(
@@ -2472,9 +2226,9 @@
 
 
   /*
-   * ==========================================
+   * ========================================
    * マッチ一覧
-   * ==========================================
+   * ========================================
    */
 
   async function loadMatches() {
@@ -2483,10 +2237,8 @@
       return;
     }
 
-
     matchesBox.innerHTML =
       '<div class="loading">読み込み中...</div>';
-
 
     try {
 
@@ -2498,9 +2250,10 @@
           )
         );
 
+      const blockedIds =
+        await getAllBlockedIds();
 
       const matches = [];
-
 
       snapshot.forEach(
         item => {
@@ -2508,26 +2261,54 @@
           const data =
             item.data();
 
+          if (
+            !Array.isArray(
+              data.users
+            )
+          ) {
+            return;
+          }
 
           if (
-            Array.isArray(
-              data.users
-            ) &&
-            data.users.includes(
+            !data.users.includes(
               currentUser.uid
             )
           ) {
-
-            matches.push({
-              id: item.id,
-              ...data
-            });
-
+            return;
           }
+
+          const otherUid =
+            data.users.find(
+              uid =>
+                uid !==
+                currentUser.uid
+            );
+
+          if (
+            !otherUid
+          ) {
+            return;
+          }
+
+          if (
+            blockedIds.has(
+              otherUid
+            )
+          ) {
+            return;
+          }
+
+          matches.push({
+            id:
+              item.id,
+
+            ...data,
+
+            otherUid
+          });
 
         }
       );
-
 
       if (!matches.length) {
 
@@ -2538,49 +2319,78 @@
 
       }
 
+      matches.sort(
+        (a,b) => {
+
+          const at =
+            a.updatedAt?.seconds ||
+            a.createdAt?.seconds ||
+            0;
+
+          const bt =
+            b.updatedAt?.seconds ||
+            b.createdAt?.seconds ||
+            0;
+
+          return bt - at;
+
+        }
+      );
 
       const cards = [];
-
 
       for (
         const match of matches
       ) {
-
-        const otherUid =
-          match.users.find(
-            uid =>
-              uid !==
-              currentUser.uid
-          );
-
-
-        if (!otherUid) {
-          continue;
-        }
-
 
         const userSnap =
           await getDoc(
             doc(
               db,
               "users",
-              otherUid
+              match.otherUid
             )
           );
 
-
-        if (!userSnap.exists()) {
+        if (
+          !userSnap.exists()
+        ) {
           continue;
         }
-
 
         const user =
           userSnap.data();
 
+        const unread =
+          Number(
+            match.unread?.[
+              currentUser.uid
+            ] || 0
+          );
+
+        const unreadHtml =
+          unread > 0
+            ? `
+              <span
+                class="unreadBadge"
+              >
+                ${unread}
+              </span>
+            `
+            : "";
+
+        const lastMessage =
+          match.lastMessage
+            ? escapeHtml(
+                match.lastMessage
+              )
+            : "まだメッセージはありません";
 
         cards.push(`
 
-          <div class="card matchCard">
+          <div
+            class="card matchCard"
+          >
 
             <div class="profile">
 
@@ -2597,6 +2407,8 @@
                     "ユーザー"
                   )}
 
+                  ${unreadHtml}
+
                 </div>
 
                 <div class="small">
@@ -2605,8 +2417,7 @@
                     user.age
                       ? escapeHtml(
                           user.age
-                        ) +
-                        "歳"
+                        ) + "歳"
                       : ""
                   }
 
@@ -2625,14 +2436,15 @@
 
             </div>
 
+            <div class="lastMessage">
+              ${lastMessage}
+            </div>
 
-            <div
-              class="actions"
-            >
+            <div class="actions">
 
               <button
                 class="like"
-                onclick="openChat('${match.id}','${otherUid}')"
+                onclick="openChat('${match.id}','${match.otherUid}')"
               >
                 💬 チャットする
               </button>
@@ -2645,15 +2457,12 @@
 
       }
 
-
       matchesBox.innerHTML =
         cards.join("");
 
-
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
-
 
       matchesBox.innerHTML =
         '<div class="message error">マッチを読み込めませんでした。</div>';
@@ -2664,9 +2473,9 @@
 
 
   /*
-   * ==========================================
-   * チャット
-   * ==========================================
+   * ========================================
+   * チャットを開く
+   * ========================================
    */
 
   window.openChat =
@@ -2678,8 +2487,65 @@
       selectedMatchId =
         matchId;
 
-
       try {
+
+        const matchSnap =
+          await getDoc(
+            doc(
+              db,
+              "matches",
+              matchId
+            )
+          );
+
+        if (
+          !matchSnap.exists()
+        ) {
+
+          alert(
+            "このマッチは存在しません。"
+          );
+
+          return;
+
+        }
+
+        const match =
+          matchSnap.data();
+
+        if (
+          !Array.isArray(
+            match.users
+          ) ||
+          !match.users.includes(
+            currentUser.uid
+          )
+        ) {
+
+          alert(
+            "このチャットを利用する権限がありません。"
+          );
+
+          return;
+
+        }
+
+        const blockedIds =
+          await getAllBlockedIds();
+
+        if (
+          blockedIds.has(
+            otherUid
+          )
+        ) {
+
+          alert(
+            "このユーザーとはチャットできません。"
+          );
+
+          return;
+
+        }
 
         const snap =
           await getDoc(
@@ -2690,30 +2556,26 @@
             )
           );
 
-
         selectedMatchUser =
           snap.exists()
             ? snap.data()
             : {
-                name:
-                  "ユーザー"
+                name:"ユーザー"
               };
-
 
         openTab(
           "chatTab"
         );
 
-
         renderChat();
 
         listenChat();
 
+        await markChatRead();
 
-      } catch (error) {
+      } catch(error) {
 
         console.error(error);
-
 
         alert(
           "チャットを開けませんでした。"
@@ -2724,12 +2586,17 @@
     };
 
 
+  /*
+   * ========================================
+   * チャット画面
+   * ========================================
+   */
+
   function renderChat() {
 
     const name =
       selectedMatchUser?.name ||
       "ユーザー";
-
 
     chatArea.innerHTML = `
 
@@ -2752,7 +2619,6 @@
 
         </div>
 
-
         <div class="chatInputRow">
 
           <input
@@ -2774,7 +2640,6 @@
 
     `;
 
-
     document
       .getElementById(
         "sendChatButton"
@@ -2784,14 +2649,13 @@
         sendChatMessage
       );
 
-
     document
       .getElementById(
         "chatInput"
       )
       .addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
           if (
             event.key ===
@@ -2810,6 +2674,12 @@
   }
 
 
+  /*
+   * ========================================
+   * チャットリアルタイム
+   * ========================================
+   */
+
   function listenChat() {
 
     if (unsubscribeChat) {
@@ -2821,11 +2691,9 @@
 
     }
 
-
     if (!selectedMatchId) {
       return;
     }
-
 
     const messagesRef =
       collection(
@@ -2835,14 +2703,12 @@
         "messages"
       );
 
-
     unsubscribeChat =
       onSnapshot(
         messagesRef,
-        snapshot => {
+        async snapshot => {
 
           const messages = [];
-
 
           snapshot.forEach(
             item => {
@@ -2850,42 +2716,38 @@
               messages.push({
                 id:
                   item.id,
+
                 ...item.data()
+
               });
 
             }
           );
 
-
           messages.sort(
-            (a, b) => {
+            (a,b) => {
 
               const at =
                 a.createdAt?.seconds ||
                 0;
 
-
               const bt =
                 b.createdAt?.seconds ||
                 0;
-
 
               return at - bt;
 
             }
           );
 
-
           const box =
             document.getElementById(
               "chatMessages"
             );
 
-
           if (!box) {
             return;
           }
-
 
           if (!messages.length) {
 
@@ -2896,7 +2758,6 @@
 
           }
 
-
           box.innerHTML =
             messages
               .map(
@@ -2906,10 +2767,8 @@
                     message.from ===
                     currentUser.uid;
 
-
                   const time =
-                    message.createdAt
-                      ?.toDate
+                    message.createdAt?.toDate
                       ? message.createdAt
                           .toDate()
                           .toLocaleString(
@@ -2917,12 +2776,10 @@
                           )
                       : "";
 
-
                   return `
 
                     <div
-                      class="chatRow
-                      ${
+                      class="chatRow ${
                         mine
                           ? "mine"
                           : ""
@@ -2957,22 +2814,22 @@
               )
               .join("");
 
-
           box.scrollTop =
             box.scrollHeight;
+
+          await markChatRead();
+
+          await loadMatches();
 
         },
         error => {
 
-          console.error(
-            error
-          );
+          console.error(error);
 
           const box =
             document.getElementById(
               "chatMessages"
             );
-
 
           if (box) {
 
@@ -2987,50 +2844,97 @@
   }
 
 
+  /*
+   * ========================================
+   * 未読を既読にする
+   * ========================================
+   */
+
+  async function markChatRead() {
+
+    if (
+      !currentUser ||
+      !selectedMatchId
+    ) {
+      return;
+    }
+
+    try {
+
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          selectedMatchId
+        ),
+        {
+
+          [`unread.${currentUser.uid}`]:
+            0
+
+        }
+      );
+
+    } catch(error) {
+
+      console.error(
+        "既読更新エラー:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /*
+   * ========================================
+   * メッセージ送信
+   * ========================================
+   */
+
   async function sendChatMessage() {
 
     if (
       !currentUser ||
       !selectedMatchId
     ) {
-
       return;
-
     }
-
 
     const input =
       document.getElementById(
         "chatInput"
       );
 
+    if (!input) {
+      return;
+    }
 
     const text =
       input.value.trim();
-
 
     if (!text) {
       return;
     }
 
-
     try {
 
-      /*
-       * matchが存在することを確認
-       */
+      const matchRef =
+        doc(
+          db,
+          "matches",
+          selectedMatchId
+        );
 
       const matchSnap =
         await getDoc(
-          doc(
-            db,
-            "matches",
-            selectedMatchId
-          )
+          matchRef
         );
 
-
-      if (!matchSnap.exists()) {
+      if (
+        !matchSnap.exists()
+      ) {
 
         alert(
           "このチャットは利用できません。"
@@ -3040,10 +2944,8 @@
 
       }
 
-
       const match =
         matchSnap.data();
-
 
       if (
         !Array.isArray(
@@ -3062,6 +2964,16 @@
 
       }
 
+      const otherUid =
+        match.users.find(
+          uid =>
+            uid !==
+            currentUser.uid
+        );
+
+      if (!otherUid) {
+        return;
+      }
 
       await addDoc(
         collection(
@@ -3075,8 +2987,10 @@
           from:
             currentUser.uid,
 
-          text:
-            text,
+          to:
+            otherUid,
+
+          text,
 
           createdAt:
             serverTimestamp()
@@ -3084,36 +2998,41 @@
         }
       );
 
-
       await updateDoc(
-        doc(
-          db,
-          "matches",
-          selectedMatchId
-        ),
+        matchRef,
         {
 
+          lastMessage:
+            text,
+
+          lastMessageFrom:
+            currentUser.uid,
+
           updatedAt:
-            serverTimestamp()
+            serverTimestamp(),
+
+          [`unread.${otherUid}`]:
+            Number(
+              match.unread?.[otherUid] ||
+              0
+            ) + 1,
+
+          [`unread.${currentUser.uid}`]:
+            0
 
         }
       );
-
 
       input.value = "";
 
       input.focus();
 
-
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
 
-
       alert(
-        firebaseErrorMessage(
-          error
-        )
+        firebaseErrorMessage(error)
       );
 
     }
@@ -3122,9 +3041,9 @@
 
 
   /*
-   * ==========================================
-   * 雑談コーナー
-   * ==========================================
+   * ========================================
+   * 雑談
+   * ========================================
    */
 
   document
@@ -3143,16 +3062,13 @@
       return;
     }
 
-
     const input =
       document.getElementById(
         "postText"
       );
 
-
     const text =
       input.value.trim();
-
 
     if (!text) {
 
@@ -3163,7 +3079,6 @@
       return;
 
     }
-
 
     try {
 
@@ -3181,8 +3096,7 @@
             currentProfile?.name ||
             "匿名",
 
-          text:
-            text,
+          text,
 
           createdAt:
             serverTimestamp()
@@ -3190,22 +3104,16 @@
         }
       );
 
-
       input.value = "";
-
 
       await loadPosts();
 
-
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
 
-
       alert(
-        firebaseErrorMessage(
-          error
-        )
+        firebaseErrorMessage(error)
       );
 
     }
@@ -3219,7 +3127,6 @@
       return;
     }
 
-
     try {
 
       const snapshot =
@@ -3230,9 +3137,7 @@
           )
         );
 
-
       const posts = [];
-
 
       snapshot.forEach(
         item => {
@@ -3240,31 +3145,29 @@
           posts.push({
             id:
               item.id,
+
             ...item.data()
+
           });
 
         }
       );
 
-
       posts.sort(
-        (a, b) => {
+        (a,b) => {
 
           const at =
             a.createdAt?.seconds ||
             0;
 
-
           const bt =
             b.createdAt?.seconds ||
             0;
-
 
           return bt - at;
 
         }
       );
-
 
       if (!posts.length) {
 
@@ -3275,22 +3178,19 @@
 
       }
 
-
       postsBox.innerHTML =
         posts
           .map(
             post => {
 
               const time =
-                post.createdAt
-                  ?.toDate
+                post.createdAt?.toDate
                   ? post.createdAt
                       .toDate()
                       .toLocaleString(
                         "ja-JP"
                       )
                   : "投稿直後";
-
 
               return `
 
@@ -3335,11 +3235,9 @@
           )
           .join("");
 
-
-    } catch (error) {
+    } catch(error) {
 
       console.error(error);
-
 
       postsBox.innerHTML =
         '<div class="message error">投稿を読み込めませんでした。</div>';
@@ -3350,9 +3248,9 @@
 
 
   /*
-   * ==========================================
-   * タブ切り替え
-   * ==========================================
+   * ========================================
+   * タブ
+   * ========================================
    */
 
   document
@@ -3395,7 +3293,6 @@
         }
       );
 
-
     document
       .querySelectorAll(
         ".tab"
@@ -3410,12 +3307,10 @@
         }
       );
 
-
     const section =
       document.getElementById(
         tabId
       );
-
 
     if (section) {
 
@@ -3425,12 +3320,10 @@
 
     }
 
-
     const button =
       document.querySelector(
         `.tab[data-tab="${tabId}"]`
       );
-
 
     if (button) {
 
@@ -3440,6 +3333,14 @@
 
     }
 
+    if (
+      tabId ===
+      "peopleTab"
+    ) {
+
+      loadPeople();
+
+    }
 
     if (
       tabId ===
@@ -3449,7 +3350,6 @@
       loadMatches();
 
     }
-
 
     if (
       tabId ===
@@ -3464,9 +3364,9 @@
 
 
   /*
-   * ==========================================
-   * Firebaseログイン状態
-   * ==========================================
+   * ========================================
+   * ログイン状態
+   * ========================================
    */
 
   onAuthStateChanged(
@@ -3478,20 +3378,16 @@
         currentUser =
           user;
 
-
         authSection.classList.add(
           "hidden"
         );
-
 
         appSection.classList.remove(
           "hidden"
         );
 
-
         accountEmail.textContent =
           user.email || "";
-
 
         try {
 
@@ -3503,11 +3399,9 @@
 
           await loadPosts();
 
-        } catch (error) {
+        } catch(error) {
 
-          console.error(
-            error
-          );
+          console.error(error);
 
         }
 
@@ -3516,20 +3410,22 @@
         currentUser =
           null;
 
-
         currentProfile =
           null;
 
+        selectedMatchId =
+          null;
+
+        selectedMatchUser =
+          null;
 
         authSection.classList.remove(
           "hidden"
         );
 
-
         appSection.classList.add(
           "hidden"
         );
-
 
         if (unsubscribeChat) {
 
@@ -3547,9 +3443,9 @@
 
 
   /*
-   * ==========================================
+   * ========================================
    * 初期化
-   * ==========================================
+   * ========================================
    */
 
   async function init() {
@@ -3557,7 +3453,6 @@
     await loadMunicipalities();
 
   }
-
 
   init();
 
