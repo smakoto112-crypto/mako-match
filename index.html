@@ -25,19 +25,9 @@
         BlinkMacSystemFont,
         "Noto Sans JP",
         sans-serif;
+
       background: #f7f3f8;
       color: #333;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
     }
 
     .app {
@@ -48,13 +38,15 @@
     }
 
     header {
-      padding: 22px 18px;
+      padding: 20px 18px;
+
       background:
         linear-gradient(
           135deg,
           #ff7aa8,
           #9b8cff
         );
+
       color: white;
     }
 
@@ -68,8 +60,8 @@
     }
 
     .sub {
-      opacity: .9;
       margin-top: 5px;
+      opacity: .9;
     }
 
     main {
@@ -81,8 +73,13 @@
       border-radius: 20px;
       padding: 16px;
       margin-bottom: 14px;
+
       box-shadow:
         0 5px 18px #0000000d;
+    }
+
+    .pink-card {
+      background: #fff4f7;
     }
 
     .form-title {
@@ -96,9 +93,18 @@
     select {
       width: 100%;
       padding: 13px;
-      border: 1px solid #ddd;
+
+      border:
+        1px solid #ddd;
+
       border-radius: 12px;
-      margin: 6px 0 10px;
+
+      margin:
+        6px 0 10px;
+
+      font:
+        inherit;
+
       background: white;
     }
 
@@ -109,15 +115,25 @@
     button {
       border: 0;
       border-radius: 14px;
-      padding: 12px 16px;
+
+      padding:
+        12px 16px;
+
       font-weight: 700;
       font-size: 15px;
+
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
 
     .primary {
+      width: 100%;
       background: #ff5c91;
       color: white;
-      width: 100%;
     }
 
     .secondary {
@@ -126,11 +142,14 @@
     }
 
     .google {
-      background: #fff;
-      color: #444;
-      border: 1px solid #ddd;
       width: 100%;
-      margin-top: 8px;
+      background: #4285f4;
+      color: white;
+    }
+
+    .danger {
+      background: #ffe8e8;
+      color: #d33;
     }
 
     .like {
@@ -138,16 +157,9 @@
       color: white;
     }
 
-    .block {
-      background: #eee;
-      color: #555;
-      margin-left: 6px;
-    }
-
-    .logout {
-      background: #eee;
-      color: #555;
-      width: 100%;
+    .chat {
+      background: #8c7cff;
+      color: white;
     }
 
     .profile {
@@ -159,29 +171,43 @@
     .avatar {
       width: 58px;
       height: 58px;
+
       border-radius: 50%;
+
       display: grid;
       place-items: center;
-      background: #eee;
+
+      background: #f0e9ff;
+
       font-size: 30px;
+
       flex-shrink: 0;
     }
 
     .name {
       font-weight: 700;
+      font-size: 18px;
     }
 
     .age {
       color: #777;
       font-weight: normal;
+      font-size: 14px;
     }
 
     .tag {
       display: inline-block;
+
       background: #f2eaff;
-      padding: 5px 9px;
+
+      padding:
+        5px 9px;
+
       border-radius: 20px;
-      margin: 4px 3px 0 0;
+
+      margin:
+        4px 3px 0 0;
+
       font-size: 12px;
     }
 
@@ -192,97 +218,101 @@
 
     .saved-location {
       margin-top: 10px;
+
       padding: 10px;
+
       background: #f7f3ff;
+
       border-radius: 12px;
+
       font-size: 13px;
-    }
-
-    .post {
-      background: #fff4f7;
-    }
-
-    #posts {
-      margin-top: 10px;
-    }
-
-    .loading {
-      color: #888;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .error {
-      color: #c33;
-      background: #fff0f0;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .success {
-      color: #26733a;
-      background: #effff2;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 13px;
-      margin-bottom: 10px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    .tabs {
+    .error {
+      color: #d33;
+
+      background: #fff0f0;
+
+      padding: 10px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      margin-bottom: 10px;
+    }
+
+    .success {
+      color: #18794e;
+
+      background: #eafff3;
+
+      padding: 10px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      margin-bottom: 10px;
+    }
+
+    .button-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
-    .tab {
+    .button-row button {
       flex: 1;
-      background: #eee;
-      color: #555;
+      min-width: 120px;
     }
 
-    .tab.active {
-      background: #ff5c91;
-      color: white;
-    }
-
-    .match-card {
-      border: 1px solid #eee;
-      border-radius: 16px;
-      padding: 13px;
-      margin-bottom: 10px;
+    .match-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
       gap: 10px;
+
+      padding: 12px 0;
+
+      border-bottom:
+        1px solid #eee;
     }
 
-    .match-info {
-      min-width: 0;
+    .match-item:last-child {
+      border-bottom: 0;
     }
 
-    .chat-button {
-      background: #9b8cff;
-      color: white;
-      white-space: nowrap;
+    .match-name {
+      font-weight: bold;
     }
 
     .chat-box {
+      border:
+        1px solid #eee;
+
+      border-radius: 16px;
+
+      padding: 10px;
+
       height: 330px;
+
       overflow-y: auto;
-      background: #f7f7fa;
-      border-radius: 15px;
-      padding: 12px;
+
+      background: #fafafa;
+
       margin-bottom: 10px;
     }
 
     .message {
-      margin: 7px 0;
+      margin:
+        7px 0;
+
       display: flex;
     }
 
@@ -292,15 +322,19 @@
 
     .bubble {
       max-width: 78%;
-      padding: 9px 12px;
-      border-radius: 15px;
-      background: white;
-      box-shadow: 0 2px 5px #0000000b;
+
+      padding:
+        9px 12px;
+
+      border-radius: 16px;
+
+      background: #eee;
+
       word-break: break-word;
     }
 
-    .message.mine .bubble {
-      background: #ffe0ec;
+    .mine .bubble {
+      background: #ffdfeb;
     }
 
     .message-time {
@@ -309,41 +343,36 @@
       margin-top: 3px;
     }
 
-    .chat-input-row {
-      display: flex;
-      gap: 7px;
-    }
-
-    .chat-input-row input {
-      flex: 1;
-      margin: 0;
-    }
-
-    .chat-input-row button {
-      background: #ff5c91;
-      color: white;
-    }
-
-    .empty {
+    .loading {
       text-align: center;
-      color: #999;
-      padding: 20px 10px;
+      color: #888;
+      padding: 15px;
     }
 
-    .user-email {
-      background: #f7f3ff;
-      padding: 10px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      font-size: 13px;
+    .top-user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 10px;
     }
 
-    .notice {
-      background: #fff8df;
-      border-radius: 12px;
-      padding: 10px;
-      font-size: 13px;
-      margin-bottom: 12px;
+    .logout {
+      background: #fff;
+      color: #555;
+    }
+
+    .divider {
+      border: 0;
+      border-top:
+        1px solid #eee;
+
+      margin:
+        20px 0;
+    }
+
+    .post {
+      background: #fff4f7;
     }
 
   </style>
@@ -355,10 +384,24 @@
 
   <header>
 
-    <h1>まこマッチ 💕</h1>
+    <div class="top-user">
 
-    <div class="sub">
-      18歳以上限定・安心して話せる場所
+      <div>
+        <h1>まこマッチ 💕</h1>
+
+        <div class="sub">
+          18歳以上限定・安心して話せる場所
+        </div>
+      </div>
+
+      <button
+        id="logoutButton"
+        class="logout hidden"
+        onclick="logout()"
+      >
+        ログアウト
+      </button>
+
     </div>
 
   </header>
@@ -366,25 +409,23 @@
 
   <main>
 
-    <!-- =========================
-         ログイン
-    ========================== -->
 
-    <section
-      id="authSection"
+    <!-- ログイン -->
+
+    <div
+      id="authArea"
       class="card"
     >
 
       <h2>🔐 ログイン</h2>
 
-      <div class="notice">
-        18歳以上の方のみ利用できます。
-      </div>
-
       <div
-        id="authError"
-        class="error hidden"
+        id="authMessage"
       ></div>
+
+      <div class="form-title">
+        メールアドレス
+      </div>
 
       <input
         id="email"
@@ -393,51 +434,49 @@
         autocomplete="email"
       >
 
+      <div class="form-title">
+        パスワード
+      </div>
+
       <input
         id="password"
         type="password"
-        placeholder="パスワード（6文字以上）"
+        placeholder="6文字以上"
         autocomplete="current-password"
       >
 
-      <button
-        class="primary"
-        onclick="login()"
-      >
-        ログイン
-      </button>
+      <div class="button-row">
 
-      <button
-        class="google"
-        onclick="register()"
-      >
-        ✨ 新規アカウントを作る
-      </button>
+        <button
+          class="primary"
+          onclick="login()"
+        >
+          ログイン
+        </button>
 
-      <div
-        class="small"
-        style="margin-top:10px;"
-      >
-        新規登録ではメールアドレスと
-        パスワードを使用します。
+        <button
+          class="secondary"
+          onclick="register()"
+        >
+          新規登録
+        </button>
+
       </div>
 
-    </section>
+      <p class="small">
+        初めての方は「新規登録」を押してください。
+      </p>
+
+    </div>
 
 
-    <!-- =========================
-         ログイン後
-    ========================== -->
 
-    <section
-      id="appSection"
+    <!-- ログイン後 -->
+
+    <div
+      id="appArea"
       class="hidden"
     >
-
-      <div
-        id="userEmail"
-        class="user-email"
-      ></div>
 
 
       <!-- プロフィール -->
@@ -455,6 +494,7 @@
           placeholder="ニックネーム"
         >
 
+
         <div class="form-title">
           年齢
         </div>
@@ -464,8 +504,9 @@
           type="number"
           min="18"
           max="120"
-          placeholder="年齢（18歳以上）"
+          placeholder="18歳以上"
         >
+
 
         <div class="form-title">
           性別
@@ -532,7 +573,7 @@
         <textarea
           id="myBio"
           rows="4"
-          placeholder="自己紹介を書いてみよう！"
+          placeholder="自己紹介を書いてください"
         ></textarea>
 
 
@@ -540,14 +581,13 @@
           class="primary"
           onclick="saveProfile()"
         >
-          プロフィールを保存 💕
+          💾 プロフィールを保存
         </button>
 
 
         <div
           id="saved"
-          class="success hidden"
-          style="margin-top:10px;"
+          class="small"
         ></div>
 
 
@@ -559,61 +599,56 @@
       </div>
 
 
-      <!-- =========================
-           マッチング
-      ========================== -->
+
+      <!-- おすすめ -->
 
       <div class="card">
 
-        <h2>💕 マッチング</h2>
+        <h2>
+          💕 おすすめの人
+        </h2>
 
-        <div class="small">
-          気になる人に「いいね」してみよう！
-          お互いにいいねするとマッチします。
-        </div>
-
-      </div>
-
-
-      <div id="profiles">
-
-        <div class="loading">
-          プロフィールを読み込んでいます…
-        </div>
-
-      </div>
-
-
-      <!-- =========================
-           マッチした人
-      ========================== -->
-
-      <div class="card">
-
-        <h2>💬 マッチした人</h2>
-
-        <div id="matches">
-
+        <div
+          id="profiles"
+        >
           <div class="loading">
-            読み込み中…
+            読み込み中...
           </div>
-
         </div>
 
       </div>
 
 
-      <!-- =========================
-           チャット
-      ========================== -->
+
+      <!-- マッチ -->
+
+      <div class="card">
+
+        <h2>
+          💕 マッチした人
+        </h2>
+
+        <div
+          id="matches"
+        >
+          <div class="loading">
+            読み込み中...
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- チャット -->
 
       <div
-        id="chatSection"
+        id="chatArea"
         class="card hidden"
       >
 
-        <h2 id="chatTitle">
-          💬 チャット
+        <h2>
+          💬 <span id="chatTitle">チャット</span>
         </h2>
 
         <div
@@ -621,36 +656,35 @@
           class="chat-box"
         ></div>
 
-        <div class="chat-input-row">
+        <textarea
+          id="chatText"
+          rows="2"
+          placeholder="メッセージを入力"
+        ></textarea>
 
-          <input
-            id="chatInput"
-            placeholder="メッセージを入力"
-            maxlength="500"
-          >
+        <div class="button-row">
 
           <button
+            class="chat"
             onclick="sendMessage()"
           >
             送信
           </button>
 
-        </div>
+          <button
+            class="secondary"
+            onclick="closeChat()"
+          >
+            閉じる
+          </button>
 
-        <button
-          class="secondary"
-          style="margin-top:10px;width:100%;"
-          onclick="closeChat()"
-        >
-          チャットを閉じる
-        </button>
+        </div>
 
       </div>
 
 
-      <!-- =========================
-           雑談
-      ========================== -->
+
+      <!-- 雑談 -->
 
       <div class="card post">
 
@@ -660,61 +694,51 @@
 
         <input
           id="postName"
-          placeholder="表示名"
+          placeholder="名前（任意）"
         >
 
         <textarea
           id="postText"
           rows="3"
-          maxlength="500"
           placeholder="気軽にひとこと投稿しよう"
         ></textarea>
 
         <button
-          class="like"
+          class="primary"
           onclick="addPost()"
         >
           投稿する
         </button>
 
-        <div id="posts"></div>
+        <hr class="divider">
+
+        <div id="posts">
+          <div class="loading">
+            読み込み中...
+          </div>
+        </div>
 
       </div>
 
 
-      <!-- ログアウト -->
-
-      <div class="card">
-
-        <button
-          class="logout"
-          onclick="logout()"
-        >
-          ログアウト
-        </button>
-
-      </div>
-
-    </section>
+    </div>
 
   </main>
 
 </div>
 
 
+
 <script type="module">
 
   /*
-   * ========================================
    * Firebase
-   * ========================================
    */
 
   import {
     initializeApp
-  }
-  from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  } from
+  "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 
   import {
@@ -723,28 +747,30 @@
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
-  }
-  from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  } from
+  "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
   import {
     getFirestore,
+    collection,
     doc,
     setDoc,
     getDoc,
     getDocs,
-    collection,
+    addDoc,
     query,
-    where,
     orderBy,
     onSnapshot,
-    addDoc,
     serverTimestamp
-  }
-  from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  } from
+  "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
+
+
+  /*
+   * Firebase設定
+   */
 
   const firebaseConfig = {
 
@@ -786,9 +812,7 @@
 
 
   /*
-   * ========================================
-   * 地域データ
-   * ========================================
+   * 都道府県・市区町村
    */
 
   const PREF_URL =
@@ -816,31 +840,28 @@
 
 
   /*
-   * ========================================
-   * Firebase現在ユーザー
-   * ========================================
+   * 現在のユーザー
    */
 
-  let currentUser = null;
+  let currentUser =
+    null;
 
 
-  let currentProfile = null;
+  let currentChatId =
+    null;
 
 
-  let currentChatUserId = null;
+  let currentChatUser =
+    null;
 
 
-  let currentChatRoomId = null;
-
-
-  let unsubscribeMessages = null;
+  let unsubscribeChat =
+    null;
 
 
 
   /*
-   * ========================================
    * HTMLエスケープ
-   * ========================================
    */
 
   function escapeHtml(text) {
@@ -848,19 +869,15 @@
     return String(text ?? "")
       .replace(
         /[&<>"']/g,
-        function(char) {
+        char => ({
 
-          return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
 
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-
-          }[char];
-
-        }
+        }[char])
       );
 
   }
@@ -868,58 +885,41 @@
 
 
   /*
-   * ========================================
-   * エラー表示
-   * ========================================
+   * 認証メッセージ
    */
 
-  function showAuthError(message) {
+  function showAuthMessage(
+    message,
+    type = "error"
+  ) {
 
     const box =
       document.getElementById(
-        "authError"
+        "authMessage"
       );
 
-    box.textContent =
-      message;
-
-    box.classList.remove(
-      "hidden"
-    );
-
-  }
-
-
-  function hideAuthError() {
-
-    document
-      .getElementById(
-        "authError"
-      )
-      .classList.add(
-        "hidden"
-      );
+    box.innerHTML =
+      `<div class="${type}">
+        ${escapeHtml(message)}
+      </div>`;
 
   }
 
 
 
   /*
-   * ========================================
    * 新規登録
-   * ========================================
    */
 
   window.register =
-    async function() {
-
-      hideAuthError();
+    async function () {
 
       const email =
         document
           .getElementById("email")
           .value
           .trim();
+
 
       const password =
         document
@@ -929,7 +929,7 @@
 
       if (!email) {
 
-        showAuthError(
+        showAuthMessage(
           "メールアドレスを入力してください。"
         );
 
@@ -940,7 +940,7 @@
 
       if (password.length < 6) {
 
-        showAuthError(
+        showAuthMessage(
           "パスワードは6文字以上にしてください。"
         );
 
@@ -958,16 +958,17 @@
         );
 
 
-        alert(
-          "アカウントを作成しました！💕"
+        showAuthMessage(
+          "登録しました！プロフィールを作成してください💕",
+          "success"
         );
 
 
-      } catch(error) {
+      } catch (error) {
 
         console.error(error);
 
-        showAuthError(
+        showAuthMessage(
           firebaseErrorMessage(
             error.code
           )
@@ -980,21 +981,18 @@
 
 
   /*
-   * ========================================
    * ログイン
-   * ========================================
    */
 
   window.login =
-    async function() {
-
-      hideAuthError();
+    async function () {
 
       const email =
         document
           .getElementById("email")
           .value
           .trim();
+
 
       const password =
         document
@@ -1004,7 +1002,7 @@
 
       if (!email || !password) {
 
-        showAuthError(
+        showAuthMessage(
           "メールアドレスとパスワードを入力してください。"
         );
 
@@ -1022,11 +1020,11 @@
         );
 
 
-      } catch(error) {
+      } catch (error) {
 
         console.error(error);
 
-        showAuthError(
+        showAuthMessage(
           firebaseErrorMessage(
             error.code
           )
@@ -1039,53 +1037,11 @@
 
 
   /*
-   * ========================================
-   * Firebaseエラー
-   * ========================================
-   */
-
-  function firebaseErrorMessage(code) {
-
-    switch(code) {
-
-      case "auth/email-already-in-use":
-        return "このメールアドレスはすでに登録されています。";
-
-      case "auth/invalid-email":
-        return "メールアドレスの形式が正しくありません。";
-
-      case "auth/weak-password":
-        return "パスワードは6文字以上にしてください。";
-
-      case "auth/invalid-credential":
-        return "メールアドレスまたはパスワードが違います。";
-
-      case "auth/user-not-found":
-        return "このアカウントは見つかりません。";
-
-      case "auth/wrong-password":
-        return "パスワードが違います。";
-
-      case "auth/too-many-requests":
-        return "試行回数が多すぎます。少し待ってください。";
-
-      default:
-        return "ログイン処理でエラーが発生しました。";
-
-    }
-
-  }
-
-
-
-  /*
-   * ========================================
    * ログアウト
-   * ========================================
    */
 
   window.logout =
-    async function() {
+    async function () {
 
       await signOut(auth);
 
@@ -1094,81 +1050,127 @@
 
 
   /*
-   * ========================================
+   * Firebaseエラー
+   */
+
+  function firebaseErrorMessage(
+    code
+  ) {
+
+    const messages = {
+
+      "auth/email-already-in-use":
+        "このメールアドレスはすでに登録されています。",
+
+      "auth/invalid-email":
+        "メールアドレスの形式が正しくありません。",
+
+      "auth/weak-password":
+        "パスワードは6文字以上にしてください。",
+
+      "auth/invalid-credential":
+        "メールアドレスまたはパスワードが違います。",
+
+      "auth/user-not-found":
+        "ユーザーが見つかりません。",
+
+      "auth/wrong-password":
+        "パスワードが違います。",
+
+      "auth/too-many-requests":
+        "試行回数が多すぎます。少し待ってください。"
+
+    };
+
+
+    return messages[code] ||
+      "エラーが発生しました。もう一度試してください。";
+
+  }
+
+
+
+  /*
    * 認証状態
-   * ========================================
    */
 
   onAuthStateChanged(
     auth,
-    async function(user) {
+    async user => {
 
       currentUser =
         user;
 
 
-      if (!user) {
-
-        document
-          .getElementById(
-            "authSection"
-          )
-          .classList.remove(
-            "hidden"
-          );
+      const authArea =
+        document.getElementById(
+          "authArea"
+        );
 
 
-        document
-          .getElementById(
-            "appSection"
-          )
-          .classList.add(
-            "hidden"
-          );
+      const appArea =
+        document.getElementById(
+          "appArea"
+        );
 
 
-        return;
+      const logoutButton =
+        document.getElementById(
+          "logoutButton"
+        );
+
+
+      if (user) {
+
+        authArea
+          .classList
+          .add("hidden");
+
+
+        appArea
+          .classList
+          .remove("hidden");
+
+
+        logoutButton
+          .classList
+          .remove("hidden");
+
+
+        await loadProfile();
+
+
+        await loadPrefectures();
+
+
+        await loadMunicipalities();
+
+
+        await loadAllProfiles();
+
+
+        loadMatches();
+
+
+        loadPosts();
+
+      } else {
+
+        authArea
+          .classList
+          .remove("hidden");
+
+
+        appArea
+          .classList
+          .add("hidden");
+
+
+        logoutButton
+          .classList
+          .add("hidden");
 
       }
-
-
-      document
-        .getElementById(
-          "authSection"
-        )
-        .classList.add(
-          "hidden"
-        );
-
-
-      document
-        .getElementById(
-          "appSection"
-        )
-        .classList.remove(
-          "hidden"
-        );
-
-
-      document
-        .getElementById(
-          "userEmail"
-        )
-        .textContent =
-          "ログイン中：" +
-          user.email;
-
-
-      await loadProfile();
-
-
-      loadUsers();
-
-
-      loadMatches();
-
-
-      renderPosts();
 
     }
   );
@@ -1176,9 +1178,7 @@
 
 
   /*
-   * ========================================
    * 都道府県
-   * ========================================
    */
 
   async function loadPrefectures() {
@@ -1186,29 +1186,27 @@
     try {
 
       const response =
-        await fetch(
-          PREF_URL
-        );
+        await fetch(PREF_URL);
 
 
       if (!response.ok) {
-
         throw new Error(
-          "都道府県データ取得失敗"
+          "都道府県取得失敗"
         );
-
       }
 
 
-      const prefectures =
+      const data =
         await response.json();
 
 
       prefecture.innerHTML =
-        '<option value="">選択してください</option>';
+        `<option value="">
+          選択してください
+        </option>`;
 
 
-      prefectures.forEach(
+      data.forEach(
         pref => {
 
           const option =
@@ -1233,13 +1231,15 @@
       );
 
 
-    } catch(error) {
+    } catch (error) {
 
       console.error(error);
 
 
       prefecture.innerHTML =
-        '<option value="">読み込み失敗</option>';
+        `<option value="">
+          読み込み失敗
+        </option>`;
 
     }
 
@@ -1248,9 +1248,7 @@
 
 
   /*
-   * ========================================
    * 市区町村
-   * ========================================
    */
 
   async function loadMunicipalities() {
@@ -1258,17 +1256,13 @@
     try {
 
       const response =
-        await fetch(
-          CITY_URL
-        );
+        await fetch(CITY_URL);
 
 
       if (!response.ok) {
-
         throw new Error(
-          "市区町村データ取得失敗"
+          "市区町村取得失敗"
         );
-
       }
 
 
@@ -1276,13 +1270,14 @@
         await response.json();
 
 
-    } catch(error) {
+    } catch (error) {
 
       console.error(error);
 
-
       municipality.innerHTML =
-        '<option value="">読み込み失敗</option>';
+        `<option value="">
+          読み込み失敗
+        </option>`;
 
     }
 
@@ -1290,26 +1285,30 @@
 
 
 
+  /*
+   * 都道府県変更
+   */
+
   prefecture.addEventListener(
     "change",
-    function() {
+    function () {
 
-      const selectedPid =
+      const pid =
         this.value;
 
 
       municipality.innerHTML =
-        '<option value="">市区町村を選択してください</option>';
+        `<option value="">
+          市区町村を選択してください
+        </option>`;
 
 
       municipality.disabled =
         true;
 
 
-      if (!selectedPid) {
-
+      if (!pid) {
         return;
-
       }
 
 
@@ -1317,7 +1316,7 @@
         municipalities.filter(
           city =>
             String(city.pid) ===
-            String(selectedPid)
+            String(pid)
         );
 
 
@@ -1355,22 +1354,14 @@
 
 
   /*
-   * ========================================
    * プロフィール保存
-   * ========================================
    */
 
   window.saveProfile =
-    async function() {
+    async function () {
 
       if (!currentUser) {
-
-        alert(
-          "先にログインしてください。"
-        );
-
         return;
-
       }
 
 
@@ -1414,6 +1405,7 @@
           .trim();
 
 
+
       if (!name) {
 
         alert(
@@ -1425,10 +1417,14 @@
       }
 
 
-      if (!age || age < 18) {
+      if (
+        !age ||
+        age < 18 ||
+        age > 120
+      ) {
 
         alert(
-          "18歳以上のみ登録できます。"
+          "18歳以上の年齢を入力してください。"
         );
 
         return;
@@ -1469,6 +1465,7 @@
       }
 
 
+
       const profile = {
 
         uid:
@@ -1492,10 +1489,14 @@
         bio:
           bio,
 
+        email:
+          currentUser.email || "",
+
         updatedAt:
           serverTimestamp()
 
       };
+
 
 
       try {
@@ -1513,10 +1514,6 @@
         );
 
 
-        currentProfile =
-          profile;
-
-
         const saved =
           document.getElementById(
             "saved"
@@ -1527,39 +1524,35 @@
           "プロフィールを保存しました！💕";
 
 
-        saved.classList.remove(
-          "hidden"
-        );
-
-
-        const savedLocation =
+        const location =
           document.getElementById(
             "savedLocation"
           );
 
 
-        savedLocation.innerHTML =
+        location.classList.remove(
+          "hidden"
+        );
+
+
+        location.innerHTML =
           "📍 " +
           escapeHtml(pref) +
           " " +
           escapeHtml(city);
 
 
-        savedLocation.classList.remove(
-          "hidden"
-        );
+        await loadAllProfiles();
 
 
-        loadUsers();
-
-
-      } catch(error) {
+      } catch (error) {
 
         console.error(error);
 
 
         alert(
-          "プロフィール保存に失敗しました。"
+          "保存できませんでした。\n" +
+          error.message
         );
 
       }
@@ -1569,23 +1562,19 @@
 
 
   /*
-   * ========================================
    * プロフィール読み込み
-   * ========================================
    */
 
   async function loadProfile() {
 
     if (!currentUser) {
-
       return;
-
     }
 
 
     try {
 
-      const snapshot =
+      const snap =
         await getDoc(
           doc(
             db,
@@ -1595,46 +1584,1145 @@
         );
 
 
-      if (!snapshot.exists()) {
+      if (!snap.exists()) {
+        return;
+      }
+
+
+      const profile =
+        snap.data();
+
+
+      document
+        .getElementById("myName")
+        .value =
+        profile.name || "";
+
+
+      document
+        .getElementById("myAge")
+        .value =
+        profile.age || "";
+
+
+      document
+        .getElementById("myGender")
+        .value =
+        profile.gender || "";
+
+
+      document
+        .getElementById("myBio")
+        .value =
+        profile.bio || "";
+
+
+      /*
+       * 地域は
+       * 都道府県データ取得後に設定
+       */
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+
+
+  /*
+   * おすすめユーザー
+   */
+
+  async function loadAllProfiles() {
+
+    const box =
+      document.getElementById(
+        "profiles"
+      );
+
+
+    box.innerHTML =
+      `<div class="loading">
+        読み込み中...
+      </div>`;
+
+
+    try {
+
+      const snap =
+        await getDocs(
+          collection(
+            db,
+            "users"
+          )
+        );
+
+
+      const people = [];
+
+
+      snap.forEach(
+        item => {
+
+          const p =
+            item.data();
+
+
+          if (
+            item.id !==
+            currentUser.uid
+          ) {
+
+            people.push({
+              id: item.id,
+              ...p
+            });
+
+          }
+
+        }
+      );
+
+
+      if (!people.length) {
+
+        box.innerHTML =
+          `<div class="small">
+            まだ他のユーザーがいません。
+          </div>`;
 
         return;
 
       }
 
 
+      box.innerHTML =
+        people
+          .map(
+            p => {
+
+              const sameArea =
+                p.prefecture ===
+                getMyPrefecture();
+
+
+              return `
+
+                <div class="card">
+
+                  <div class="profile">
+
+                    <div class="avatar">
+                      ${getIcon(p.gender)}
+                    </div>
+
+                    <div>
+
+                      <div class="name">
+
+                        ${escapeHtml(
+                          p.name ||
+                          "名前なし"
+                        )}
+
+                        <span class="age">
+                          ${p.age || ""}歳
+                        </span>
+
+                      </div>
+
+                      <div class="small">
+                        📍
+                        ${escapeHtml(
+                          p.prefecture || ""
+                        )}
+                        ${escapeHtml(
+                          p.municipality || ""
+                        )}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  ${
+                    sameArea
+                    ?
+                    `<span class="tag">
+                      📍 同じ都道府県
+                    </span>`
+                    :
+                    ""
+                  }
+
+                  <p>
+                    ${escapeHtml(
+                      p.bio ||
+                      "よろしくお願いします！"
+                    )}
+                  </p>
+
+
+                  <button
+                    class="like"
+                    onclick="likeUser('${p.id}')"
+                  >
+                    ❤️ いいね
+                  </button>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      box.innerHTML =
+        `<div class="error">
+          ユーザーを読み込めませんでした。
+        </div>`;
+
+    }
+
+  }
+
+
+
+  /*
+   * アイコン
+   */
+
+  function getIcon(
+    gender
+  ) {
+
+    if (gender === "女性") {
+      return "🌸";
+    }
+
+    if (gender === "男性") {
+      return "😊";
+    }
+
+    return "💜";
+
+  }
+
+
+
+  /*
+   * 自分の都道府県
+   */
+
+  function getMyPrefecture() {
+
+    const option =
+      prefecture.options[
+        prefecture.selectedIndex
+      ];
+
+
+    return option
+      ? option.textContent
+      : "";
+
+  }
+
+
+
+  /*
+   * いいね
+   */
+
+  window.likeUser =
+    async function (targetUid) {
+
+      if (!currentUser) {
+        return;
+      }
+
+
+      try {
+
+        /*
+         * 自分→相手
+         */
+
+        const myLikeId =
+          currentUser.uid +
+          "_" +
+          targetUid;
+
+
+        await setDoc(
+          doc(
+            db,
+            "likes",
+            myLikeId
+          ),
+          {
+
+            fromUid:
+              currentUser.uid,
+
+            toUid:
+              targetUid,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        /*
+         * 相手→自分があるか確認
+         */
+
+        const reverseId =
+          targetUid +
+          "_" +
+          currentUser.uid;
+
+
+        const reverse =
+          await getDoc(
+            doc(
+              db,
+              "likes",
+              reverseId
+            )
+          );
+
+
+        if (reverse.exists()) {
+
+          const ids = [
+            currentUser.uid,
+            targetUid
+          ].sort();
+
+
+          const matchId =
+            ids[0] +
+            "_" +
+            ids[1];
+
+
+          await setDoc(
+            doc(
+              db,
+              "matches",
+              matchId
+            ),
+            {
+
+              users:
+                ids,
+
+              createdAt:
+                serverTimestamp()
+
+            },
+            {
+              merge: true
+            }
+          );
+
+
+          alert(
+            "🎉 マッチしました！💕"
+          );
+
+
+          loadMatches();
+
+        } else {
+
+          alert(
+            "❤️ いいねしました！\n相手もいいねするとマッチします💕"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "いいねできませんでした。\n" +
+          error.message
+        );
+
+      }
+
+    };
+
+
+
+  /*
+   * マッチ一覧
+   */
+
+  function loadMatches() {
+
+    const box =
+      document.getElementById(
+        "matches"
+      );
+
+
+    const q =
+      query(
+        collection(
+          db,
+          "matches"
+        )
+      );
+
+
+    onSnapshot(
+      q,
+      async snapshot => {
+
+        const matches = [];
+
+
+        for (
+          const item
+          of snapshot.docs
+        ) {
+
+          const data =
+            item.data();
+
+
+          if (
+            !Array.isArray(
+              data.users
+            )
+          ) {
+            continue;
+          }
+
+
+          if (
+            data.users.includes(
+              currentUser.uid
+            )
+          ) {
+
+            const otherUid =
+              data.users.find(
+                id =>
+                  id !==
+                  currentUser.uid
+              );
+
+
+            if (otherUid) {
+
+              const userSnap =
+                await getDoc(
+                  doc(
+                    db,
+                    "users",
+                    otherUid
+                  )
+                );
+
+
+              if (
+                userSnap.exists()
+              ) {
+
+                matches.push({
+
+                  id:
+                    item.id,
+
+                  uid:
+                    otherUid,
+
+                  profile:
+                    userSnap.data()
+
+                });
+
+              }
+
+            }
+
+          }
+
+        }
+
+
+        if (!matches.length) {
+
+          box.innerHTML =
+            `<div class="small">
+              まだマッチした人はいません💕
+            </div>`;
+
+          return;
+
+        }
+
+
+        box.innerHTML =
+          matches
+            .map(
+              m => `
+
+                <div class="match-item">
+
+                  <div>
+
+                    <div class="match-name">
+                      💕
+                      ${escapeHtml(
+                        m.profile.name ||
+                        "名前なし"
+                      )}
+                    </div>
+
+                    <div class="small">
+                      ${m.profile.age || ""}歳
+                      ・
+                      ${escapeHtml(
+                        m.profile.prefecture ||
+                        ""
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  <button
+                    class="chat"
+                    onclick="openChat(
+                      '${m.uid}',
+                      '${escapeJs(
+                        m.profile.name ||
+                        "相手"
+                      )}'
+                    )"
+                  >
+                    💬 チャット
+                  </button>
+
+                </div>
+
+              `
+            )
+            .join("");
+
+      }
+    );
+
+  }
+
+
+
+  /*
+   * チャットID
+   */
+
+  function makeChatId(
+    uid1,
+    uid2
+  ) {
+
+    return [
+      uid1,
+      uid2
+    ]
+      .sort()
+      .join("_");
+
+  }
+
+
+
+  /*
+   * チャットを開く
+   */
+
+  window.openChat =
+    async function (
+      otherUid,
+      otherName
+    ) {
+
+      currentChatUser =
+        otherUid;
+
+
+      currentChatId =
+        makeChatId(
+          currentUser.uid,
+          otherUid
+        );
+
+
+      document
+        .getElementById("chatArea")
+        .classList
+        .remove("hidden");
+
+
+      document
+        .getElementById("chatTitle")
+        .textContent =
+        otherName;
+
+
+      document
+        .getElementById("chatText")
+        .value = "";
+
+
+      if (unsubscribeChat) {
+        unsubscribeChat();
+      }
+
+
+      const messagesRef =
+        collection(
+          db,
+          "chats",
+          currentChatId,
+          "messages"
+        );
+
+
+      const q =
+        query(
+          messagesRef,
+          orderBy(
+            "createdAt",
+            "asc"
+          )
+        );
+
+
+      unsubscribeChat =
+        onSnapshot(
+          q,
+          snapshot => {
+
+            const box =
+              document.getElementById(
+                "chatBox"
+              );
+
+
+            box.innerHTML = "";
+
+
+            snapshot.forEach(
+              item => {
+
+                const data =
+                  item.data();
+
+
+                const mine =
+                  data.senderId ===
+                  currentUser.uid;
+
+
+                const time =
+                  data.createdAt
+                  ?.toDate
+                  ? data.createdAt
+                    .toDate()
+                    .toLocaleTimeString(
+                      "ja-JP",
+                      {
+                        hour:
+                          "2-digit",
+                        minute:
+                          "2-digit"
+                      }
+                    )
+                  : "";
+
+
+                box.innerHTML += `
+
+                  <div class="message ${
+                    mine
+                    ? "mine"
+                    : ""
+                  }">
+
+                    <div>
+
+                      <div class="bubble">
+                        ${escapeHtml(
+                          data.text
+                        )}
+                      </div>
+
+                      <div class="message-time">
+                        ${time}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                `;
+
+              }
+            );
+
+
+            box.scrollTop =
+              box.scrollHeight;
+
+          }
+        );
+
+
+      setTimeout(
+        () => {
+
+          document
+            .getElementById(
+              "chatArea"
+            )
+            .scrollIntoView({
+              behavior:
+                "smooth"
+            });
+
+        },
+        100
+      );
+
+    };
+
+
+
+  /*
+   * メッセージ送信
+   */
+
+  window.sendMessage =
+    async function () {
+
+      if (
+        !currentUser ||
+        !currentChatId ||
+        !currentChatUser
+      ) {
+        return;
+      }
+
+
+      const input =
+        document.getElementById(
+          "chatText"
+        );
+
+
+      const text =
+        input.value.trim();
+
+
+      if (!text) {
+        return;
+      }
+
+
+      try {
+
+        await addDoc(
+          collection(
+            db,
+            "chats",
+            currentChatId,
+            "messages"
+          ),
+          {
+
+            senderId:
+              currentUser.uid,
+
+            receiverId:
+              currentChatUser,
+
+            text:
+              text,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        input.value = "";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "メッセージを送信できませんでした。\n" +
+          error.message
+        );
+
+      }
+
+    };
+
+
+
+  /*
+   * チャットを閉じる
+   */
+
+  window.closeChat =
+    function () {
+
+      if (unsubscribeChat) {
+
+        unsubscribeChat();
+
+        unsubscribeChat =
+          null;
+
+      }
+
+
+      currentChatId =
+        null;
+
+
+      currentChatUser =
+        null;
+
+
+      document
+        .getElementById(
+          "chatArea"
+        )
+        .classList
+        .add("hidden");
+
+    };
+
+
+
+  /*
+   * Enterキーで送信
+   */
+
+  document
+    .getElementById("chatText")
+    .addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key ===
+          "Enter" &&
+          !event.shiftKey
+        ) {
+
+          event.preventDefault();
+
+          sendMessage();
+
+        }
+
+      }
+    );
+
+
+
+  /*
+   * 雑談投稿
+   */
+
+  window.addPost =
+    async function () {
+
+      if (!currentUser) {
+        return;
+      }
+
+
+      const name =
+        document
+          .getElementById("postName")
+          .value
+          .trim();
+
+
+      const text =
+        document
+          .getElementById("postText")
+          .value
+          .trim();
+
+
+      if (!text) {
+
+        alert(
+          "投稿内容を入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const profile =
+          await getDoc(
+            doc(
+              db,
+              "users",
+              currentUser.uid
+            )
+          );
+
+
+        const profileData =
+          profile.exists()
+          ? profile.data()
+          : {};
+
+
+        await addDoc(
+          collection(
+            db,
+            "posts"
+          ),
+          {
+
+            uid:
+              currentUser.uid,
+
+            name:
+              name ||
+              profileData.name ||
+              "匿名",
+
+            text:
+              text,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        document
+          .getElementById("postText")
+          .value = "";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "投稿できませんでした。\n" +
+          error.message
+        );
+
+      }
+
+    };
+
+
+
+  /*
+   * 雑談読み込み
+   */
+
+  function loadPosts() {
+
+    const box =
+      document.getElementById(
+        "posts"
+      );
+
+
+    const q =
+      query(
+        collection(
+          db,
+          "posts"
+        ),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
+      );
+
+
+    onSnapshot(
+      q,
+      snapshot => {
+
+        if (snapshot.empty) {
+
+          box.innerHTML =
+            `<div class="small">
+              まだ投稿がありません。
+            </div>`;
+
+          return;
+
+        }
+
+
+        box.innerHTML =
+          snapshot.docs
+            .map(
+              item => {
+
+                const p =
+                  item.data();
+
+
+                const time =
+                  p.createdAt
+                  ?.toDate
+                  ? p.createdAt
+                    .toDate()
+                    .toLocaleString(
+                      "ja-JP"
+                    )
+                  : "";
+
+
+                return `
+
+                  <div class="card">
+
+                    <b>
+                      ${escapeHtml(
+                        p.name ||
+                        "匿名"
+                      )}
+                    </b>
+
+                    <div>
+                      ${escapeHtml(
+                        p.text
+                      )}
+                    </div>
+
+                    <div class="small">
+                      ${time}
+                    </div>
+
+                  </div>
+
+                `;
+
+              }
+            )
+            .join("");
+
+      },
+      error => {
+
+        console.error(error);
+
+
+        box.innerHTML =
+          `<div class="error">
+            投稿を読み込めませんでした。
+          </div>`;
+
+      }
+    );
+
+  }
+
+
+
+  /*
+   * JS文字列エスケープ
+   */
+
+  function escapeJs(text) {
+
+    return String(text)
+      .replace(
+        /\\/g,
+        "\\\\"
+      )
+      .replace(
+        /'/g,
+        "\\'"
+      );
+
+  }
+
+
+
+  /*
+   * プロフィール読み込み後、
+   * 地域をセット
+   */
+
+  async function setSavedLocation() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    try {
+
+      const snap =
+        await getDoc(
+          doc(
+            db,
+            "users",
+            currentUser.uid
+          )
+        );
+
+
+      if (!snap.exists()) {
+        return;
+      }
+
+
       const profile =
-        snapshot.data();
+        snap.data();
 
 
-      currentProfile =
-        profile;
-
-
-      document
-        .getElementById("myName")
-        .value =
-          profile.name || "";
-
-
-      document
-        .getElementById("myAge")
-        .value =
-          profile.age || "";
-
-
-      document
-        .getElementById("myGender")
-        .value =
-          profile.gender || "";
-
-
-      document
-        .getElementById("myBio")
-        .value =
-          profile.bio || "";
-
-
-      if (profile.prefecture) {
+      if (
+        profile.prefecture
+      ) {
 
         const option =
           Array.from(
@@ -1653,7 +2741,9 @@
 
 
           prefecture.dispatchEvent(
-            new Event("change")
+            new Event(
+              "change"
+            )
           );
 
 
@@ -1661,46 +2751,48 @@
             () => {
 
               municipality.value =
-                profile.municipality || "";
+                profile.municipality ||
+                "";
+
+
+              if (
+                profile.municipality
+              ) {
+
+                const location =
+                  document
+                    .getElementById(
+                      "savedLocation"
+                    );
+
+
+                location.classList
+                  .remove(
+                    "hidden"
+                  );
+
+
+                location.innerHTML =
+                  "📍 " +
+                  escapeHtml(
+                    profile.prefecture
+                  ) +
+                  " " +
+                  escapeHtml(
+                    profile.municipality
+                  );
+
+              }
 
             },
-            100
+            200
           );
 
         }
 
       }
 
-
-      if (
-        profile.prefecture &&
-        profile.municipality
-      ) {
-
-        const savedLocation =
-          document.getElementById(
-            "savedLocation"
-          );
-
-
-        savedLocation.innerHTML =
-          "📍 " +
-          escapeHtml(
-            profile.prefecture
-          ) +
-          " " +
-          escapeHtml(
-            profile.municipality
-          );
-
-
-        savedLocation.classList.remove(
-          "hidden"
-        );
-
-      }
-
-    } catch(error) {
+    } catch (error) {
 
       console.error(error);
 
@@ -1711,1233 +2803,50 @@
 
 
   /*
-   * ========================================
-   * ユーザー一覧
-   * ========================================
+   * 初期地域設定を
+   * 上書きするための処理
    */
 
-  async function loadUsers() {
-
-    const box =
-      document.getElementById(
-        "profiles"
-      );
+  const originalLoadPrefectures =
+    loadPrefectures;
 
 
-    box.innerHTML =
-      '<div class="loading">読み込み中…</div>';
+  /*
+   * 都道府県＋市区町村を
+   * 両方読み込んだあと
+   * 保存データをセット
+   */
+
+  async function initializeLocation() {
+
+    await originalLoadPrefectures();
+
+    await loadMunicipalities();
+
+    await setSavedLocation();
+
+  }
 
 
-    try {
 
-      const snapshot =
-        await getDocs(
-          collection(
-            db,
-            "users"
-          )
-        );
+  /*
+   * 認証状態変更時に
+   * 地域設定も行う
+   */
 
+  onAuthStateChanged(
+    auth,
+    async user => {
 
-      const users =
-        [];
-
-
-      snapshot.forEach(
-        docSnap => {
-
-          const data =
-            docSnap.data();
-
-
-          if (
-            docSnap.id !==
-            currentUser.uid
-          ) {
-
-            if (
-              Number(data.age) >= 18
-            ) {
-
-              users.push(data);
-
-            }
-
-          }
-
-        }
-      );
-
-
-      if (!users.length) {
-
-        box.innerHTML =
-          '<div class="empty">まだ他のユーザーがいません。<br>友達を招待してみよう💕</div>';
-
+      if (!user) {
         return;
-
       }
 
 
-      box.innerHTML =
-        "";
-
-
-      for (const user of users) {
-
-        const card =
-          document.createElement(
-            "div"
-          );
-
-
-        card.className =
-          "card";
-
-
-        const name =
-          escapeHtml(
-            user.name ||
-            "名前なし"
-          );
-
-
-        const age =
-          escapeHtml(
-            user.age ||
-            ""
-          );
-
-
-        const gender =
-          escapeHtml(
-            user.gender ||
-            ""
-          );
-
-
-        const location =
-          escapeHtml(
-            (
-              user.prefecture ||
-              ""
-            ) +
-            " " +
-            (
-              user.municipality ||
-              ""
-            )
-          );
-
-
-        const bio =
-          escapeHtml(
-            user.bio ||
-            "自己紹介はまだありません。"
-          );
-
-
-        card.innerHTML = `
-
-          <div class="profile">
-
-            <div class="avatar">
-              💕
-            </div>
-
-            <div>
-
-              <div class="name">
-                ${name}
-                <span class="age">
-                  ${age}歳
-                </span>
-              </div>
-
-              <div class="small">
-                ${gender}
-              </div>
-
-            </div>
-
-          </div>
-
-          <div
-            class="saved-location"
-          >
-            📍 ${location}
-          </div>
-
-          <p>
-            ${bio}
-          </p>
-
-          <button
-            class="like"
-            data-user-id="${escapeHtml(user.uid)}"
-          >
-            ❤️ いいね
-          </button>
-
-          <button
-            class="block"
-            data-block-id="${escapeHtml(user.uid)}"
-          >
-            🚫 ブロック
-          </button>
-
-        `;
-
-
-        const likeButton =
-          card.querySelector(
-            "[data-user-id]"
-          );
-
-
-        likeButton.addEventListener(
-          "click",
-          () =>
-            likeUser(
-              user.uid,
-              user.name
-            )
-        );
-
-
-        const blockButton =
-          card.querySelector(
-            "[data-block-id]"
-          );
-
-
-        blockButton.addEventListener(
-          "click",
-          () =>
-            blockUser(
-              user.uid,
-              user.name
-            )
-        );
-
-
-        box.appendChild(
-          card
-        );
-
-      }
-
-
-    } catch(error) {
-
-      console.error(error);
-
-
-      box.innerHTML =
-        '<div class="error">ユーザーの読み込みに失敗しました。</div>';
+      await initializeLocation();
 
     }
-
-  }
-
-
-
-  /*
-   * ========================================
-   * いいね
-   * ========================================
-   */
-
-  async function likeUser(
-    otherUid,
-    otherName
-  ) {
-
-    if (!currentUser) {
-
-      return;
-
-    }
-
-
-    try {
-
-      const likeId =
-        currentUser.uid +
-        "_" +
-        otherUid;
-
-
-      await setDoc(
-        doc(
-          db,
-          "likes",
-          likeId
-        ),
-        {
-
-          from:
-            currentUser.uid,
-
-          to:
-            otherUid,
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
-
-
-      const reverseId =
-        otherUid +
-        "_" +
-        currentUser.uid;
-
-
-      const reverse =
-        await getDoc(
-          doc(
-            db,
-            "likes",
-            reverseId
-          )
-        );
-
-
-      if (reverse.exists()) {
-
-        const roomId =
-          makeRoomId(
-            currentUser.uid,
-            otherUid
-          );
-
-
-        await setDoc(
-          doc(
-            db,
-            "matches",
-            roomId
-          ),
-          {
-
-            users: [
-              currentUser.uid,
-              otherUid
-            ],
-
-            createdAt:
-              serverTimestamp()
-
-          },
-          {
-            merge: true
-          }
-        );
-
-
-        alert(
-          "💕 マッチしました！\n" +
-          otherName +
-          "さんとチャットできます！"
-        );
-
-
-        loadMatches();
-
-
-      } else {
-
-        alert(
-          otherName +
-          "さんにいいねしました！💕"
-        );
-
-      }
-
-
-    } catch(error) {
-
-      console.error(error);
-
-
-      alert(
-        "いいねに失敗しました。"
-      );
-
-    }
-
-  }
-
-
-
-  /*
-   * ========================================
-   * マッチ一覧
-   * ========================================
-   */
-
-  async function loadMatches() {
-
-    const box =
-      document.getElementById(
-        "matches"
-      );
-
-
-    if (!currentUser) {
-
-      return;
-
-    }
-
-
-    try {
-
-      const snapshot =
-        await getDocs(
-          collection(
-            db,
-            "matches"
-          )
-        );
-
-
-      const matches =
-        [];
-
-
-      snapshot.forEach(
-        snap => {
-
-          const data =
-            snap.data();
-
-
-          if (
-            Array.isArray(
-              data.users
-            ) &&
-            data.users.includes(
-              currentUser.uid
-            )
-          ) {
-
-            matches.push(
-              data
-            );
-
-          }
-
-        }
-      );
-
-
-      if (!matches.length) {
-
-        box.innerHTML =
-          '<div class="empty">まだマッチしていません💕<br>気になる人にいいねしてみよう！</div>';
-
-        return;
-
-      }
-
-
-      box.innerHTML =
-        "";
-
-
-      for (
-        const match
-        of matches
-      ) {
-
-        const otherUid =
-          match.users.find(
-            uid =>
-              uid !==
-              currentUser.uid
-          );
-
-
-        if (!otherUid) {
-
-          continue;
-
-        }
-
-
-        const userSnap =
-          await getDoc(
-            doc(
-              db,
-              "users",
-              otherUid
-            )
-          );
-
-
-        if (!userSnap.exists()) {
-
-          continue;
-
-        }
-
-
-        const user =
-          userSnap.data();
-
-
-        const card =
-          document.createElement(
-            "div"
-          );
-
-
-        card.className =
-          "match-card";
-
-
-        card.innerHTML = `
-
-          <div class="match-info">
-
-            <div class="name">
-              💕
-              ${escapeHtml(
-                user.name ||
-                "ユーザー"
-              )}
-            </div>
-
-            <div class="small">
-              ${escapeHtml(
-                user.age ||
-                ""
-              )}歳
-              ・
-              ${escapeHtml(
-                user.prefecture ||
-                ""
-              )}
-            </div>
-
-          </div>
-
-          <button
-            class="chat-button"
-          >
-            💬 チャット
-          </button>
-
-        `;
-
-
-        card
-          .querySelector(
-            "button"
-          )
-          .addEventListener(
-            "click",
-            () =>
-              openChat(
-                otherUid,
-                user
-              )
-          );
-
-
-        box.appendChild(
-          card
-        );
-
-      }
-
-
-    } catch(error) {
-
-      console.error(error);
-
-
-      box.innerHTML =
-        '<div class="error">マッチ一覧の読み込みに失敗しました。</div>';
-
-    }
-
-  }
-
-
-
-  /*
-   * ========================================
-   * チャットルームID
-   * ========================================
-   */
-
-  function makeRoomId(
-    uid1,
-    uid2
-  ) {
-
-    return [
-      uid1,
-      uid2
-    ]
-      .sort()
-      .join("_");
-
-  }
-
-
-
-  /*
-   * ========================================
-   * チャット開始
-   * ========================================
-   */
-
-  async function openChat(
-    otherUid,
-    user
-  ) {
-
-    currentChatUserId =
-      otherUid;
-
-
-    currentChatRoomId =
-      makeRoomId(
-        currentUser.uid,
-        otherUid
-      );
-
-
-    document
-      .getElementById(
-        "chatSection"
-      )
-      .classList.remove(
-        "hidden"
-      );
-
-
-    document
-      .getElementById(
-        "chatTitle"
-      )
-      .textContent =
-        "💬 " +
-        (
-          user.name ||
-          "ユーザー"
-        ) +
-        "さんとのチャット";
-
-
-    document
-      .getElementById(
-        "chatInput"
-      )
-      .focus();
-
-
-    loadMessages();
-
-  }
-
-
-
-  /*
-   * ========================================
-   * メッセージ読み込み
-   * ========================================
-   */
-
-  function loadMessages() {
-
-    const chatBox =
-      document.getElementById(
-        "chatBox"
-      );
-
-
-    chatBox.innerHTML =
-      '<div class="loading">メッセージを読み込んでいます…</div>';
-
-
-    if (unsubscribeMessages) {
-
-      unsubscribeMessages();
-
-    }
-
-
-    const messagesRef =
-      collection(
-        db,
-        "rooms",
-        currentChatRoomId,
-        "messages"
-      );
-
-
-    const q =
-      query(
-        messagesRef,
-        orderBy(
-          "createdAt",
-          "asc"
-        )
-      );
-
-
-    unsubscribeMessages =
-      onSnapshot(
-        q,
-        snapshot => {
-
-          chatBox.innerHTML =
-            "";
-
-
-          if (
-            snapshot.empty
-          ) {
-
-            chatBox.innerHTML =
-              '<div class="empty">まだメッセージはありません。<br>最初のメッセージを送ろう💕</div>';
-
-            return;
-
-          }
-
-
-          snapshot.forEach(
-            snap => {
-
-              const message =
-                snap.data();
-
-
-              const mine =
-                message.uid ===
-                currentUser.uid;
-
-
-              const wrapper =
-                document.createElement(
-                  "div"
-                );
-
-
-              wrapper.className =
-                "message" +
-                (
-                  mine
-                    ? " mine"
-                    : ""
-                );
-
-
-              const bubble =
-                document.createElement(
-                  "div"
-                );
-
-
-              bubble.className =
-                "bubble";
-
-
-              bubble.innerHTML =
-                escapeHtml(
-                  message.text
-                );
-
-
-              wrapper.appendChild(
-                bubble
-              );
-
-
-              chatBox.appendChild(
-                wrapper
-              );
-
-            }
-          );
-
-
-          chatBox.scrollTop =
-            chatBox.scrollHeight;
-
-        },
-        error => {
-
-          console.error(error);
-
-          chatBox.innerHTML =
-            '<div class="error">チャットを読み込めませんでした。</div>';
-
-        }
-      );
-
-  }
-
-
-
-  /*
-   * ========================================
-   * メッセージ送信
-   * ========================================
-   */
-
-  window.sendMessage =
-    async function() {
-
-      if (
-        !currentUser ||
-        !currentChatRoomId
-      ) {
-
-        return;
-
-      }
-
-
-      const input =
-        document.getElementById(
-          "chatInput"
-        );
-
-
-      const text =
-        input.value.trim();
-
-
-      if (!text) {
-
-        return;
-
-      }
-
-
-      try {
-
-        await addDoc(
-          collection(
-            db,
-            "rooms",
-            currentChatRoomId,
-            "messages"
-          ),
-          {
-
-            uid:
-              currentUser.uid,
-
-            text:
-              text,
-
-            createdAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        input.value =
-          "";
-
-
-        input.focus();
-
-
-      } catch(error) {
-
-        console.error(error);
-
-
-        alert(
-          "メッセージ送信に失敗しました。"
-        );
-
-      }
-
-    };
-
-
-
-  /*
-   * Enterで送信
-   */
-
-  document
-    .getElementById(
-      "chatInput"
-    )
-    .addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key ===
-          "Enter"
-        ) {
-
-          event.preventDefault();
-
-          window.sendMessage();
-
-        }
-
-      }
-    );
-
-
-
-  /*
-   * ========================================
-   * チャットを閉じる
-   * ========================================
-   */
-
-  window.closeChat =
-    function() {
-
-      document
-        .getElementById(
-          "chatSection"
-        )
-        .classList.add(
-          "hidden"
-        );
-
-
-      currentChatUserId =
-        null;
-
-
-      currentChatRoomId =
-        null;
-
-
-      if (unsubscribeMessages) {
-
-        unsubscribeMessages();
-
-        unsubscribeMessages =
-          null;
-
-      }
-
-    };
-
-
-
-  /*
-   * ========================================
-   * ブロック
-   * ========================================
-   */
-
-  async function blockUser(
-    otherUid,
-    otherName
-  ) {
-
-    const ok =
-      confirm(
-        otherName +
-        "さんをブロックしますか？"
-      );
-
-
-    if (!ok) {
-
-      return;
-
-    }
-
-
-    try {
-
-      await setDoc(
-        doc(
-          db,
-          "blocks",
-          currentUser.uid +
-          "_" +
-          otherUid
-        ),
-        {
-
-          from:
-            currentUser.uid,
-
-          to:
-            otherUid,
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
-
-
-      alert(
-        otherName +
-        "さんをブロックしました。"
-      );
-
-
-      loadUsers();
-
-
-    } catch(error) {
-
-      console.error(error);
-
-
-      alert(
-        "ブロックに失敗しました。"
-      );
-
-    }
-
-  }
-
-
-
-  /*
-   * ========================================
-   * 雑談投稿
-   * ========================================
-   */
-
-  window.addPost =
-    async function() {
-
-      if (!currentUser) {
-
-        return;
-
-      }
-
-
-      const name =
-        document
-          .getElementById(
-            "postName"
-          )
-          .value
-          .trim();
-
-
-      const text =
-        document
-          .getElementById(
-            "postText"
-          )
-          .value
-          .trim();
-
-
-      if (!text) {
-
-        alert(
-          "投稿内容を入力してください。"
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        await addDoc(
-          collection(
-            db,
-            "posts"
-          ),
-          {
-
-            uid:
-              currentUser.uid,
-
-            name:
-              name ||
-              (
-                currentProfile?.name ||
-                "匿名"
-              ),
-
-            text:
-              text,
-
-            createdAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        document
-          .getElementById(
-            "postText"
-          )
-          .value =
-            "";
-
-
-        renderPosts();
-
-
-      } catch(error) {
-
-        console.error(error);
-
-
-        alert(
-          "投稿に失敗しました。"
-        );
-
-      }
-
-    };
-
-
-
-  /*
-   * ========================================
-   * 雑談表示
-   * ========================================
-   */
-
-  async function renderPosts() {
-
-    const box =
-      document.getElementById(
-        "posts"
-      );
-
-
-    box.innerHTML =
-      '<div class="loading">投稿を読み込んでいます…</div>';
-
-
-    try {
-
-      const q =
-        query(
-          collection(
-            db,
-            "posts"
-          ),
-          orderBy(
-            "createdAt",
-            "desc"
-          )
-        );
-
-
-      const snapshot =
-        await getDocs(q);
-
-
-      if (snapshot.empty) {
-
-        box.innerHTML =
-          '<div class="empty">まだ投稿はありません。</div>';
-
-        return;
-
-      }
-
-
-      box.innerHTML =
-        "";
-
-
-      snapshot.forEach(
-        snap => {
-
-          const post =
-            snap.data();
-
-
-          const card =
-            document.createElement(
-              "div"
-            );
-
-
-          card.className =
-            "card";
-
-
-          card.innerHTML = `
-
-            <b>
-              ${escapeHtml(
-                post.name ||
-                "匿名"
-              )}
-            </b>
-
-            <div style="margin-top:6px;">
-              ${escapeHtml(
-                post.text
-              )}
-            </div>
-
-          `;
-
-
-          box.appendChild(
-            card
-          );
-
-        }
-      );
-
-
-    } catch(error) {
-
-      console.error(error);
-
-
-      box.innerHTML =
-        '<div class="error">投稿の読み込みに失敗しました。</div>';
-
-    }
-
-  }
-
-
-
-  /*
-   * ========================================
-   * 起動
-   * ========================================
-   */
-
-  async function init() {
-
-    await Promise.all([
-
-      loadPrefectures(),
-
-      loadMunicipalities()
-
-    ]);
-
-  }
-
-
-  init();
+  );
 
 </script>
 
