@@ -1,12 +1,18 @@
 <!doctype html>
 <html lang="ja">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
 
   <title>まこマッチ 💕</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -17,37 +23,65 @@
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
-        "Noto Sans JP",
+        "Segoe UI",
         sans-serif;
-      background: #f7f3f8;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff0f6,
+          #f2efff
+        );
+
       color: #333;
     }
 
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
     .app {
-      max-width: 480px;
-      margin: auto;
+      width: 100%;
+      max-width: 520px;
       min-height: 100vh;
+      margin: auto;
       background: white;
+      box-shadow:
+        0 0 30px rgba(0,0,0,.08);
     }
 
     header {
       padding: 22px 18px;
-      background: linear-gradient(135deg,#ff7aa8,#9b8cff);
       color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff6f9f,
+          #9b8cff
+        );
+
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    h2 {
-      margin-top: 0;
+    .brand {
+      font-size: 27px;
+      font-weight: 800;
     }
 
     .sub {
-      opacity: .9;
       margin-top: 5px;
+      font-size: 13px;
+      opacity: .95;
     }
 
     main {
@@ -55,38 +89,84 @@
     }
 
     .card {
+      background: white;
+
       border: 1px solid #eee;
+
       border-radius: 20px;
+
       padding: 16px;
+
       margin-bottom: 14px;
-      box-shadow: 0 5px 18px #0000000d;
+
+      box-shadow:
+        0 6px 20px rgba(0,0,0,.06);
     }
 
-    .form-title {
-      font-weight: bold;
-      margin-top: 14px;
-      margin-bottom: 5px;
+    h2 {
+      margin-top: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
     }
 
     input,
     textarea,
     select {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
+
+      padding: 12px 13px;
+
+      border:
+        1px solid #ddd;
+
       border-radius: 12px;
-      margin: 6px 0 10px;
-      font: inherit;
+
+      margin:
+        5px 0 10px;
+
       background: white;
+
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #ff72a2;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(255,114,162,.12);
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     button {
       border: 0;
-      border-radius: 14px;
-      padding: 12px 16px;
+
+      border-radius: 13px;
+
+      padding:
+        11px 15px;
+
       font-weight: 700;
-      cursor: pointer;
-      font-size: 15px;
+    }
+
+    .primary {
+      width: 100%;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff5f96,
+          #9a86ff
+        );
     }
 
     .like {
@@ -94,56 +174,24 @@
       color: white;
     }
 
-    .like:disabled {
-      background: #ccc;
-    }
-
     .block {
       background: #eee;
       color: #555;
-      margin-left: 6px;
     }
 
-    .profile {
-      display: flex;
-      gap: 12px;
-      align-items: center;
+    .secondary {
+      background: #f0ebff;
+      color: #654bd1;
     }
 
-    .avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
+    .logout {
       background: #eee;
-      font-size: 30px;
-      flex-shrink: 0;
+      color: #555;
     }
 
-    .name {
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .age {
-      color: #777;
-      font-weight: normal;
-    }
-
-    .location {
-      color: #777;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #f2eaff;
-      padding: 5px 9px;
-      border-radius: 20px;
-      margin: 4px 3px 0 0;
-      font-size: 12px;
+    .danger {
+      background: #ffe5eb;
+      color: #d33;
     }
 
     .small {
@@ -151,241 +199,711 @@
       color: #888;
     }
 
-    .saved-location {
-      margin-top: 10px;
+    .message {
       padding: 10px;
-      background: #f7f3ff;
+
       border-radius: 12px;
-      font-size: 13px;
+
+      margin:
+        7px 0;
     }
 
     .success {
-      margin-top: 10px;
-      padding: 12px;
-      background: #effff5;
-      color: #16834b;
-      border-radius: 12px;
-    }
-
-    .match {
-      background: linear-gradient(135deg,#fff0f6,#f1edff);
-      border: 1px solid #eadcf5;
-    }
-
-    .post {
-      background: #fff4f7;
-    }
-
-    .loading {
-      color: #888;
-      text-align: center;
-      padding: 20px;
+      background: #edfff2;
+      color: #248a48;
     }
 
     .error {
-      color: #e44;
-      background: #fff0f0;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 13px;
+      background: #fff0f2;
+      color: #c52b46;
+    }
+
+    .profile {
+      display: flex;
+
+      gap: 12px;
+
+      align-items: center;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+
+      flex-shrink: 0;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffe0ec,
+          #e5ddff
+        );
+
+      font-size: 29px;
+    }
+
+    .name {
+      font-weight: 800;
+    }
+
+    .age {
+      color: #777;
+      font-weight: 500;
+    }
+
+    .tag {
+      display: inline-block;
+
+      background: #f1ebff;
+
+      color: #6652c7;
+
+      padding:
+        5px 9px;
+
+      border-radius: 20px;
+
+      margin:
+        4px 3px 0 0;
+
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 12px;
+    }
+
+    .actions button {
+      flex: 1;
     }
 
     .account {
-      background: #f7f3ff;
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
     }
 
-    .logout {
-      background: #eee;
-      color: #555;
+    .accountEmail {
+      font-size: 13px;
+
+      color: #666;
+
+      overflow-wrap: anywhere;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .loading {
+      padding: 15px;
+
+      text-align: center;
+
+      color: #888;
+    }
+
+    .location {
+      margin-top: 8px;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+    .post {
+      background: #fff7fa;
+    }
+
+    .postItem {
+      background: white;
+
+      border:
+        1px solid #eee;
+
+      border-radius: 14px;
+
+      padding: 12px;
+
       margin-top: 10px;
+    }
+
+    .postHeader {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 8px;
+    }
+
+    .matchCard {
+      background:
+        linear-gradient(
+          135deg,
+          #fff0f7,
+          #f3efff
+        );
+
+      border:
+        1px solid #eadff5;
+    }
+
+    .chatMessages {
+      height: 330px;
+
+      overflow-y: auto;
+
+      padding: 10px;
+
+      background: #fafafa;
+
+      border-radius: 15px;
+
+      margin-bottom: 10px;
+    }
+
+    .chatRow {
+      display: flex;
+
+      margin:
+        7px 0;
+    }
+
+    .chatRow.mine {
+      justify-content: flex-end;
+    }
+
+    .chatBubble {
+      max-width: 78%;
+
+      padding:
+        9px 12px;
+
+      border-radius: 15px;
+
+      background: #eee;
+    }
+
+    .mine .chatBubble {
+      background: #ffdeea;
+    }
+
+    .chatTime {
+      font-size: 10px;
+
+      color: #999;
+
+      margin-top: 3px;
+    }
+
+    .chatInputRow {
+      display: flex;
+
+      gap: 7px;
+    }
+
+    .chatInputRow input {
+      margin: 0;
+    }
+
+    .chatInputRow button {
+      flex-shrink: 0;
+    }
+
+    .tabs {
+      display: flex;
+
+      gap: 7px;
+
+      overflow-x: auto;
+
+      margin-bottom: 15px;
+    }
+
+    .tab {
+      white-space: nowrap;
+
+      background: #f2eefb;
+
+      color: #6755b9;
+    }
+
+    .tab.active {
+      background: #ff6f9f;
+
+      color: white;
+    }
+
+    .checkboxRow {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 8px;
+
+      font-size: 13px;
+
+      margin:
+        5px 0 12px;
+    }
+
+    .checkboxRow input {
+      width: auto;
+
+      margin-top: 3px;
     }
 
     .empty {
       padding: 20px;
+
       text-align: center;
-      color: #888;
-      border: 1px dashed #ddd;
+
+      color: #999;
+
+      background: #fafafa;
+
       border-radius: 15px;
     }
+
   </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
   <header>
-    <h1>まこマッチ 💕</h1>
+
+    <div class="brand">
+      まこマッチ 💕
+    </div>
+
     <div class="sub">
       18歳以上限定・安心して話せる場所
     </div>
+
   </header>
+
 
   <main>
 
-    <!-- アカウント -->
-    <div class="card account">
+    <!-- ========================= -->
+    <!-- ログイン -->
+    <!-- ========================= -->
 
-      <h2>👤 アカウント</h2>
+    <section
+      id="authSection"
+      class="card"
+    >
 
-      <div id="accountEmail">
-        読み込み中...
+      <h2>🔐 ログイン</h2>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="メールアドレス"
+        autocomplete="email"
+      >
+
+      <input
+        id="password"
+        type="password"
+        placeholder="パスワード"
+        autocomplete="current-password"
+      >
+
+      <div
+        class="checkboxRow"
+      >
+
+        <input
+          id="ageConfirm"
+          type="checkbox"
+        >
+
+        <label for="ageConfirm">
+          私は18歳以上です
+        </label>
+
       </div>
 
       <button
-        class="logout"
-        onclick="logout()"
+        id="loginButton"
+        class="primary"
       >
-        ログアウト
+        ログイン
       </button>
 
-    </div>
-
-
-    <!-- プロフィール -->
-    <div class="card">
-
-      <h2>プロフィール</h2>
-
-      <div class="form-title">
-        ニックネーム
-      </div>
-
-      <input
-        id="myName"
-        placeholder="ニックネーム"
-      >
-
-      <div class="form-title">
-        年齢
-      </div>
-
-      <input
-        id="myAge"
-        type="number"
-        min="18"
-        placeholder="18歳以上"
-      >
-
-      <div class="form-title">
-        性別
-      </div>
-
-      <select id="myGender">
-        <option value="">
-          選択してください
-        </option>
-        <option value="男性">男性</option>
-        <option value="女性">女性</option>
-        <option value="その他">その他</option>
-        <option value="回答しない">回答しない</option>
-      </select>
-
-
-      <div class="form-title">
-        都道府県
-      </div>
-
-      <select id="prefecture">
-        <option value="">
-          読み込み中...
-        </option>
-      </select>
-
-
-      <div class="form-title">
-        市区町村
-      </div>
-
-      <select
-        id="municipality"
-        disabled
-      >
-        <option value="">
-          先に都道府県を選択してください
-        </option>
-      </select>
-
-
-      <div class="form-title">
-        自己紹介
-      </div>
-
-      <textarea
-        id="myBio"
-        rows="3"
-        placeholder="自己紹介"
-      ></textarea>
-
+      <br><br>
 
       <button
-        class="like"
-        onclick="saveProfile()"
+        id="registerButton"
+        class="secondary"
+        style="width:100%"
       >
-        プロフィールを保存
+        新規登録
       </button>
 
       <div
-        id="saved"
-        class="success"
-        style="display:none;"
+        id="authMessage"
+        class="small"
+        style="margin-top:12px"
       ></div>
 
-      <div
-        id="savedLocation"
-        class="saved-location"
-        style="display:none;"
-      ></div>
-
-    </div>
+    </section>
 
 
-    <!-- マッチした人 -->
-    <h2>💕 マッチした人</h2>
+    <!-- ========================= -->
+    <!-- ログイン後 -->
+    <!-- ========================= -->
 
-    <div id="matches">
-      <div class="loading">
-        読み込み中...
+    <section
+      id="appSection"
+      class="hidden"
+    >
+
+
+      <!-- アカウント -->
+
+      <div class="card">
+
+        <div class="account">
+
+          <div>
+
+            <div>
+              🔐 ログイン中
+            </div>
+
+            <div
+              id="accountEmail"
+              class="accountEmail"
+            ></div>
+
+          </div>
+
+          <button
+            id="logoutButton"
+            class="logout"
+          >
+            ログアウト
+          </button>
+
+        </div>
+
       </div>
-    </div>
 
 
-    <!-- おすすめ -->
-    <h2>💞 おすすめの人</h2>
+      <!-- タブ -->
 
-    <div id="profiles">
-      <div class="loading">
-        読み込み中...
+      <div class="tabs">
+
+        <button
+          class="tab active"
+          data-tab="profileTab"
+        >
+          👤プロフィール
+        </button>
+
+        <button
+          class="tab"
+          data-tab="peopleTab"
+        >
+          💕おすすめ
+        </button>
+
+        <button
+          class="tab"
+          data-tab="matchTab"
+        >
+          💖マッチ
+        </button>
+
+        <button
+          class="tab"
+          data-tab="chatTab"
+        >
+          💬チャット
+        </button>
+
+        <button
+          class="tab"
+          data-tab="talkTab"
+        >
+          🗣️雑談
+        </button>
+
       </div>
-    </div>
 
 
-    <!-- 雑談 -->
-    <div class="card post">
+      <!-- ========================= -->
+      <!-- プロフィール -->
+      <!-- ========================= -->
 
-      <h2>💬 雑談コーナー</h2>
-
-      <input
-        id="postName"
-        placeholder="名前（任意）"
+      <section
+        id="profileTab"
+        class="tabContent"
       >
 
-      <textarea
-        id="postText"
-        rows="3"
-        placeholder="気軽にひとこと投稿しよう"
-      ></textarea>
+        <div class="card">
 
-      <button
-        class="like"
-        onclick="addPost()"
+          <h2>
+            👤 プロフィール
+          </h2>
+
+          <label>
+            ニックネーム
+          </label>
+
+          <input
+            id="myName"
+            placeholder="ニックネーム"
+            maxlength="30"
+          >
+
+
+          <label>
+            年齢
+          </label>
+
+          <input
+            id="myAge"
+            type="number"
+            min="18"
+            max="120"
+            placeholder="18歳以上"
+          >
+
+
+          <label>
+            性別
+          </label>
+
+          <select id="myGender">
+
+            <option value="">
+              選択してください
+            </option>
+
+            <option value="男性">
+              男性
+            </option>
+
+            <option value="女性">
+              女性
+            </option>
+
+            <option value="その他">
+              その他
+            </option>
+
+          </select>
+
+
+          <label>
+            都道府県
+          </label>
+
+          <select id="prefecture">
+
+            <option value="">
+              読み込み中...
+            </option>
+
+          </select>
+
+
+          <label>
+            市区町村
+          </label>
+
+          <select
+            id="municipality"
+            disabled
+          >
+
+            <option value="">
+              先に都道府県を選択してください
+            </option>
+
+          </select>
+
+
+          <label>
+            自己紹介
+          </label>
+
+          <textarea
+            id="myBio"
+            rows="4"
+            maxlength="500"
+            placeholder="よろしくお願いします！"
+          ></textarea>
+
+
+          <button
+            id="saveProfileButton"
+            class="primary"
+          >
+            プロフィールを保存 💕
+          </button>
+
+
+          <div
+            id="profileMessage"
+            class="small"
+            style="margin-top:10px"
+          ></div>
+
+
+          <div
+            id="myLocation"
+            class="location"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================= -->
+      <!-- おすすめ -->
+      <!-- ========================= -->
+
+      <section
+        id="peopleTab"
+        class="tabContent hidden"
       >
-        投稿する
-      </button>
 
-      <div id="posts"></div>
+        <h2>
+          💕 おすすめの人
+        </h2>
 
-    </div>
+        <div
+          id="profiles"
+        >
+
+          <div class="loading">
+            読み込み中...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================= -->
+      <!-- マッチ -->
+      <!-- ========================= -->
+
+      <section
+        id="matchTab"
+        class="tabContent hidden"
+      >
+
+        <h2>
+          💖 マッチした人
+        </h2>
+
+        <div
+          id="matches"
+        >
+
+          <div class="loading">
+            読み込み中...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================= -->
+      <!-- チャット -->
+      <!-- ========================= -->
+
+      <section
+        id="chatTab"
+        class="tabContent hidden"
+      >
+
+        <h2>
+          💬 二人だけのチャット
+        </h2>
+
+        <div
+          id="chatArea"
+        >
+
+          <div class="empty">
+            マッチした人を選ぶと<br>
+            チャットできます 💕
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================= -->
+      <!-- 雑談 -->
+      <!-- ========================= -->
+
+      <section
+        id="talkTab"
+        class="tabContent hidden"
+      >
+
+        <div class="card post">
+
+          <h2>
+            🗣️ 雑談コーナー
+          </h2>
+
+          <textarea
+            id="postText"
+            rows="3"
+            maxlength="500"
+            placeholder="気軽にひとこと投稿しよう"
+          ></textarea>
+
+          <button
+            id="postButton"
+            class="primary"
+          >
+            投稿する
+          </button>
+
+        </div>
+
+
+        <div
+          id="posts"
+        ></div>
+
+      </section>
+
+
+    </section>
 
   </main>
 
@@ -395,38 +913,45 @@
 <script type="module">
 
   /*
+   * ==========================================
    * Firebase
+   * ==========================================
    */
 
   import {
     initializeApp
-  } from
-  "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  }
+  from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
   import {
     getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
-  } from
-  "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  }
+  from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
   import {
     getFirestore,
     doc,
-    setDoc,
     getDoc,
-    getDocs,
+    setDoc,
+    updateDoc,
+    addDoc,
     collection,
-    query,
-    where,
-    serverTimestamp
-  } from
-  "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    getDocs,
+    onSnapshot,
+    serverTimestamp,
+    query
+  }
+  from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
-  /*
-   * Firebase設定
-   */
 
   const firebaseConfig = {
 
@@ -457,102 +982,220 @@
   const app =
     initializeApp(firebaseConfig);
 
+
   const auth =
     getAuth(app);
+
 
   const db =
     getFirestore(app);
 
 
-  let currentUser = null;
-
-  let municipalities = [];
-
-
   /*
-   * 地域データ
+   * ==========================================
+   * 市区町村データ
+   * ==========================================
    */
-
-  const PREF_URL =
-    "https://code4fukui.github.io/localgovjp/prefjp.json";
 
   const CITY_URL =
     "https://code4fukui.github.io/localgovjp/localgovjp.json";
 
 
   const prefecture =
-    document.getElementById("prefecture");
+    document.getElementById(
+      "prefecture"
+    );
+
 
   const municipality =
-    document.getElementById("municipality");
+    document.getElementById(
+      "municipality"
+    );
 
-  const myName =
-    document.getElementById("myName");
 
-  const myAge =
-    document.getElementById("myAge");
-
-  const myGender =
-    document.getElementById("myGender");
-
-  const myBio =
-    document.getElementById("myBio");
-
-  const saved =
-    document.getElementById("saved");
-
-  const savedLocation =
-    document.getElementById("savedLocation");
+  let municipalities = [];
 
 
   /*
-   * 都道府県
+   * ==========================================
+   * 現在のユーザー
+   * ==========================================
    */
 
-  async function loadPrefectures() {
+  let currentUser = null;
 
-    try {
+  let currentProfile = null;
 
-      const response =
-        await fetch(PREF_URL);
+  let selectedMatchId = null;
 
-      if (!response.ok) {
-        throw new Error();
-      }
+  let selectedMatchUser = null;
 
-      const data =
-        await response.json();
+  let unsubscribeChat = null;
 
-      prefecture.innerHTML =
-        '<option value="">選択してください</option>';
+  let unsubscribePosts = null;
 
-      data.forEach(pref => {
 
-        const option =
-          document.createElement("option");
+  /*
+   * ==========================================
+   * DOM
+   * ==========================================
+   */
 
-        option.value =
-          pref.pid;
+  const authSection =
+    document.getElementById(
+      "authSection"
+    );
 
-        option.textContent =
-          pref.pref;
 
-        prefecture.appendChild(option);
+  const appSection =
+    document.getElementById(
+      "appSection"
+    );
 
-      });
 
-    } catch (e) {
+  const authMessage =
+    document.getElementById(
+      "authMessage"
+    );
 
-      prefecture.innerHTML =
-        '<option value="">読み込み失敗</option>';
 
-    }
+  const accountEmail =
+    document.getElementById(
+      "accountEmail"
+    );
+
+
+  const profilesBox =
+    document.getElementById(
+      "profiles"
+    );
+
+
+  const matchesBox =
+    document.getElementById(
+      "matches"
+    );
+
+
+  const chatArea =
+    document.getElementById(
+      "chatArea"
+    );
+
+
+  const postsBox =
+    document.getElementById(
+      "posts"
+    );
+
+
+  /*
+   * ==========================================
+   * HTMLエスケープ
+   * ==========================================
+   */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(
+        /[&<>"']/g,
+        function(char) {
+
+          return {
+
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+
+          }[char];
+
+        }
+      );
 
   }
 
 
   /*
-   * 市区町村
+   * ==========================================
+   * エラーメッセージ
+   * ==========================================
+   */
+
+  function firebaseErrorMessage(error) {
+
+    const code =
+      error?.code || "";
+
+
+    if (
+      code ===
+      "auth/email-already-in-use"
+    ) {
+
+      return "このメールアドレスはすでに登録されています。";
+
+    }
+
+
+    if (
+      code ===
+      "auth/invalid-email"
+    ) {
+
+      return "メールアドレスを確認してください。";
+
+    }
+
+
+    if (
+      code ===
+      "auth/weak-password"
+    ) {
+
+      return "パスワードは6文字以上にしてください。";
+
+    }
+
+
+    if (
+      code ===
+      "auth/invalid-credential" ||
+      code ===
+      "auth/wrong-password" ||
+      code ===
+      "auth/user-not-found"
+    ) {
+
+      return "メールアドレスまたはパスワードが違います。";
+
+    }
+
+
+    if (
+      code ===
+      "permission-denied"
+    ) {
+
+      return "Firebaseの権限設定を確認してください。";
+
+    }
+
+
+    return (
+      error?.message ||
+      "エラーが発生しました。"
+    );
+
+  }
+
+
+  /*
+   * ==========================================
+   * 都道府県・市区町村
+   * ==========================================
    */
 
   async function loadMunicipalities() {
@@ -562,14 +1205,88 @@
       const response =
         await fetch(CITY_URL);
 
+
       if (!response.ok) {
-        throw new Error();
+
+        throw new Error(
+          "市区町村データ取得失敗"
+        );
+
       }
+
 
       municipalities =
         await response.json();
 
-    } catch (e) {
+
+      const prefMap =
+        new Map();
+
+
+      municipalities.forEach(
+        city => {
+
+          if (
+            city.pid &&
+            city.pref
+          ) {
+
+            prefMap.set(
+              String(city.pid),
+              city.pref
+            );
+
+          }
+
+        }
+      );
+
+
+      prefecture.innerHTML =
+        '<option value="">選択してください</option>';
+
+
+      Array.from(
+        prefMap.entries()
+      )
+        .sort(
+          (a, b) =>
+            Number(a[0]) -
+            Number(b[0])
+        )
+        .forEach(
+          ([pid, pref]) => {
+
+            const option =
+              document.createElement(
+                "option"
+              );
+
+
+            option.value =
+              pid;
+
+
+            option.textContent =
+              pref;
+
+
+            prefecture.appendChild(
+              option
+            );
+
+          }
+        );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      prefecture.innerHTML =
+        '<option value="">読み込み失敗</option>';
+
 
       municipality.innerHTML =
         '<option value="">読み込み失敗</option>';
@@ -579,59 +1296,419 @@
   }
 
 
-  /*
-   * 都道府県変更
-   */
-
   prefecture.addEventListener(
     "change",
     function() {
 
       const pid =
-        this.value;
-
-      municipality.innerHTML =
-        '<option value="">市区町村を選択してください</option>';
-
-      municipality.disabled = true;
-
-      if (!pid) {
-        return;
-      }
-
-      const cities =
-        municipalities.filter(
-          city =>
-            String(city.pid) ===
-            String(pid)
+        String(
+          prefecture.value
         );
 
-      cities.forEach(city => {
 
-        const option =
-          document.createElement("option");
+      municipality.innerHTML =
+        '<option value="">選択してください</option>';
 
-        option.value =
-          city.city;
 
-        option.textContent =
-          city.city;
+      municipality.disabled =
+        true;
 
-        municipality.appendChild(option);
 
-      });
+      if (!pid) {
 
-      municipality.disabled = false;
+        municipality.innerHTML =
+          '<option value="">先に都道府県を選択してください</option>';
+
+        return;
+
+      }
+
+
+      const cities =
+        municipalities
+          .filter(
+            city =>
+              String(city.pid) === pid
+          )
+          .sort(
+            (a, b) =>
+              String(a.city)
+                .localeCompare(
+                  String(b.city),
+                  "ja"
+                )
+          );
+
+
+      cities.forEach(
+        city => {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+
+          option.value =
+            city.city;
+
+
+          option.textContent =
+            city.city;
+
+
+          municipality.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      municipality.disabled =
+        false;
 
     }
   );
 
 
   /*
-   * Firebaseにプロフィール保存
+   * ==========================================
+   * 認証
+   * ==========================================
    */
 
-  window.saveProfile = async function() {
+  document
+    .getElementById("registerButton")
+    .addEventListener(
+      "click",
+      async function() {
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        const ageConfirm =
+          document
+            .getElementById("ageConfirm")
+            .checked;
+
+
+        if (!ageConfirm) {
+
+          authMessage.textContent =
+            "18歳以上であることを確認してください。";
+
+          authMessage.className =
+            "message error";
+
+          return;
+
+        }
+
+
+        if (!email || !password) {
+
+          authMessage.textContent =
+            "メールアドレスとパスワードを入力してください。";
+
+          authMessage.className =
+            "message error";
+
+          return;
+
+        }
+
+
+        try {
+
+          authMessage.textContent =
+            "登録中...";
+
+
+          const result =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          await setDoc(
+            doc(
+              db,
+              "users",
+              result.user.uid
+            ),
+            {
+
+              uid:
+                result.user.uid,
+
+              email:
+                result.user.email,
+
+              createdAt:
+                serverTimestamp(),
+
+              updatedAt:
+                serverTimestamp()
+
+            },
+            {
+              merge: true
+            }
+          );
+
+
+          authMessage.textContent =
+            "登録しました！💕";
+
+
+          authMessage.className =
+            "message success";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          authMessage.textContent =
+            firebaseErrorMessage(
+              error
+            );
+
+
+          authMessage.className =
+            "message error";
+
+        }
+
+      }
+    );
+
+
+  document
+    .getElementById("loginButton")
+    .addEventListener(
+      "click",
+      async function() {
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        const ageConfirm =
+          document
+            .getElementById("ageConfirm")
+            .checked;
+
+
+        if (!ageConfirm) {
+
+          authMessage.textContent =
+            "18歳以上であることを確認してください。";
+
+          authMessage.className =
+            "message error";
+
+          return;
+
+        }
+
+
+        if (!email || !password) {
+
+          authMessage.textContent =
+            "メールアドレスとパスワードを入力してください。";
+
+          authMessage.className =
+            "message error";
+
+          return;
+
+        }
+
+
+        try {
+
+          authMessage.textContent =
+            "ログイン中...";
+
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          authMessage.textContent =
+            "";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          authMessage.textContent =
+            firebaseErrorMessage(
+              error
+            );
+
+
+          authMessage.className =
+            "message error";
+
+        }
+
+      }
+    );
+
+
+  document
+    .getElementById("logoutButton")
+    .addEventListener(
+      "click",
+      async function() {
+
+        await signOut(auth);
+
+      }
+    );
+
+
+  /*
+   * ==========================================
+   * プロフィール読み込み
+   * ==========================================
+   */
+
+  async function loadMyProfile() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    const snap =
+      await getDoc(
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        )
+      );
+
+
+    if (!snap.exists()) {
+
+      currentProfile = null;
+
+      return;
+
+    }
+
+
+    currentProfile =
+      snap.data();
+
+
+    document
+      .getElementById("myName")
+      .value =
+      currentProfile.name || "";
+
+
+    document
+      .getElementById("myAge")
+      .value =
+      currentProfile.age || "";
+
+
+    document
+      .getElementById("myGender")
+      .value =
+      currentProfile.gender || "";
+
+
+    if (
+      currentProfile.prefecturePid
+    ) {
+
+      prefecture.value =
+        String(
+          currentProfile.prefecturePid
+        );
+
+
+      prefecture.dispatchEvent(
+        new Event("change")
+      );
+
+
+      setTimeout(
+        function() {
+
+          municipality.value =
+            currentProfile.municipality ||
+            "";
+
+        },
+        100
+      );
+
+    }
+
+
+    document
+      .getElementById("myBio")
+      .value =
+      currentProfile.bio || "";
+
+
+    updateLocationText();
+
+  }
+
+
+  /*
+   * ==========================================
+   * プロフィール保存
+   * ==========================================
+   */
+
+  document
+    .getElementById(
+      "saveProfileButton"
+    )
+    .addEventListener(
+      "click",
+      saveProfile
+    );
+
+
+  async function saveProfile() {
 
     if (!currentUser) {
 
@@ -645,42 +1722,82 @@
 
 
     const name =
-      myName.value.trim();
+      document
+        .getElementById("myName")
+        .value
+        .trim();
+
 
     const age =
-      Number(myAge.value);
+      Number(
+        document
+          .getElementById("myAge")
+          .value
+      );
+
 
     const gender =
-      myGender.value;
+      document
+        .getElementById("myGender")
+        .value;
 
-    const pref =
-      prefecture.options[
-        prefecture.selectedIndex
-      ]?.textContent || "";
 
-    const city =
-      municipality.value;
+    const prefecturePid =
+      document
+        .getElementById("prefecture")
+        .value;
+
+
+    const prefectureName =
+      prefecture
+        .options[
+          prefecture.selectedIndex
+        ]
+        ?.textContent || "";
+
+
+    const municipalityName =
+      municipality
+        .value;
+
 
     const bio =
-      myBio.value.trim();
+      document
+        .getElementById("myBio")
+        .value
+        .trim();
+
+
+    const message =
+      document
+        .getElementById(
+          "profileMessage"
+        );
 
 
     if (!name) {
 
-      alert(
-        "ニックネームを入力してください。"
-      );
+      message.textContent =
+        "ニックネームを入力してください。";
+
+      message.className =
+        "message error";
 
       return;
 
     }
 
 
-    if (!age || age < 18) {
+    if (
+      !Number.isInteger(age) ||
+      age < 18
+    ) {
 
-      alert(
-        "18歳以上のみ登録できます。"
-      );
+      message.textContent =
+        "18歳以上の年齢を入力してください。";
+
+      message.className =
+        "message error";
 
       return;
 
@@ -689,31 +1806,37 @@
 
     if (!gender) {
 
-      alert(
-        "性別を選択してください。"
-      );
+      message.textContent =
+        "性別を選択してください。";
+
+      message.className =
+        "message error";
 
       return;
 
     }
 
 
-    if (!prefecture.value) {
+    if (!prefecturePid) {
 
-      alert(
-        "都道府県を選択してください。"
-      );
+      message.textContent =
+        "都道府県を選択してください。";
+
+      message.className =
+        "message error";
 
       return;
 
     }
 
 
-    if (!city) {
+    if (!municipalityName) {
 
-      alert(
-        "市区町村を選択してください。"
-      );
+      message.textContent =
+        "市区町村を選択してください。";
+
+      message.className =
+        "message error";
 
       return;
 
@@ -733,6 +1856,9 @@
           uid:
             currentUser.uid,
 
+          email:
+            currentUser.email,
+
           name:
             name,
 
@@ -742,11 +1868,14 @@
           gender:
             gender,
 
+          prefecturePid:
+            prefecturePid,
+
           prefecture:
-            pref,
+            prefectureName,
 
           municipality:
-            city,
+            municipalityName,
 
           bio:
             bio,
@@ -761,154 +1890,83 @@
       );
 
 
-      localStorage.setItem(
-        "makoProfile",
-        JSON.stringify({
-          name,
-          age,
-          gender,
-          prefecture: pref,
-          municipality: city,
-          bio
-        })
-      );
+      currentProfile = {
+
+        uid:
+          currentUser.uid,
+
+        email:
+          currentUser.email,
+
+        name,
+        age,
+        gender,
+        prefecturePid,
+        prefecture:
+          prefectureName,
+        municipality:
+          municipalityName,
+        bio
+
+      };
 
 
-      saved.style.display =
-        "block";
-
-      saved.textContent =
+      message.textContent =
         "プロフィールを保存しました！💕";
 
 
-      savedLocation.style.display =
-        "block";
-
-      savedLocation.innerHTML =
-        "📍 " +
-        escapeHtml(pref) +
-        " " +
-        escapeHtml(city);
+      message.className =
+        "message success";
 
 
-      await loadUsers();
+      updateLocationText();
 
-      await loadMatches();
 
+      await loadPeople();
 
     } catch (error) {
 
       console.error(error);
 
-      alert(
-        "保存できませんでした。\n" +
-        error.message
-      );
 
-    }
-
-  };
-
-
-  /*
-   * プロフィール読み込み
-   */
-
-  async function loadProfile() {
-
-    if (!currentUser) {
-      return;
-    }
-
-    try {
-
-      const snapshot =
-        await getDoc(
-          doc(
-            db,
-            "users",
-            currentUser.uid
-          )
+      message.textContent =
+        firebaseErrorMessage(
+          error
         );
 
 
-      if (!snapshot.exists()) {
+      message.className =
+        "message error";
 
-        return;
+    }
 
-      }
-
-
-      const profile =
-        snapshot.data();
+  }
 
 
-      myName.value =
-        profile.name || "";
+  function updateLocationText() {
 
-      myAge.value =
-        profile.age || "";
-
-      myGender.value =
-        profile.gender || "";
-
-      myBio.value =
-        profile.bio || "";
+    const location =
+      document.getElementById(
+        "myLocation"
+      );
 
 
-      if (profile.prefecture) {
+    if (
+      currentProfile &&
+      currentProfile.prefecture &&
+      currentProfile.municipality
+    ) {
 
-        const options =
-          Array.from(
-            prefecture.options
-          );
+      location.textContent =
+        "📍 " +
+        currentProfile.prefecture +
+        " " +
+        currentProfile.municipality;
 
-        const option =
-          options.find(
-            o =>
-              o.textContent ===
-              profile.prefecture
-          );
+    } else {
 
-
-        if (option) {
-
-          prefecture.value =
-            option.value;
-
-          prefecture.dispatchEvent(
-            new Event("change")
-          );
-
-
-          setTimeout(() => {
-
-            municipality.value =
-              profile.municipality || "";
-
-          }, 200);
-
-        }
-
-
-        savedLocation.style.display =
-          "block";
-
-        savedLocation.innerHTML =
-          "📍 " +
-          escapeHtml(
-            profile.prefecture
-          ) +
-          " " +
-          escapeHtml(
-            profile.municipality || ""
-          );
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
+      location.textContent =
+        "";
 
     }
 
@@ -916,28 +1974,20 @@
 
 
   /*
-   * 他ユーザー取得
+   * ==========================================
+   * ユーザー一覧
+   * ==========================================
    */
 
-  async function loadUsers() {
-
-    const box =
-      document.getElementById(
-        "profiles"
-      );
-
-    box.innerHTML =
-      '<div class="loading">ユーザーを読み込んでいます…</div>';
-
+  async function loadPeople() {
 
     if (!currentUser) {
-
-      box.innerHTML =
-        '<div class="empty">ログインしてください。</div>';
-
       return;
-
     }
+
+
+    profilesBox.innerHTML =
+      '<div class="loading">読み込み中...</div>';
 
 
     try {
@@ -954,340 +2004,547 @@
       const users = [];
 
 
-      snapshot.forEach(docSnap => {
+      snapshot.forEach(
+        item => {
 
-        const data =
-          docSnap.data();
-
-
-        if (
-          data.uid !==
-          currentUser.uid &&
-          data.age >= 18
-        ) {
-
-          users.push(data);
-
-        }
-
-      });
+          const data =
+            item.data();
 
 
-      if (!users.length) {
-
-        box.innerHTML =
-          '<div class="empty">まだ他のユーザーがいません。</div>';
-
-        return;
-
-      }
+          if (
+            item.id ===
+            currentUser.uid
+          ) {
+            return;
+          }
 
 
-      box.innerHTML =
-        "";
+          if (
+            data.blocked === true
+          ) {
+            return;
+          }
 
 
-      for (const user of users) {
-
-        const card =
-          document.createElement("div");
-
-        card.className =
-          "card";
-
-
-        card.innerHTML = `
-
-          <div class="profile">
-
-            <div class="avatar">
-              ${getAvatar(user.gender)}
-            </div>
-
-            <div>
-
-              <div class="name">
-                ${escapeHtml(user.name || "匿名")}
-
-                <span class="age">
-                  ${user.age || ""}歳
-                </span>
-              </div>
-
-              <div class="location">
-                📍 ${escapeHtml(user.prefecture || "")}
-                ${escapeHtml(user.municipality || "")}
-              </div>
-
-            </div>
-
-          </div>
-
-          <p>
-            ${escapeHtml(user.bio || "よろしくお願いします！")}
-          </p>
-
-          <button
-            class="like"
-            data-uid="${escapeHtml(user.uid)}"
-          >
-            ❤️ いいね
-          </button>
-
-        `;
-
-
-        const button =
-          card.querySelector("button");
-
-
-        button.addEventListener(
-          "click",
-          () =>
-            sendLike(
-              user,
-              button
-            )
-        );
-
-
-        box.appendChild(card);
-
-      }
-
-    } catch (error) {
-
-      console.error(error);
-
-      box.innerHTML =
-        `<div class="error">
-          ユーザーを取得できませんでした。<br>
-          ${escapeHtml(error.message)}
-        </div>`;
-
-    }
-
-  }
-
-
-  /*
-   * いいね
-   */
-
-  async function sendLike(
-    user,
-    button
-  ) {
-
-    if (!currentUser) {
-
-      alert(
-        "ログインしてください。"
-      );
-
-      return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-      "送信中…";
-
-
-    try {
-
-      const likeId =
-        currentUser.uid +
-        "_" +
-        user.uid;
-
-
-      await setDoc(
-        doc(
-          db,
-          "likes",
-          likeId
-        ),
-        {
-
-          from:
-            currentUser.uid,
-
-          to:
-            user.uid,
-
-          createdAt:
-            serverTimestamp()
+          users.push({
+            id: item.id,
+            ...data
+          });
 
         }
       );
 
 
       /*
-       * 相手からもいいねされているか確認
+       * ブロックした相手を除外
        */
 
-      const reverseLike =
-        await getDoc(
-          doc(
-            db,
-            "likes",
-            user.uid +
-            "_" +
-            currentUser.uid
-          )
-        );
+      const blockedIds =
+        await getMyBlockedIds();
 
 
-      if (reverseLike.exists()) {
-
-        /*
-         * マッチ成立
-         */
-
-        const ids = [
-          currentUser.uid,
-          user.uid
-        ].sort();
-
-
-        const matchId =
-          ids[0] +
-          "_" +
-          ids[1];
-
-
-        await setDoc(
-          doc(
-            db,
-            "matches",
-            matchId
-          ),
-          {
-
-            users: ids,
-
-            createdAt:
-              serverTimestamp()
-
-          },
-          {
-            merge: true
-          }
-        );
-
-
-        alert(
-          "🎉 マッチしました！💕\n" +
-          user.name +
-          "さんとマッチ成立です！"
-        );
-
-
-        button.textContent =
-          "💕 マッチ成立";
-
-      } else {
-
-        alert(
-          user.name +
-          "さんに「いいね！」しました💕"
-        );
-
-
-        button.textContent =
-          "❤️ いいね済み";
-
-      }
-
-
-      await loadMatches();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        "いいねに失敗しました。\n" +
-        error.message
-      );
-
-
-      button.disabled = false;
-
-      button.textContent =
-        "❤️ いいね";
-
-    }
-
-  }
-
-
-  /*
-   * マッチ一覧
-   */
-
-  async function loadMatches() {
-
-    const box =
-      document.getElementById(
-        "matches"
-      );
-
-
-    if (!currentUser) {
-
-      box.innerHTML =
-        '<div class="empty">ログインしてください。</div>';
-
-      return;
-
-    }
-
-
-    try {
-
-      const snapshot =
-        await getDocs(
-          query(
-            collection(
-              db,
-              "matches"
-            ),
-            where(
-              "users",
-              "array-contains",
-              currentUser.uid
+      const filtered =
+        users.filter(
+          user =>
+            !blockedIds.has(
+              user.id
             )
-          )
         );
 
 
-      if (snapshot.empty) {
+      if (!filtered.length) {
 
-        box.innerHTML =
-          '<div class="empty">まだマッチした人はいません。</div>';
+        profilesBox.innerHTML =
+          '<div class="empty">まだ他のユーザーがいません。<br>新しいユーザーが登録するとここに表示されます💕</div>';
 
         return;
 
       }
 
 
-      box.innerHTML =
-        "";
+      profilesBox.innerHTML =
+        filtered
+          .map(
+            user =>
+              renderUserCard(
+                user
+              )
+          )
+          .join("");
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      profilesBox.innerHTML =
+        '<div class="message error">ユーザーを読み込めませんでした。</div>';
+
+    }
+
+  }
+
+
+  function renderUserCard(user) {
+
+    const location =
+      user.prefecture &&
+      user.municipality
+        ? `
+          <div class="location">
+            📍
+            ${escapeHtml(user.prefecture)}
+            ${escapeHtml(user.municipality)}
+          </div>
+        `
+        : "";
+
+
+    return `
+
+      <div class="card">
+
+        <div class="profile">
+
+          <div class="avatar">
+            💕
+          </div>
+
+          <div>
+
+            <div class="name">
+
+              ${escapeHtml(
+                user.name ||
+                "名前未設定"
+              )}
+
+              <span class="age">
+
+                ${
+                  user.age
+                    ? escapeHtml(
+                        user.age
+                      ) +
+                      "歳"
+                    : ""
+                }
+
+              </span>
+
+            </div>
+
+            <div class="small">
+
+              ${
+                user.gender
+                  ? escapeHtml(
+                      user.gender
+                    )
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${location}
+
+
+        <p>
+
+          ${
+            escapeHtml(
+              user.bio ||
+              "よろしくお願いします！"
+            )
+          }
+
+        </p>
+
+
+        <div class="actions">
+
+          <button
+            class="like"
+            onclick="sendLike('${user.id}')"
+          >
+            ❤️ いいね
+          </button>
+
+          <button
+            class="block"
+            onclick="blockUser('${user.id}')"
+          >
+            🚫 ブロック
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /*
+   * ==========================================
+   * いいね
+   * ==========================================
+   */
+
+  window.sendLike =
+    async function(targetUid) {
+
+      if (!currentUser) {
+        return;
+      }
+
+
+      try {
+
+        const likeId =
+          currentUser.uid +
+          "_" +
+          targetUid;
+
+
+        const reverseLikeId =
+          targetUid +
+          "_" +
+          currentUser.uid;
+
+
+        await setDoc(
+          doc(
+            db,
+            "likes",
+            likeId
+          ),
+          {
+
+            from:
+              currentUser.uid,
+
+            to:
+              targetUid,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        const reverse =
+          await getDoc(
+            doc(
+              db,
+              "likes",
+              reverseLikeId
+            )
+          );
+
+
+        if (reverse.exists()) {
+
+          const matchId =
+            makeMatchId(
+              currentUser.uid,
+              targetUid
+            );
+
+
+          await setDoc(
+            doc(
+              db,
+              "matches",
+              matchId
+            ),
+            {
+
+              matchId:
+                matchId,
+
+              users: [
+                currentUser.uid,
+                targetUid
+              ],
+
+              createdAt:
+                serverTimestamp(),
+
+              updatedAt:
+                serverTimestamp()
+
+            },
+            {
+              merge: true
+            }
+          );
+
+
+          alert(
+            "💕 マッチしました！\nチャットできます！"
+          );
+
+
+          await loadMatches();
+
+
+          openTab(
+            "matchTab"
+          );
+
+
+        } else {
+
+          alert(
+            "❤️ いいねしました！\n相手もいいねするとマッチします💕"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          firebaseErrorMessage(
+            error
+          )
+        );
+
+      }
+
+    };
+
+
+  /*
+   * ==========================================
+   * ブロック
+   * ==========================================
+   */
+
+  window.blockUser =
+    async function(targetUid) {
+
+      if (!currentUser) {
+        return;
+      }
+
+
+      const ok =
+        confirm(
+          "このユーザーをブロックしますか？"
+        );
+
+
+      if (!ok) {
+        return;
+      }
+
+
+      try {
+
+        const blockId =
+          currentUser.uid +
+          "_" +
+          targetUid;
+
+
+        await setDoc(
+          doc(
+            db,
+            "blocks",
+            blockId
+          ),
+          {
+
+            from:
+              currentUser.uid,
+
+            to:
+              targetUid,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        alert(
+          "🚫 ブロックしました。"
+        );
+
+
+        await loadPeople();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          firebaseErrorMessage(
+            error
+          )
+        );
+
+      }
+
+    };
+
+
+  async function getMyBlockedIds() {
+
+    const result =
+      new Set();
+
+
+    if (!currentUser) {
+      return result;
+    }
+
+
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "blocks"
+        )
+      );
+
+
+    snapshot.forEach(
+      item => {
+
+        const data =
+          item.data();
+
+
+        if (
+          data.from ===
+          currentUser.uid
+        ) {
+
+          result.add(
+            data.to
+          );
+
+        }
+
+      }
+    );
+
+
+    return result;
+
+  }
+
+
+  /*
+   * ==========================================
+   * マッチID
+   * ==========================================
+   */
+
+  function makeMatchId(
+    uid1,
+    uid2
+  ) {
+
+    return [
+      uid1,
+      uid2
+    ]
+      .sort()
+      .join("_");
+
+  }
+
+
+  /*
+   * ==========================================
+   * マッチ一覧
+   * ==========================================
+   */
+
+  async function loadMatches() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    matchesBox.innerHTML =
+      '<div class="loading">読み込み中...</div>';
+
+
+    try {
+
+      const snapshot =
+        await getDocs(
+          collection(
+            db,
+            "matches"
+          )
+        );
+
+
+      const matches = [];
+
+
+      snapshot.forEach(
+        item => {
+
+          const data =
+            item.data();
+
+
+          if (
+            Array.isArray(
+              data.users
+            ) &&
+            data.users.includes(
+              currentUser.uid
+            )
+          ) {
+
+            matches.push({
+              id: item.id,
+              ...data
+            });
+
+          }
+
+        }
+      );
+
+
+      if (!matches.length) {
+
+        matchesBox.innerHTML =
+          '<div class="empty">まだマッチしていません💕<br>おすすめの人に「いいね」してみよう！</div>';
+
+        return;
+
+      }
+
+
+      const cards = [];
 
 
       for (
-        const matchDoc
-        of snapshot.docs
+        const match of matches
       ) {
-
-        const match =
-          matchDoc.data();
-
 
         const otherUid =
           match.users.find(
@@ -1302,7 +2559,7 @@
         }
 
 
-        const userDoc =
+        const userSnap =
           await getDoc(
             doc(
               db,
@@ -1312,71 +2569,94 @@
           );
 
 
-        if (!userDoc.exists()) {
+        if (!userSnap.exists()) {
           continue;
         }
 
 
         const user =
-          userDoc.data();
+          userSnap.data();
 
 
-        const card =
-          document.createElement("div");
+        cards.push(`
 
-        card.className =
-          "card match";
+          <div class="card matchCard">
 
+            <div class="profile">
 
-        card.innerHTML = `
+              <div class="avatar">
+                💖
+              </div>
 
-          <div class="profile">
+              <div>
 
-            <div class="avatar">
-              ${getAvatar(user.gender)}
+                <div class="name">
+
+                  ${escapeHtml(
+                    user.name ||
+                    "ユーザー"
+                  )}
+
+                </div>
+
+                <div class="small">
+
+                  ${
+                    user.age
+                      ? escapeHtml(
+                          user.age
+                        ) +
+                        "歳"
+                      : ""
+                  }
+
+                  ${
+                    user.prefecture
+                      ? " ・ " +
+                        escapeHtml(
+                          user.prefecture
+                        )
+                      : ""
+                  }
+
+                </div>
+
+              </div>
+
             </div>
 
-            <div>
 
-              <div class="name">
-                ${escapeHtml(user.name || "匿名")}
-              </div>
+            <div
+              class="actions"
+            >
 
-              <div class="location">
-                📍 ${escapeHtml(user.prefecture || "")}
-                ${escapeHtml(user.municipality || "")}
-              </div>
+              <button
+                class="like"
+                onclick="openChat('${match.id}','${otherUid}')"
+              >
+                💬 チャットする
+              </button>
 
             </div>
 
           </div>
 
-          <p>
-            🎉 相互いいねでマッチしました！
-          </p>
-
-          <button
-            class="like"
-            onclick="openChat('${escapeJs(otherUid)}')"
-          >
-            💬 チャット
-          </button>
-
-        `;
-
-
-        box.appendChild(card);
+        `);
 
       }
+
+
+      matchesBox.innerHTML =
+        cards.join("");
+
 
     } catch (error) {
 
       console.error(error);
 
-      box.innerHTML =
-        `<div class="error">
-          マッチ一覧を取得できませんでした。
-        </div>`;
+
+      matchesBox.innerHTML =
+        '<div class="message error">マッチを読み込めませんでした。</div>';
 
     }
 
@@ -1384,63 +2664,494 @@
 
 
   /*
+   * ==========================================
    * チャット
-   *
-   * 次の段階で本格的な
-   * 1対1チャット画面を追加します。
+   * ==========================================
    */
 
-  window.openChat = function(uid) {
+  window.openChat =
+    async function(
+      matchId,
+      otherUid
+    ) {
 
-    alert(
-      "💬 チャット機能を次に追加します！\n\n" +
-      "相手ID:\n" +
-      uid
-    );
-
-  };
+      selectedMatchId =
+        matchId;
 
 
-  /*
-   * ログアウト
-   */
+      try {
 
-  window.logout = async function() {
+        const snap =
+          await getDoc(
+            doc(
+              db,
+              "users",
+              otherUid
+            )
+          );
+
+
+        selectedMatchUser =
+          snap.exists()
+            ? snap.data()
+            : {
+                name:
+                  "ユーザー"
+              };
+
+
+        openTab(
+          "chatTab"
+        );
+
+
+        renderChat();
+
+        listenChat();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "チャットを開けませんでした。"
+        );
+
+      }
+
+    };
+
+
+  function renderChat() {
+
+    const name =
+      selectedMatchUser?.name ||
+      "ユーザー";
+
+
+    chatArea.innerHTML = `
+
+      <div class="card">
+
+        <h3>
+          💕
+          ${escapeHtml(name)}
+          さんとのチャット
+        </h3>
+
+        <div
+          id="chatMessages"
+          class="chatMessages"
+        >
+
+          <div class="loading">
+            読み込み中...
+          </div>
+
+        </div>
+
+
+        <div class="chatInputRow">
+
+          <input
+            id="chatInput"
+            maxlength="500"
+            placeholder="メッセージを入力..."
+          >
+
+          <button
+            id="sendChatButton"
+            class="like"
+          >
+            送信
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById(
+        "sendChatButton"
+      )
+      .addEventListener(
+        "click",
+        sendChatMessage
+      );
+
+
+    document
+      .getElementById(
+        "chatInput"
+      )
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key ===
+            "Enter"
+          ) {
+
+            event.preventDefault();
+
+            sendChatMessage();
+
+          }
+
+        }
+      );
+
+  }
+
+
+  function listenChat() {
+
+    if (unsubscribeChat) {
+
+      unsubscribeChat();
+
+      unsubscribeChat =
+        null;
+
+    }
+
+
+    if (!selectedMatchId) {
+      return;
+    }
+
+
+    const messagesRef =
+      collection(
+        db,
+        "matches",
+        selectedMatchId,
+        "messages"
+      );
+
+
+    unsubscribeChat =
+      onSnapshot(
+        messagesRef,
+        snapshot => {
+
+          const messages = [];
+
+
+          snapshot.forEach(
+            item => {
+
+              messages.push({
+                id:
+                  item.id,
+                ...item.data()
+              });
+
+            }
+          );
+
+
+          messages.sort(
+            (a, b) => {
+
+              const at =
+                a.createdAt?.seconds ||
+                0;
+
+
+              const bt =
+                b.createdAt?.seconds ||
+                0;
+
+
+              return at - bt;
+
+            }
+          );
+
+
+          const box =
+            document.getElementById(
+              "chatMessages"
+            );
+
+
+          if (!box) {
+            return;
+          }
+
+
+          if (!messages.length) {
+
+            box.innerHTML =
+              '<div class="empty">まだメッセージはありません。<br>最初のメッセージを送ってみよう💕</div>';
+
+            return;
+
+          }
+
+
+          box.innerHTML =
+            messages
+              .map(
+                message => {
+
+                  const mine =
+                    message.from ===
+                    currentUser.uid;
+
+
+                  const time =
+                    message.createdAt
+                      ?.toDate
+                      ? message.createdAt
+                          .toDate()
+                          .toLocaleString(
+                            "ja-JP"
+                          )
+                      : "";
+
+
+                  return `
+
+                    <div
+                      class="chatRow
+                      ${
+                        mine
+                          ? "mine"
+                          : ""
+                      }"
+                    >
+
+                      <div
+                        class="chatBubble"
+                      >
+
+                        <div>
+                          ${escapeHtml(
+                            message.text
+                          )}
+                        </div>
+
+                        <div
+                          class="chatTime"
+                        >
+                          ${escapeHtml(
+                            time
+                          )}
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  `;
+
+                }
+              )
+              .join("");
+
+
+          box.scrollTop =
+            box.scrollHeight;
+
+        },
+        error => {
+
+          console.error(
+            error
+          );
+
+          const box =
+            document.getElementById(
+              "chatMessages"
+            );
+
+
+          if (box) {
+
+            box.innerHTML =
+              '<div class="message error">チャットを読み込めませんでした。</div>';
+
+          }
+
+        }
+      );
+
+  }
+
+
+  async function sendChatMessage() {
+
+    if (
+      !currentUser ||
+      !selectedMatchId
+    ) {
+
+      return;
+
+    }
+
+
+    const input =
+      document.getElementById(
+        "chatInput"
+      );
+
+
+    const text =
+      input.value.trim();
+
+
+    if (!text) {
+      return;
+    }
+
 
     try {
 
-      await signOut(auth);
+      /*
+       * matchが存在することを確認
+       */
+
+      const matchSnap =
+        await getDoc(
+          doc(
+            db,
+            "matches",
+            selectedMatchId
+          )
+        );
+
+
+      if (!matchSnap.exists()) {
+
+        alert(
+          "このチャットは利用できません。"
+        );
+
+        return;
+
+      }
+
+
+      const match =
+        matchSnap.data();
+
+
+      if (
+        !Array.isArray(
+          match.users
+        ) ||
+        !match.users.includes(
+          currentUser.uid
+        )
+      ) {
+
+        alert(
+          "このチャットを利用する権限がありません。"
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(
+          db,
+          "matches",
+          selectedMatchId,
+          "messages"
+        ),
+        {
+
+          from:
+            currentUser.uid,
+
+          text:
+            text,
+
+          createdAt:
+            serverTimestamp()
+
+        }
+      );
+
+
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          selectedMatchId
+        ),
+        {
+
+          updatedAt:
+            serverTimestamp()
+
+        }
+      );
+
+
+      input.value = "";
+
+      input.focus();
+
 
     } catch (error) {
 
+      console.error(error);
+
+
       alert(
-        "ログアウトできませんでした。"
+        firebaseErrorMessage(
+          error
+        )
       );
 
     }
 
-  };
+  }
 
 
   /*
-   * 雑談
+   * ==========================================
+   * 雑談コーナー
+   * ==========================================
    */
 
-  window.addPost = function() {
+  document
+    .getElementById(
+      "postButton"
+    )
+    .addEventListener(
+      "click",
+      addPost
+    );
 
-    const name =
-      document
-        .getElementById("postName")
-        .value
-        .trim() ||
-      "匿名";
+
+  async function addPost() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    const input =
+      document.getElementById(
+        "postText"
+      );
 
 
     const text =
-      document
-        .getElementById("postText")
-        .value
-        .trim();
+      input.value.trim();
 
 
     if (!text) {
@@ -1454,205 +3165,380 @@
     }
 
 
-    const posts =
-      JSON.parse(
-        localStorage.getItem(
-          "makoPosts"
-        ) || "[]"
+    try {
+
+      await addDoc(
+        collection(
+          db,
+          "posts"
+        ),
+        {
+
+          uid:
+            currentUser.uid,
+
+          name:
+            currentProfile?.name ||
+            "匿名",
+
+          text:
+            text,
+
+          createdAt:
+            serverTimestamp()
+
+        }
       );
 
 
-    posts.unshift({
-
-      name:
-        name,
-
-      text:
-        text,
-
-      time:
-        new Date()
-          .toLocaleString("ja-JP")
-
-    });
+      input.value = "";
 
 
-    localStorage.setItem(
-      "makoPosts",
-      JSON.stringify(posts)
-    );
+      await loadPosts();
 
 
-    document
-      .getElementById("postText")
-      .value = "";
+    } catch (error) {
+
+      console.error(error);
 
 
-    renderPosts();
-
-  };
-
-
-  function renderPosts() {
-
-    const posts =
-      JSON.parse(
-        localStorage.getItem(
-          "makoPosts"
-        ) || "[]"
+      alert(
+        firebaseErrorMessage(
+          error
+        )
       );
 
-
-    document.getElementById(
-      "posts"
-    ).innerHTML =
-
-      posts.map(
-        p => `
-
-          <div class="card">
-
-            <b>
-              ${escapeHtml(p.name)}
-            </b>
-
-            <div>
-              ${escapeHtml(p.text)}
-            </div>
-
-            <div class="small">
-              ${escapeHtml(p.time)}
-            </div>
-
-          </div>
-
-        `
-      ).join("");
-
-  }
-
-
-  /*
-   * アイコン
-   */
-
-  function getAvatar(gender) {
-
-    if (gender === "女性") {
-      return "👩";
     }
 
-    if (gender === "男性") {
-      return "👨";
+  }
+
+
+  async function loadPosts() {
+
+    if (!currentUser) {
+      return;
     }
 
-    return "🙂";
 
-  }
+    try {
 
-
-  /*
-   * HTMLエスケープ
-   */
-
-  function escapeHtml(text) {
-
-    return String(text).replace(
-      /[&<>"']/g,
-      char => ({
-
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-
-      }[char])
-    );
-
-  }
+      const snapshot =
+        await getDocs(
+          collection(
+            db,
+            "posts"
+          )
+        );
 
 
-  /*
-   * JavaScript用エスケープ
-   */
+      const posts = [];
 
-  function escapeJs(text) {
 
-    return String(text)
-      .replace(
-        /\\/g,
-        "\\\\"
-      )
-      .replace(
-        /'/g,
-        "\\'"
+      snapshot.forEach(
+        item => {
+
+          posts.push({
+            id:
+              item.id,
+            ...item.data()
+          });
+
+        }
       );
 
-  }
+
+      posts.sort(
+        (a, b) => {
+
+          const at =
+            a.createdAt?.seconds ||
+            0;
 
 
-  /*
-   * ログイン状態
-   */
+          const bt =
+            b.createdAt?.seconds ||
+            0;
 
-  onAuthStateChanged(
-    auth,
-    async user => {
 
-      if (!user) {
+          return bt - at;
 
-        currentUser =
-          null;
+        }
+      );
 
-        document
-          .getElementById(
-            "accountEmail"
-          )
-          .textContent =
-          "ログインしていません。";
 
-        document
-          .getElementById(
-            "profiles"
-          )
-          .innerHTML =
-          '<div class="empty">ログインしてください。</div>';
+      if (!posts.length) {
+
+        postsBox.innerHTML =
+          '<div class="empty">まだ投稿はありません。<br>最初の投稿をしてみよう💕</div>';
 
         return;
 
       }
 
 
-      currentUser =
-        user;
+      postsBox.innerHTML =
+        posts
+          .map(
+            post => {
+
+              const time =
+                post.createdAt
+                  ?.toDate
+                  ? post.createdAt
+                      .toDate()
+                      .toLocaleString(
+                        "ja-JP"
+                      )
+                  : "投稿直後";
 
 
-      document
-        .getElementById(
-          "accountEmail"
-        )
-        .textContent =
-        user.email ||
-        "ログイン中";
+              return `
+
+                <div
+                  class="postItem"
+                >
+
+                  <div
+                    class="postHeader"
+                  >
+
+                    <strong>
+                      ${escapeHtml(
+                        post.name ||
+                        "匿名"
+                      )}
+                    </strong>
+
+                    <span
+                      class="small"
+                    >
+                      ${escapeHtml(
+                        time
+                      )}
+                    </span>
+
+                  </div>
+
+                  <div
+                    style="margin-top:8px"
+                  >
+                    ${escapeHtml(
+                      post.text
+                    )}
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("");
 
 
-      try {
+    } catch (error) {
 
-        await Promise.all([
-          loadPrefectures(),
-          loadMunicipalities()
-        ]);
+      console.error(error);
 
-        await loadProfile();
 
-        await loadUsers();
+      postsBox.innerHTML =
+        '<div class="message error">投稿を読み込めませんでした。</div>';
 
-        await loadMatches();
+    }
 
-      } catch (error) {
+  }
 
-        console.error(error);
+
+  /*
+   * ==========================================
+   * タブ切り替え
+   * ==========================================
+   */
+
+  document
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            openTab(
+              button.dataset.tab
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  function openTab(
+    tabId
+  ) {
+
+    document
+      .querySelectorAll(
+        ".tabContent"
+      )
+      .forEach(
+        section => {
+
+          section.classList.add(
+            "hidden"
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        ".tab"
+      )
+      .forEach(
+        button => {
+
+          button.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+    const section =
+      document.getElementById(
+        tabId
+      );
+
+
+    if (section) {
+
+      section.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+    const button =
+      document.querySelector(
+        `.tab[data-tab="${tabId}"]`
+      );
+
+
+    if (button) {
+
+      button.classList.add(
+        "active"
+      );
+
+    }
+
+
+    if (
+      tabId ===
+      "matchTab"
+    ) {
+
+      loadMatches();
+
+    }
+
+
+    if (
+      tabId ===
+      "talkTab"
+    ) {
+
+      loadPosts();
+
+    }
+
+  }
+
+
+  /*
+   * ==========================================
+   * Firebaseログイン状態
+   * ==========================================
+   */
+
+  onAuthStateChanged(
+    auth,
+    async function(user) {
+
+      if (user) {
+
+        currentUser =
+          user;
+
+
+        authSection.classList.add(
+          "hidden"
+        );
+
+
+        appSection.classList.remove(
+          "hidden"
+        );
+
+
+        accountEmail.textContent =
+          user.email || "";
+
+
+        try {
+
+          await loadMyProfile();
+
+          await loadPeople();
+
+          await loadMatches();
+
+          await loadPosts();
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+        }
+
+      } else {
+
+        currentUser =
+          null;
+
+
+        currentProfile =
+          null;
+
+
+        authSection.classList.remove(
+          "hidden"
+        );
+
+
+        appSection.classList.add(
+          "hidden"
+        );
+
+
+        if (unsubscribeChat) {
+
+          unsubscribeChat();
+
+          unsubscribeChat =
+            null;
+
+        }
 
       }
 
@@ -1661,12 +3547,22 @@
 
 
   /*
-   * 雑談表示
+   * ==========================================
+   * 初期化
+   * ==========================================
    */
 
-  renderPosts();
+  async function init() {
+
+    await loadMunicipalities();
+
+  }
+
+
+  init();
 
 </script>
 
 </body>
+
 </html>
