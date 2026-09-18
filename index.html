@@ -493,7 +493,9 @@
     }
 
     /*
+     * ==========================================
      * 未読バッジ
+     * ==========================================
      */
 
     .unreadBadge {
@@ -542,6 +544,34 @@
       align-items: center;
 
       flex-wrap: wrap;
+    }
+
+    /*
+     * ==========================================
+     * メッセージ削除ボタン
+     * ==========================================
+     */
+
+    .deleteMessageButton {
+      margin-top: 6px;
+
+      padding:
+        5px 9px;
+
+      font-size: 11px;
+
+      background: white;
+
+      color: #d33;
+
+      border:
+        1px solid #ffd0d8;
+
+      border-radius: 8px;
+    }
+
+    .deleteMessageButton:hover {
+      background: #fff0f2;
     }
 
   </style>
@@ -642,7 +672,6 @@
       id="appSection"
       class="hidden"
     >
-
 
       <!-- アカウント -->
 
@@ -1005,6 +1034,7 @@
     setDoc,
     updateDoc,
     addDoc,
+    deleteDoc,
     collection,
     getDocs,
     onSnapshot,
@@ -2555,11 +2585,6 @@
         );
 
 
-      /*
-       * このユーザーが最後に
-       * チャットを開いた時間
-       */
-
       const readAt =
         matchData?.readAt?.[
           currentUser.uid
@@ -2576,11 +2601,6 @@
             item.data();
 
 
-          /*
-           * 自分のメッセージは
-           * 未読にしない
-           */
-
           if (
             message.from ===
             currentUser.uid
@@ -2594,11 +2614,6 @@
           const createdAt =
             message.createdAt;
 
-
-          /*
-           * Timestampを
-           * ミリ秒に変換
-           */
 
           const messageTime =
             createdAt &&
@@ -2615,10 +2630,6 @@
               ? readAt.toMillis()
               : 0;
 
-
-          /*
-           * 最終既読時刻より後なら未読
-           */
 
           if (
             messageTime >
@@ -2808,10 +2819,6 @@
         const user =
           userSnap.data();
 
-
-        /*
-         * 未読数を取得
-         */
 
         const unreadCount =
           await getUnreadCount(
@@ -3010,19 +3017,10 @@
         listenChat();
 
 
-        /*
-         * チャットを開いたので
-         * 既読にする
-         */
-
         await markChatAsRead(
           matchId
         );
 
-
-        /*
-         * 未読バッジを消す
-         */
 
         await loadMatches();
 
@@ -3246,6 +3244,24 @@
                         : "";
 
 
+                    /*
+                     * 自分のメッセージだけ
+                     * 削除ボタンを表示
+                     */
+
+                    const deleteButton =
+                      mine
+                        ? `
+                          <button
+                            class="deleteMessageButton"
+                            onclick="deleteChatMessage('${message.id}')"
+                          >
+                            🗑️ 削除
+                          </button>
+                        `
+                        : "";
+
+
                     return `
 
                       <div
@@ -3274,6 +3290,8 @@
                               time
                             )}
                           </div>
+
+                          ${deleteButton}
 
                         </div>
 
@@ -3331,6 +3349,145 @@
 
   /*
    * ==========================================
+   * チャットメッセージ削除
+   * ==========================================
+   */
+
+  window.deleteChatMessage =
+    async function(messageId) {
+
+      if (
+        !currentUser ||
+        !selectedMatchId ||
+        !messageId
+      ) {
+
+        return;
+
+      }
+
+
+      const ok =
+        confirm(
+          "このメッセージを削除しますか？"
+        );
+
+
+      if (!ok) {
+
+        return;
+
+      }
+
+
+      try {
+
+        /*
+         * メッセージの場所
+         */
+
+        const messageRef =
+          doc(
+            db,
+            "matches",
+            selectedMatchId,
+            "messages",
+            messageId
+          );
+
+
+        /*
+         * メッセージを確認
+         */
+
+        const messageSnap =
+          await getDoc(
+            messageRef
+          );
+
+
+        if (!messageSnap.exists()) {
+
+          alert(
+            "このメッセージはすでに削除されています。"
+          );
+
+          return;
+
+        }
+
+
+        const message =
+          messageSnap.data();
+
+
+        /*
+         * 自分のメッセージだけ削除可能
+         */
+
+        if (
+          message.from !==
+          currentUser.uid
+        ) {
+
+          alert(
+            "自分が送ったメッセージだけ削除できます。"
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * Firestoreから削除
+         */
+
+        await deleteDoc(
+          messageRef
+        );
+
+
+        /*
+         * マッチの更新日時
+         */
+
+        await updateDoc(
+          doc(
+            db,
+            "matches",
+            selectedMatchId
+          ),
+          {
+
+            updatedAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "メッセージ削除エラー",
+          error
+        );
+
+
+        alert(
+          firebaseErrorMessage(
+            error
+          )
+        );
+
+      }
+
+    };
+
+
+  /*
+   * ==========================================
    * チャット送信
    * ==========================================
    */
@@ -3351,6 +3508,11 @@
       document.getElementById(
         "chatInput"
       );
+
+
+    if (!input) {
+      return;
+    }
 
 
     const text =
@@ -3439,11 +3601,6 @@
 
           updatedAt:
             serverTimestamp(),
-
-          /*
-           * 自分が送ったので
-           * 自分側は最新状態を既読扱い
-           */
 
           [`readAt.${currentUser.uid}`]:
             serverTimestamp()
