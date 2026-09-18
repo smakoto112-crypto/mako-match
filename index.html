@@ -393,7 +393,7 @@
       display: flex;
 
       margin:
-        7px 0;
+        8px 0;
     }
 
     .chatRow.mine {
@@ -401,7 +401,7 @@
     }
 
     .chatBubble {
-      max-width: 78%;
+      max-width: 82%;
 
       padding:
         9px 12px;
@@ -409,6 +409,8 @@
       border-radius: 15px;
 
       background: #eee;
+
+      position: relative;
     }
 
     .mine .chatBubble {
@@ -427,14 +429,76 @@
       display: flex;
 
       gap: 7px;
+
+      align-items: center;
     }
 
     .chatInputRow input {
       margin: 0;
+
+      flex: 1;
     }
 
     .chatInputRow button {
       flex-shrink: 0;
+    }
+
+    .photoButton {
+      background: #f0ebff;
+
+      color: #654bd1;
+
+      padding:
+        11px 12px;
+    }
+
+    .photoInput {
+      display: none;
+    }
+
+    .chatPhoto {
+      display: block;
+
+      width: 100%;
+
+      max-width: 280px;
+
+      max-height: 330px;
+
+      object-fit: contain;
+
+      border-radius: 12px;
+
+      margin-bottom: 4px;
+
+      background: #fff;
+    }
+
+    .deleteButton {
+      margin-top: 5px;
+
+      padding:
+        5px 8px;
+
+      font-size: 11px;
+
+      background: #fff;
+
+      color: #d33;
+
+      border:
+        1px solid #f0c5ce;
+    }
+
+    .chatStatus {
+      text-align: center;
+
+      font-size: 12px;
+
+      color: #888;
+
+      margin:
+        7px 0;
     }
 
     .tabs {
@@ -492,12 +556,6 @@
       border-radius: 15px;
     }
 
-    /*
-     * ==========================================
-     * 未読バッジ
-     * ==========================================
-     */
-
     .unreadBadge {
       display: inline-flex;
 
@@ -546,32 +604,13 @@
       flex-wrap: wrap;
     }
 
-    /*
-     * ==========================================
-     * メッセージ削除ボタン
-     * ==========================================
-     */
-
-    .deleteMessageButton {
-      margin-top: 6px;
-
-      padding:
-        5px 9px;
-
+    .photoHelp {
       font-size: 11px;
 
-      background: white;
+      color: #999;
 
-      color: #d33;
-
-      border:
-        1px solid #ffd0d8;
-
-      border-radius: 8px;
-    }
-
-    .deleteMessageButton:hover {
-      background: #fff0f2;
+      margin:
+        5px 0 10px;
     }
 
   </style>
@@ -597,6 +636,7 @@
 
 
   <main>
+
 
     <!-- ========================= -->
     <!-- ログイン -->
@@ -673,7 +713,6 @@
       class="hidden"
     >
 
-      <!-- アカウント -->
 
       <div class="card">
 
@@ -771,7 +810,6 @@
             maxlength="30"
           >
 
-
           <label>
             年齢
           </label>
@@ -783,7 +821,6 @@
             max="120"
             placeholder="18歳以上"
           >
-
 
           <label>
             性別
@@ -809,7 +846,6 @@
 
           </select>
 
-
           <label>
             都道府県
           </label>
@@ -821,7 +857,6 @@
             </option>
 
           </select>
-
 
           <label>
             市区町村
@@ -838,7 +873,6 @@
 
           </select>
 
-
           <label>
             自己紹介
           </label>
@@ -850,7 +884,6 @@
             placeholder="よろしくお願いします！"
           ></textarea>
 
-
           <button
             id="saveProfileButton"
             class="primary"
@@ -858,13 +891,11 @@
             プロフィールを保存 💕
           </button>
 
-
           <div
             id="profileMessage"
             class="small"
             style="margin-top:10px"
           ></div>
-
 
           <div
             id="myLocation"
@@ -889,9 +920,7 @@
           💕 おすすめの人
         </h2>
 
-        <div
-          id="profiles"
-        >
+        <div id="profiles">
 
           <div class="loading">
             読み込み中...
@@ -915,9 +944,7 @@
           💖 マッチした人
         </h2>
 
-        <div
-          id="matches"
-        >
+        <div id="matches">
 
           <div class="loading">
             読み込み中...
@@ -941,9 +968,7 @@
           💬 二人だけのチャット
         </h2>
 
-        <div
-          id="chatArea"
-        >
+        <div id="chatArea">
 
           <div class="empty">
             マッチした人を選ぶと<br>
@@ -986,10 +1011,7 @@
 
         </div>
 
-
-        <div
-          id="posts"
-        ></div>
+        <div id="posts"></div>
 
       </section>
 
@@ -1002,6 +1024,7 @@
 
 
 <script type="module">
+
 
   /*
    * ==========================================
@@ -1044,6 +1067,21 @@
     "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+  /*
+   * Firebase Storage
+   */
+
+  import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject
+  }
+  from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+
+
   const firebaseConfig = {
 
     apiKey:
@@ -1082,9 +1120,13 @@
     getFirestore(app);
 
 
+  const storage =
+    getStorage(app);
+
+
   /*
    * ==========================================
-   * 市区町村データ
+   * 市区町村
    * ==========================================
    */
 
@@ -1269,6 +1311,36 @@
     ) {
 
       return "Firebaseの権限設定を確認してください。";
+
+    }
+
+
+    if (
+      code ===
+      "storage/unauthorized"
+    ) {
+
+      return "写真保存の権限がありません。Firebase Storageのルールを確認してください。";
+
+    }
+
+
+    if (
+      code ===
+      "storage/canceled"
+    ) {
+
+      return "写真の送信をキャンセルしました。";
+
+    }
+
+
+    if (
+      code ===
+      "storage/quota-exceeded"
+    ) {
+
+      return "写真保存容量を確認してください。";
 
     }
 
@@ -2558,7 +2630,7 @@
 
   /*
    * ==========================================
-   * 未読メッセージ数
+   * 未読
    * ==========================================
    */
 
@@ -2663,7 +2735,7 @@
 
   /*
    * ==========================================
-   * チャットを既読にする
+   * 既読
    * ==========================================
    */
 
@@ -3074,7 +3146,28 @@
         </div>
 
 
+        <div
+          id="chatStatus"
+          class="chatStatus"
+        ></div>
+
+
         <div class="chatInputRow">
+
+          <button
+            id="photoButton"
+            class="photoButton"
+            title="写真を送る"
+          >
+            📷
+          </button>
+
+          <input
+            id="photoInput"
+            class="photoInput"
+            type="file"
+            accept="image/*"
+          >
 
           <input
             id="chatInput"
@@ -3089,6 +3182,10 @@
             送信
           </button>
 
+        </div>
+
+        <div class="photoHelp">
+          📷 ボタンから写真を選んで送れます
         </div>
 
       </div>
@@ -3126,6 +3223,34 @@
           }
 
         }
+      );
+
+
+    document
+      .getElementById(
+        "photoButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          document
+            .getElementById(
+              "photoInput"
+            )
+            .click();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "photoInput"
+      )
+      .addEventListener(
+        "change",
+        sendChatPhoto
       );
 
   }
@@ -3175,6 +3300,7 @@
             item => {
 
               messages.push({
+
                 id:
                   item.id,
 
@@ -3244,16 +3370,11 @@
                         : "";
 
 
-                    /*
-                     * 自分のメッセージだけ
-                     * 削除ボタンを表示
-                     */
-
                     const deleteButton =
                       mine
                         ? `
                           <button
-                            class="deleteMessageButton"
+                            class="deleteButton"
                             onclick="deleteChatMessage('${message.id}')"
                           >
                             🗑️ 削除
@@ -3261,6 +3382,62 @@
                         `
                         : "";
 
+
+                    /*
+                     * 写真メッセージ
+                     */
+
+                    if (
+                      message.type ===
+                      "image"
+                    ) {
+
+                      return `
+
+                        <div
+                          class="chatRow
+                          ${
+                            mine
+                              ? "mine"
+                              : ""
+                          }"
+                        >
+
+                          <div
+                            class="chatBubble"
+                          >
+
+                            <img
+                              class="chatPhoto"
+                              src="${escapeHtml(
+                                message.imageUrl
+                              )}"
+                              alt="送信された写真"
+                              loading="lazy"
+                            >
+
+                            <div
+                              class="chatTime"
+                            >
+                              ${escapeHtml(
+                                time
+                              )}
+                            </div>
+
+                            ${deleteButton}
+
+                          </div>
+
+                        </div>
+
+                      `;
+
+                    }
+
+
+                    /*
+                     * 通常メッセージ
+                     */
 
                     return `
 
@@ -3310,12 +3487,6 @@
             box.scrollHeight;
 
 
-          /*
-           * チャットを開いている間に
-           * 相手から届いたメッセージも
-           * すぐ既読扱いにする
-           */
-
           await markChatAsRead(
             selectedMatchId
           );
@@ -3349,146 +3520,7 @@
 
   /*
    * ==========================================
-   * チャットメッセージ削除
-   * ==========================================
-   */
-
-  window.deleteChatMessage =
-    async function(messageId) {
-
-      if (
-        !currentUser ||
-        !selectedMatchId ||
-        !messageId
-      ) {
-
-        return;
-
-      }
-
-
-      const ok =
-        confirm(
-          "このメッセージを削除しますか？"
-        );
-
-
-      if (!ok) {
-
-        return;
-
-      }
-
-
-      try {
-
-        /*
-         * メッセージの場所
-         */
-
-        const messageRef =
-          doc(
-            db,
-            "matches",
-            selectedMatchId,
-            "messages",
-            messageId
-          );
-
-
-        /*
-         * メッセージを確認
-         */
-
-        const messageSnap =
-          await getDoc(
-            messageRef
-          );
-
-
-        if (!messageSnap.exists()) {
-
-          alert(
-            "このメッセージはすでに削除されています。"
-          );
-
-          return;
-
-        }
-
-
-        const message =
-          messageSnap.data();
-
-
-        /*
-         * 自分のメッセージだけ削除可能
-         */
-
-        if (
-          message.from !==
-          currentUser.uid
-        ) {
-
-          alert(
-            "自分が送ったメッセージだけ削除できます。"
-          );
-
-          return;
-
-        }
-
-
-        /*
-         * Firestoreから削除
-         */
-
-        await deleteDoc(
-          messageRef
-        );
-
-
-        /*
-         * マッチの更新日時
-         */
-
-        await updateDoc(
-          doc(
-            db,
-            "matches",
-            selectedMatchId
-          ),
-          {
-
-            updatedAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "メッセージ削除エラー",
-          error
-        );
-
-
-        alert(
-          firebaseErrorMessage(
-            error
-          )
-        );
-
-      }
-
-    };
-
-
-  /*
-   * ==========================================
-   * チャット送信
+   * テキストメッセージ送信
    * ==========================================
    */
 
@@ -3581,6 +3613,9 @@
           from:
             currentUser.uid,
 
+          type:
+            "text",
+
           text:
             text,
 
@@ -3628,6 +3663,493 @@
     }
 
   }
+
+
+  /*
+   * ==========================================
+   * 写真送信
+   * ==========================================
+   */
+
+  async function sendChatPhoto(event) {
+
+    const file =
+      event.target.files?.[0];
+
+
+    /*
+     * 同じ写真を再度選べるように
+     * valueを空にする
+     */
+
+    event.target.value = "";
+
+
+    if (
+      !file ||
+      !currentUser ||
+      !selectedMatchId
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+     * 写真だけ許可
+     */
+
+    if (
+      !file.type.startsWith(
+        "image/"
+      )
+    ) {
+
+      alert(
+        "写真ファイルを選択してください。"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * 10MB制限
+     */
+
+    const maxSize =
+      10 * 1024 * 1024;
+
+
+    if (
+      file.size >
+      maxSize
+    ) {
+
+      alert(
+        "写真は10MB以下にしてください。"
+      );
+
+      return;
+
+    }
+
+
+    const status =
+      document.getElementById(
+        "chatStatus"
+      );
+
+
+    const photoButton =
+      document.getElementById(
+        "photoButton"
+      );
+
+
+    if (status) {
+
+      status.textContent =
+        "📷 写真を送信中...";
+
+    }
+
+
+    if (photoButton) {
+
+      photoButton.disabled =
+        true;
+
+    }
+
+
+    try {
+
+      /*
+       * マッチ確認
+       */
+
+      const matchSnap =
+        await getDoc(
+          doc(
+            db,
+            "matches",
+            selectedMatchId
+          )
+        );
+
+
+      if (!matchSnap.exists()) {
+
+        throw new Error(
+          "このチャットは存在しません。"
+        );
+
+      }
+
+
+      const match =
+        matchSnap.data();
+
+
+      if (
+        !Array.isArray(
+          match.users
+        ) ||
+        !match.users.includes(
+          currentUser.uid
+        )
+      ) {
+
+        throw new Error(
+          "このチャットを利用する権限がありません。"
+        );
+
+      }
+
+
+      /*
+       * ファイル名を安全にする
+       */
+
+      const safeName =
+        file.name
+          .replace(
+            /[^a-zA-Z0-9._-]/g,
+            "_"
+          );
+
+
+      const fileName =
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2) +
+        "_" +
+        safeName;
+
+
+      /*
+       * Storage保存先
+       *
+       * matches/
+       *   マッチID/
+       *     messages/
+       *       UID/
+       *         写真
+       */
+
+      const storagePath =
+        "matches/" +
+        selectedMatchId +
+        "/messages/" +
+        currentUser.uid +
+        "/" +
+        fileName;
+
+
+      const storageRef =
+        ref(
+          storage,
+          storagePath
+        );
+
+
+      /*
+       * 写真アップロード
+       */
+
+      await uploadBytes(
+        storageRef,
+        file,
+        {
+          contentType:
+            file.type
+        }
+      );
+
+
+      /*
+       * URL取得
+       */
+
+      const imageUrl =
+        await getDownloadURL(
+          storageRef
+        );
+
+
+      /*
+       * Firestoreに写真メッセージ
+       */
+
+      await addDoc(
+        collection(
+          db,
+          "matches",
+          selectedMatchId,
+          "messages"
+        ),
+        {
+
+          from:
+            currentUser.uid,
+
+          type:
+            "image",
+
+          imageUrl:
+            imageUrl,
+
+          storagePath:
+            storagePath,
+
+          fileName:
+            file.name,
+
+          createdAt:
+            serverTimestamp()
+
+        }
+      );
+
+
+      /*
+       * マッチ更新
+       */
+
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          selectedMatchId
+        ),
+        {
+
+          updatedAt:
+            serverTimestamp(),
+
+          [`readAt.${currentUser.uid}`]:
+            serverTimestamp()
+
+        }
+      );
+
+
+      if (status) {
+
+        status.textContent =
+          "📷 写真を送信しました！💕";
+
+
+        setTimeout(
+          function() {
+
+            if (
+              status
+            ) {
+
+              status.textContent =
+                "";
+
+            }
+
+          },
+          2000
+        );
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "写真送信エラー",
+        error
+      );
+
+
+      if (status) {
+
+        status.textContent =
+          "";
+
+      }
+
+
+      alert(
+        firebaseErrorMessage(
+          error
+        )
+      );
+
+
+    } finally {
+
+      if (photoButton) {
+
+        photoButton.disabled =
+          false;
+
+      }
+
+    }
+
+  }
+
+
+  /*
+   * ==========================================
+   * メッセージ削除
+   * ==========================================
+   */
+
+  window.deleteChatMessage =
+    async function(messageId) {
+
+      if (
+        !currentUser ||
+        !selectedMatchId ||
+        !messageId
+      ) {
+
+        return;
+
+      }
+
+
+      const ok =
+        confirm(
+          "このメッセージを削除しますか？"
+        );
+
+
+      if (!ok) {
+        return;
+      }
+
+
+      try {
+
+        /*
+         * メッセージ取得
+         */
+
+        const messageRef =
+          doc(
+            db,
+            "matches",
+            selectedMatchId,
+            "messages",
+            messageId
+          );
+
+
+        const messageSnap =
+          await getDoc(
+            messageRef
+          );
+
+
+        if (!messageSnap.exists()) {
+
+          alert(
+            "メッセージが見つかりません。"
+          );
+
+          return;
+
+        }
+
+
+        const message =
+          messageSnap.data();
+
+
+        /*
+         * 自分のメッセージだけ削除可能
+         */
+
+        if (
+          message.from !==
+          currentUser.uid
+        ) {
+
+          alert(
+            "自分が送ったメッセージだけ削除できます。"
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * 写真の場合は
+         * Storageの写真も削除
+         */
+
+        if (
+          message.type ===
+            "image" &&
+          message.storagePath
+        ) {
+
+          try {
+
+            await deleteObject(
+              ref(
+                storage,
+                message.storagePath
+              )
+            );
+
+          } catch (storageError) {
+
+            /*
+             * Storage側に写真がない場合でも
+             * Firestoreのメッセージは削除する
+             */
+
+            console.warn(
+              "Storage写真削除エラー",
+              storageError
+            );
+
+          }
+
+        }
+
+
+        /*
+         * Firestoreメッセージ削除
+         */
+
+        await deleteDoc(
+          messageRef
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "メッセージ削除エラー",
+          error
+        );
+
+
+        alert(
+          firebaseErrorMessage(
+            error
+          )
+        );
+
+      }
+
+    };
 
 
   /*
@@ -3747,6 +4269,7 @@
         item => {
 
           posts.push({
+
             id:
               item.id,
 
