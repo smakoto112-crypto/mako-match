@@ -2,18 +2,16 @@
 <html lang="ja">
 
 <head>
-
   <meta charset="utf-8">
 
   <meta
     name="viewport"
-    content="width=device-width,initial-scale=1"
+    content="width=device-width,initial-scale=1,maximum-scale=1"
   >
 
   <title>ゼロ円マッチ 💕</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -23,15 +21,11 @@
       font-family:
         -apple-system,
         BlinkMacSystemFont,
+        "Segoe UI",
         "Noto Sans JP",
-        "Yu Gothic",
         sans-serif;
       background:
-        linear-gradient(
-          135deg,
-          #fff0f6,
-          #f2efff
-        );
+        linear-gradient(135deg, #fff0f6, #f2efff);
       color: #333;
     }
 
@@ -50,10 +44,10 @@
       width: 100%;
       max-width: 520px;
       min-height: 100vh;
-      margin: 0 auto;
+      margin: auto;
       background: #fff;
-      box-shadow:
-        0 0 30px rgba(100, 60, 120, 0.12);
+      box-shadow: 0 0 30px rgba(0,0,0,.08);
+      position: relative;
     }
 
     /* =========================
@@ -61,113 +55,79 @@
     ========================= */
 
     header {
-      padding: 22px 18px;
-      color: white;
       background:
-        linear-gradient(
-          135deg,
-          #ff6f9f,
-          #9b8cff
-        );
+        linear-gradient(135deg, #ff6f9f, #9b8cff);
+      color: white;
+      padding: 18px 16px;
+      text-align: center;
     }
 
-    .brand {
+    .logo {
       font-size: 24px;
       font-weight: 800;
     }
 
     .subtitle {
-      margin-top: 5px;
-      font-size: 13px;
-      opacity: 0.95;
+      font-size: 12px;
+      margin-top: 4px;
+      opacity: .95;
+    }
+
+    /* =========================
+       AUTH
+    ========================= */
+
+    .auth {
+      padding: 30px 20px;
+    }
+
+    .auth h2 {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 25px;
     }
 
     /* =========================
        COMMON
     ========================= */
 
-    .hidden {
-      display: none !important;
-    }
-
-    .screen {
+    .page {
       padding: 18px;
+      padding-bottom: 95px;
     }
 
     .card {
-      background: #fff;
+      background: white;
       border-radius: 18px;
       padding: 18px;
-      margin-bottom: 14px;
-      box-shadow:
-        0 6px 20px rgba(80, 50, 100, 0.08);
+      margin-bottom: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.06);
     }
-
-    h2 {
-      margin: 0 0 14px;
-      font-size: 21px;
-    }
-
-    h3 {
-      margin: 0 0 10px;
-      font-size: 17px;
-    }
-
-    .muted {
-      color: #888;
-      font-size: 13px;
-    }
-
-    .error {
-      color: #d63031;
-      background: #fff0f0;
-      padding: 10px 12px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      font-size: 13px;
-    }
-
-    .success {
-      color: #087f5b;
-      background: #e9fff7;
-      padding: 10px 12px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      font-size: 13px;
-    }
-
-    /* =========================
-       FORM
-    ========================= */
 
     label {
       display: block;
-      margin-bottom: 6px;
+      font-size: 13px;
       font-weight: 700;
-      font-size: 14px;
-    }
-
-    .field {
-      margin-bottom: 14px;
+      margin-bottom: 7px;
+      color: #555;
     }
 
     input,
     textarea,
     select {
       width: 100%;
-      padding: 12px 13px;
       border: 1px solid #ddd;
       border-radius: 12px;
-      outline: none;
+      padding: 12px;
       background: #fff;
+      outline: none;
     }
 
     input:focus,
     textarea:focus,
     select:focus {
-      border-color: #ff78a5;
-      box-shadow:
-        0 0 0 3px rgba(255, 120, 165, 0.12);
+      border-color: #ff6f9f;
+      box-shadow: 0 0 0 3px rgba(255,111,159,.12);
     }
 
     textarea {
@@ -175,86 +135,81 @@
       resize: vertical;
     }
 
-    /* =========================
-       BUTTON
-    ========================= */
+    .field {
+      margin-bottom: 15px;
+    }
 
     .btn {
       width: 100%;
-      border: none;
-      border-radius: 13px;
-      padding: 13px 16px;
-      font-weight: 800;
-      margin-top: 7px;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 15px;
+      font-weight: 700;
+      margin-top: 8px;
     }
 
     .btn-primary {
-      color: #fff;
-      background:
-        linear-gradient(
-          135deg,
-          #ff6f9f,
-          #9b8cff
-        );
+      background: linear-gradient(135deg,#ff6f9f,#9b8cff);
+      color: white;
     }
 
     .btn-secondary {
-      color: #555;
-      background: #f3f3f6;
+      background: #f2f2f2;
+      color: #444;
     }
 
     .btn-danger {
-      color: #fff;
-      background: #e74c3c;
-    }
-
-    .btn-like {
-      color: #fff;
-      background:
-        linear-gradient(
-          135deg,
-          #ff5c8a,
-          #ff9bba
-        );
+      background: #ffe7ec;
+      color: #d6335c;
     }
 
     .btn-small {
       width: auto;
-      display: inline-block;
-      padding: 9px 13px;
+      padding: 8px 12px;
+      font-size: 12px;
       margin: 0;
-      font-size: 13px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 12px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .success {
+      background: #eafff1;
+      color: #198754;
+    }
+
+    .error {
+      background: #ffe9ed;
+      color: #c6284a;
+    }
+
+    .info {
+      background: #eef4ff;
+      color: #3867c8;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 15px;
+      color: #777;
     }
 
     /* =========================
-       AUTH
+       AUTH AGE
     ========================= */
-
-    .logo-big {
-      text-align: center;
-      font-size: 42px;
-      margin: 15px 0 8px;
-    }
-
-    .auth-title {
-      text-align: center;
-      font-size: 26px;
-      font-weight: 900;
-      margin-bottom: 5px;
-    }
-
-    .auth-description {
-      text-align: center;
-      color: #777;
-      font-size: 13px;
-      margin-bottom: 22px;
-    }
 
     .age-check {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 700;
       font-size: 13px;
       margin: 12px 0;
     }
@@ -268,31 +223,69 @@
     ========================= */
 
     .nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 520px;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      padding: 8px;
-      background: #fff;
+      background: rgba(255,255,255,.96);
       border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
     .nav button {
-      border: none;
+      position: relative;
+      border: 0;
       background: transparent;
-      padding: 8px 3px;
-      border-radius: 10px;
+      padding: 9px 2px;
       font-size: 11px;
       color: #777;
     }
 
     .nav button.active {
-      background: #fff0f6;
-      color: #ff5790;
+      color: #ff4f8a;
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .unreadBadge {
+      position: absolute;
+      top: 3px;
+      right: 15px;
+      background: #ff315d;
+      color: white;
+      min-width: 19px;
+      height: 19px;
+      border-radius: 999px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
       font-weight: 800;
+      padding: 0 5px;
+    }
+
+    /* =========================
+       PROFILE
+    ========================= */
+
+    .profile-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .logout {
+      margin-top: 20px;
     }
 
     /* =========================
@@ -301,57 +294,44 @@
 
     .user-card {
       border: 1px solid #eee;
-      border-radius: 17px;
-      padding: 15px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-
-    .user-top {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
       background:
-        linear-gradient(
-          135deg,
-          #ffd3e2,
-          #dcd5ff
-        );
-      font-size: 27px;
-      flex-shrink: 0;
+        linear-gradient(135deg,#fff,#fff7fb);
     }
 
     .user-name {
-      font-weight: 900;
-      font-size: 17px;
+      font-size: 19px;
+      font-weight: 800;
     }
 
     .user-info {
-      color: #777;
       font-size: 13px;
-      margin-top: 3px;
+      color: #666;
+      margin-top: 5px;
     }
 
     .user-bio {
-      margin: 12px 0;
+      margin-top: 12px;
       font-size: 14px;
       line-height: 1.6;
       white-space: pre-wrap;
     }
 
-    .user-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+    .like-button {
+      margin-top: 13px;
+      background: linear-gradient(135deg,#ff6f9f,#ff4f8a);
+      color: white;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-weight: 700;
+    }
+
+    .liked {
+      background: #eee;
+      color: #777;
     }
 
     /* =========================
@@ -361,40 +341,51 @@
     .match-item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 13px;
+      gap: 12px;
+      padding: 14px;
       border: 1px solid #eee;
-      border-radius: 14px;
-      margin-bottom: 9px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      background: white;
     }
 
-    .match-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .match-avatar {
-      width: 44px;
-      height: 44px;
+    .match-icon {
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
-      background: #f7dce7;
+      background: linear-gradient(135deg,#ff6f9f,#9b8cff);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 20px;
       flex-shrink: 0;
     }
 
-    .match-name {
+    .match-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .matchNameRow {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       font-weight: 800;
     }
 
-    .match-location {
-      color: #888;
+    .unreadText {
+      color: #ff315d;
+      font-size: 11px;
+    }
+
+    .last-message {
+      color: #777;
       font-size: 12px;
-      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 3px;
     }
 
     /* =========================
@@ -408,134 +399,121 @@
       margin-bottom: 12px;
     }
 
-    .chat-header button {
-      border: none;
-      background: #f4f4f6;
-      border-radius: 10px;
-      padding: 8px 10px;
+    .back-button {
+      border: 0;
+      background: #f2f2f2;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
     }
 
-    .chat-messages {
-      height: 430px;
+    .chat-name {
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .chat-box {
+      height: 55vh;
+      min-height: 350px;
       overflow-y: auto;
-      padding: 10px 4px;
-      background: #faf9fc;
-      border-radius: 15px;
+      background: #f8f8fb;
+      border-radius: 18px;
+      padding: 14px;
       margin-bottom: 10px;
     }
 
-    .message-row {
+    .bubble-row {
       display: flex;
-      margin: 7px 0;
+      margin-bottom: 9px;
     }
 
-    .message-row.mine {
+    .bubble-row.mine {
       justify-content: flex-end;
     }
 
-    .message-bubble {
+    .bubble {
       max-width: 78%;
-      padding: 10px 13px;
-      border-radius: 16px;
-      background: #eeeef3;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 14px;
-      line-height: 1.5;
+      border-radius: 18px;
+      padding: 9px 12px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      position: relative;
     }
 
-    .message-row.mine .message-bubble {
-      background:
-        linear-gradient(
-          135deg,
-          #ff79a6,
-          #a28dff
-        );
-      color: white;
+    .mine .bubble {
+      background: #ffdfeb;
     }
 
-    .message-time {
-      font-size: 10px;
+    .bubble-time {
+      font-size: 9px;
       color: #999;
-      margin-top: 3px;
+      margin-top: 4px;
       text-align: right;
     }
 
-    .message-row.mine .message-time {
-      color: #aaa;
+    .delete-message {
+      border: 0;
+      background: transparent;
+      color: #999;
+      font-size: 10px;
+      padding: 2px 0 0 8px;
     }
-
-    /* =========================
-       PHOTO MESSAGE
-    ========================= */
 
     .chat-image {
       display: block;
+      max-width: 230px;
+      max-height: 300px;
       width: auto;
-      max-width: 250px;
-      max-height: 330px;
-      border-radius: 14px;
+      height: auto;
+      border-radius: 13px;
       object-fit: cover;
       cursor: pointer;
-      background: #eee;
     }
 
-    .photo-message {
-      padding: 4px !important;
-      background: transparent !important;
-    }
-
-    .message-row.mine .photo-message {
-      background: transparent !important;
-    }
-
-    .chat-image-link {
-      display: block;
-      text-decoration: none;
+    .image-message-label {
+      font-size: 11px;
+      color: #777;
+      margin-top: 5px;
     }
 
     .chat-input-area {
-      display: grid;
-      grid-template-columns: 45px 1fr 65px;
+      display: flex;
       gap: 7px;
-      align-items: end;
+      align-items: flex-end;
+    }
+
+    .chat-text {
+      flex: 1;
+      min-height: 46px;
+      max-height: 120px;
+      resize: none;
     }
 
     .photo-button {
-      width: 45px;
-      height: 45px;
-      border: none;
-      border-radius: 13px;
-      background: #f3efff;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 0;
+      background: #f1eaff;
       font-size: 21px;
-    }
-
-    .chat-input {
-      min-height: 45px;
-      max-height: 110px;
-      resize: vertical;
-      margin: 0;
+      flex-shrink: 0;
     }
 
     .send-button {
-      height: 45px;
-      border: none;
-      border-radius: 13px;
+      width: 70px;
+      height: 46px;
+      border: 0;
+      border-radius: 15px;
+      background: linear-gradient(135deg,#ff6f9f,#9b8cff);
       color: white;
-      background:
-        linear-gradient(
-          135deg,
-          #ff6f9f,
-          #9b8cff
-        );
-      font-weight: 800;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .upload-status {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #888;
-      text-align: center;
+    .upload-progress {
+      margin-top: 7px;
+      font-size: 11px;
+      color: #777;
     }
 
     /* =========================
@@ -543,48 +521,44 @@
     ========================= */
 
     .post {
-      padding: 13px;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding: 13px 0;
+    }
+
+    .post:last-child {
+      border-bottom: 0;
     }
 
     .post-name {
       font-weight: 800;
+      font-size: 13px;
+    }
+
+    .post-text {
+      margin-top: 5px;
+      white-space: pre-wrap;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .post-time {
       font-size: 10px;
-      color: #aaa;
-      margin-left: 5px;
-    }
-
-    .post-text {
-      margin-top: 7px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: break-word;
+      color: #999;
+      margin-top: 5px;
     }
 
     /* =========================
-       LOADING
+       SPINNER
     ========================= */
 
-    .loading {
-      text-align: center;
-      padding: 30px 15px;
-      color: #888;
-    }
-
     .spinner {
-      width: 35px;
-      height: 35px;
+      width: 28px;
+      height: 28px;
       border: 4px solid #eee;
       border-top-color: #ff6f9f;
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 12px;
+      animation: spin 1s linear infinite;
+      margin: auto;
     }
 
     @keyframes spin {
@@ -593,347 +567,158 @@
       }
     }
 
-    /* =========================
-       EMPTY
-    ========================= */
+    .small {
+      font-size: 12px;
+      color: #777;
+    }
 
-    .empty {
+    .center {
       text-align: center;
-      color: #888;
-      padding: 35px 15px;
-      font-size: 14px;
     }
-
-    /* =========================
-       PHOTO MODAL
-    ========================= */
-
-    .photo-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 15px;
-    }
-
-    .photo-modal img {
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 10px;
-    }
-
-    .photo-modal-close {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      width: 44px;
-      height: 44px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      color: white;
-      font-size: 24px;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 420px) {
-
-      .screen {
-        padding: 14px;
-      }
-
-      .chat-messages {
-        height: 390px;
-      }
-
-      .chat-image {
-        max-width: 220px;
-      }
-
-    }
-
   </style>
-
 </head>
-
 
 <body>
 
 <div class="app">
 
   <header>
-
-    <div class="brand">
-      ゼロ円マッチ 💕
-    </div>
-
+    <div class="logo">ゼロ円マッチ 💕</div>
     <div class="subtitle">
       18歳以上限定・安心して話せる場所
     </div>
-
   </header>
 
-
   <!-- =========================
-       AUTH SCREEN
-  ========================== -->
+       AUTH
+  ========================= -->
 
-  <section id="authScreen" class="screen">
+  <section id="authScreen" class="auth">
 
-    <div class="card">
+    <h2>ゼロ円マッチ 💕</h2>
 
-      <div class="logo-big">
-        💕
-      </div>
+    <div id="authMessage"></div>
 
-      <div class="auth-title">
-        ゼロ円マッチ
-      </div>
-
-      <div class="auth-description">
-        気になる人とつながって<br>
-        二人だけのチャットを楽しもう
-      </div>
-
-
-      <div id="authError" class="error hidden"></div>
-
-
-      <div class="field">
-
-        <label for="email">
-          メールアドレス
-        </label>
-
-        <input
-          id="email"
-          type="email"
-          autocomplete="email"
-          placeholder="example@example.com"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label for="password">
-          パスワード
-        </label>
-
-        <input
-          id="password"
-          type="password"
-          autocomplete="current-password"
-          placeholder="6文字以上"
-        >
-
-      </div>
-
-
-      <label class="age-check">
-
-        <input
-          id="ageCheck"
-          type="checkbox"
-        >
-
-        私は18歳以上です
-
-      </label>
-
-
-      <button
-        id="loginBtn"
-        class="btn btn-primary"
+    <div class="field">
+      <label>メールアドレス</label>
+      <input
+        id="emailInput"
+        type="email"
+        placeholder="example@example.com"
+        autocomplete="email"
       >
-        ログイン
-      </button>
-
-
-      <button
-        id="registerBtn"
-        class="btn btn-secondary"
-      >
-        新規登録
-      </button>
-
     </div>
+
+    <div class="field">
+      <label>パスワード</label>
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="6文字以上"
+        autocomplete="current-password"
+      >
+    </div>
+
+    <label class="age-check">
+      <input id="ageCheck" type="checkbox">
+      私は18歳以上です
+    </label>
+
+    <button
+      id="loginBtn"
+      class="btn btn-primary"
+    >
+      ログイン
+    </button>
+
+    <button
+      id="registerBtn"
+      class="btn btn-secondary"
+    >
+      新規登録
+    </button>
 
   </section>
 
-
   <!-- =========================
-       MAIN APP
-  ========================== -->
+       MAIN
+  ========================= -->
 
-  <div id="mainScreen" class="hidden">
+  <main id="mainScreen" class="hidden">
 
-
-    <!-- NAV -->
-
-    <nav class="nav">
-
-      <button
-        data-tab="profile"
-        class="active"
-      >
-        👤<br>プロフィール
-      </button>
-
-      <button data-tab="recommend">
-        💕<br>おすすめ
-      </button>
-
-      <button data-tab="matches">
-        💖<br>マッチ
-      </button>
-
-      <button data-tab="chat">
-        💬<br>チャット
-      </button>
-
-      <button data-tab="talk">
-        🗣️<br>雑談
-      </button>
-
-    </nav>
-
-
-    <!-- =========================
-         PROFILE
-    ========================== -->
+    <!-- PROFILE -->
 
     <section
-      id="profileTab"
-      class="screen tab"
+      id="profilePage"
+      class="page"
     >
+
+      <div class="profile-title">
+        👤 プロフィール
+      </div>
+
+      <div id="profileMessage"></div>
 
       <div class="card">
 
-        <h2>
-          👤プロフィール
-        </h2>
-
-        <div id="profileMessage"></div>
-
-
         <div class="field">
-
-          <label for="nickname">
-            ニックネーム
-          </label>
+          <label>ニックネーム</label>
 
           <input
-            id="nickname"
+            id="nameInput"
             maxlength="30"
             placeholder="ニックネーム"
           >
-
         </div>
 
-
         <div class="field">
-
-          <label for="age">
-            年齢
-          </label>
+          <label>年齢</label>
 
           <input
-            id="age"
+            id="ageInput"
             type="number"
             min="18"
             max="120"
             placeholder="18"
           >
-
         </div>
 
-
         <div class="field">
+          <label>性別</label>
 
-          <label for="gender">
-            性別
-          </label>
-
-          <select id="gender">
-
-            <option value="">
-              選択してください
-            </option>
-
-            <option value="男性">
-              男性
-            </option>
-
-            <option value="女性">
-              女性
-            </option>
-
-            <option value="その他">
-              その他
-            </option>
-
+          <select id="genderInput">
+            <option value="">選択してください</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
           </select>
-
         </div>
 
-
         <div class="field">
+          <label>都道府県</label>
 
-          <label for="prefecture">
-            都道府県
-          </label>
-
-          <select id="prefecture">
-
-            <option value="">
-              読み込み中...
-            </option>
-
+          <select id="prefectureInput">
+            <option value="">読み込み中...</option>
           </select>
-
         </div>
 
-
         <div class="field">
+          <label>市区町村</label>
 
-          <label for="city">
-            市区町村
-          </label>
-
-          <select id="city">
-
-            <option value="">
-              都道府県を選択してください
-            </option>
-
+          <select id="municipalityInput">
+            <option value="">都道府県を選択してください</option>
           </select>
-
         </div>
 
-
         <div class="field">
-
-          <label for="bio">
-            自己紹介
-          </label>
+          <label>自己紹介</label>
 
           <textarea
-            id="bio"
+            id="bioInput"
             maxlength="500"
-            placeholder="気軽に自己紹介を書いてみよう"
+            placeholder="気軽に自己紹介を書いてください"
           ></textarea>
-
         </div>
-
 
         <button
           id="saveProfileBtn"
@@ -942,216 +727,153 @@
           プロフィールを保存 💕
         </button>
 
-
-        <button
-          id="logoutBtn"
-          class="btn btn-secondary"
-        >
-          ログアウト
-        </button>
-
       </div>
+
+      <button
+        id="logoutBtn"
+        class="btn btn-danger logout"
+      >
+        ログアウト
+      </button>
 
     </section>
 
 
-    <!-- =========================
-         RECOMMEND
-    ========================== -->
+    <!-- RECOMMEND -->
 
     <section
-      id="recommendTab"
-      class="screen tab hidden"
+      id="recommendPage"
+      class="page hidden"
     >
 
-      <div class="card">
-
-        <h2>
-          💕おすすめ
-        </h2>
-
-        <div class="muted">
-          気になる人に「いいね」してみよう
-        </div>
-
+      <div class="profile-title">
+        💕 おすすめ
       </div>
-
 
       <div id="recommendList">
-
         <div class="loading">
-
           <div class="spinner"></div>
-
-          読み込み中...
-
+          <p>読み込み中...</p>
         </div>
-
       </div>
 
     </section>
 
 
-    <!-- =========================
-         MATCHES
-    ========================== -->
+    <!-- MATCH -->
 
     <section
-      id="matchesTab"
-      class="screen tab hidden"
+      id="matchPage"
+      class="page hidden"
     >
 
-      <div class="card">
+      <div id="matchListPage">
 
-        <h2>
-          💖マッチ
-        </h2>
+        <div class="profile-title">
+          💖 マッチ
+        </div>
 
-        <div class="muted">
-          マッチした人と二人だけで話せます
+        <div id="matchList">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>読み込み中...</p>
+          </div>
         </div>
 
       </div>
 
-
-      <div id="matchList">
-
-        <div class="empty">
-          マッチした人はいません 💕
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CHAT
-    ========================== -->
-
-    <section
-      id="chatTab"
-      class="screen tab hidden"
-    >
-
-      <div id="chatSelectArea" class="card">
-
-        <h2>
-          💬チャット
-        </h2>
-
-        <div class="muted">
-          マッチした人を選ぶと<br>
-          二人だけのチャットができます 💕
-        </div>
-
-      </div>
-
+      <!-- CHAT -->
 
       <div
-        id="chatArea"
-        class="card hidden"
+        id="chatPage"
+        class="hidden"
       >
 
         <div class="chat-header">
 
-          <button id="backChatBtn">
+          <button
+            id="backChatBtn"
+            class="back-button"
+          >
             ←
           </button>
 
           <div>
-
             <div
               id="chatPartnerName"
-              class="user-name"
-            >
-              チャット
-            </div>
-
-            <div
-              id="chatPartnerLocation"
-              class="muted"
+              class="chat-name"
             ></div>
 
+            <div class="small">
+              二人だけのチャット 💕
+            </div>
           </div>
 
         </div>
 
-
         <div
           id="chatMessages"
-          class="chat-messages"
+          class="chat-box"
         ></div>
-
 
         <div
-          id="uploadStatus"
-          class="upload-status"
+          id="uploadProgress"
+          class="upload-progress"
         ></div>
-
 
         <div class="chat-input-area">
 
           <button
-            id="photoButton"
+            id="photoBtn"
             class="photo-button"
-            type="button"
             title="写真を送る"
           >
             📷
           </button>
 
-
           <textarea
-            id="chatInput"
-            class="chat-input"
-            maxlength="1000"
+            id="chatText"
+            class="chat-text"
             placeholder="メッセージを入力..."
           ></textarea>
-
 
           <button
             id="sendMessageBtn"
             class="send-button"
-            type="button"
           >
             送信
           </button>
 
         </div>
 
-
         <input
-          id="chatImageInput"
+          id="photoInput"
           type="file"
-          accept="image/jpeg,image/png,image/webp"
-          hidden
+          accept="image/*"
+          class="hidden"
         >
 
-        <div class="muted" style="margin-top:8px;">
-          📷 JPG・PNG・WebP / 最大10MB<br>
-          写真は自動的に圧縮して送信します
-        </div>
+        <p class="small">
+          ※写真は自動的にサイズを小さくして送信します。
+        </p>
 
       </div>
 
     </section>
 
 
-    <!-- =========================
-         TALK
-    ========================== -->
+    <!-- POSTS -->
 
     <section
-      id="talkTab"
-      class="screen tab hidden"
+      id="postPage"
+      class="page hidden"
     >
 
-      <div class="card">
+      <div class="profile-title">
+        🗣️ 雑談コーナー
+      </div>
 
-        <h2>
-          🗣️雑談コーナー
-        </h2>
+      <div class="card">
 
         <textarea
           id="postText"
@@ -1168,47 +890,82 @@
 
       </div>
 
+      <div class="card">
 
-      <div id="postList">
-
-        <div class="loading">
-
-          <div class="spinner"></div>
-
-          読み込み中...
-
+        <div id="postList">
+          <div class="loading">
+            読み込み中...
+          </div>
         </div>
 
       </div>
 
     </section>
 
-  </div>
+  </main>
 
 
   <!-- =========================
-       PHOTO MODAL
-  ========================== -->
+       NAV
+  ========================= -->
 
-  <div
-    id="photoModal"
-    class="photo-modal hidden"
+  <nav
+    id="nav"
+    class="nav hidden"
   >
 
     <button
-      id="photoModalClose"
-      class="photo-modal-close"
+      data-page="profilePage"
+      class="active"
     >
-      ×
+      <span class="nav-icon">👤</span>
+      プロフィール
     </button>
 
-    <img
-      id="photoModalImage"
-      src=""
-      alt="写真"
+    <button
+      data-page="recommendPage"
     >
+      <span class="nav-icon">💕</span>
+      おすすめ
+    </button>
 
-  </div>
+    <button
+      data-page="matchPage"
+    >
+      <span class="nav-icon">💖</span>
+      マッチ
+
+      <span
+        id="navUnread"
+        class="unreadBadge hidden"
+      >
+        0
+      </span>
+    </button>
+
+    <button
+      data-page="chatDummy"
+      id="chatNavBtn"
+    >
+      <span class="nav-icon">💬</span>
+      チャット
+
+      <span
+        id="navChatUnread"
+        class="unreadBadge hidden"
+      >
+        0
+      </span>
+    </button>
+
+    <button
+      data-page="postPage"
+    >
+      <span class="nav-icon">🗣️</span>
+      雑談
+    </button>
+
+  </nav>
 
 </div>
 
@@ -1216,14 +973,13 @@
 <script type="module">
 
   /* =====================================================
-     FIREBASE
+     Firebase
   ===================================================== */
 
   import {
     initializeApp
   } from
   "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
 
   import {
     getAuth,
@@ -1234,7 +990,6 @@
   } from
   "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-
   import {
     getFirestore,
     doc,
@@ -1242,25 +997,28 @@
     setDoc,
     updateDoc,
     addDoc,
+    deleteDoc,
     collection,
     getDocs,
     onSnapshot,
-    serverTimestamp
+    serverTimestamp,
+    query,
+    where
   } from
   "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
 
   import {
     getStorage,
     ref,
-    uploadBytes,
-    getDownloadURL
+    uploadBytesResumable,
+    getDownloadURL,
+    deleteObject
   } from
   "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
 
 
   /* =====================================================
-     FIREBASE CONFIG
+     Firebase Config
   ===================================================== */
 
   const firebaseConfig = {
@@ -1285,47 +1043,49 @@
 
     measurementId:
       "G-Y39HTKE7ZZ"
-
   };
 
 
   const app =
     initializeApp(firebaseConfig);
 
-
   const auth =
     getAuth(app);
 
-
   const db =
     getFirestore(app);
-
 
   const storage =
     getStorage(app);
 
 
   /* =====================================================
-     GLOBAL
+     STATE
   ===================================================== */
 
   let currentUser = null;
 
   let currentProfile = null;
 
-  let currentMatches = [];
+  let currentMatchId = null;
 
-  let selectedMatchId = null;
-
-  let selectedPartner = null;
+  let currentChatPartner = null;
 
   let unsubscribeMessages = null;
 
-  let municipalityData = [];
+  let unsubscribeMatches = null;
+
+  let unsubscribePosts = null;
+
+  let allLocations = [];
+
+  let allUsers = [];
+
+  let likedUsers = new Set();
 
 
   /* =====================================================
-     ELEMENTS
+     DOM
   ===================================================== */
 
   const authScreen =
@@ -1334,21 +1094,18 @@
   const mainScreen =
     document.getElementById("mainScreen");
 
-  const authError =
-    document.getElementById("authError");
+  const nav =
+    document.getElementById("nav");
 
-  const emailInput =
-    document.getElementById("email");
+  const authMessage =
+    document.getElementById("authMessage");
 
-  const passwordInput =
-    document.getElementById("password");
-
-  const ageCheck =
-    document.getElementById("ageCheck");
+  const profileMessage =
+    document.getElementById("profileMessage");
 
 
   /* =====================================================
-     ESCAPE HTML
+     HELPERS
   ===================================================== */
 
   function escapeHtml(value) {
@@ -1359,29 +1116,30 @@
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
-
   }
 
 
-  /* =====================================================
-     DATE
-  ===================================================== */
+  function showMessage(element, text, type = "info") {
 
-  function formatDate(timestamp) {
+    element.innerHTML =
+      `<div class="message ${type}">
+        ${escapeHtml(text)}
+      </div>`;
+  }
 
-    if (!timestamp) {
-      return "";
-    }
+
+  function formatTime(timestamp) {
+
+    if (!timestamp) return "";
 
     let date;
 
-    if (timestamp.toDate) {
-      date = timestamp.toDate();
-    } else {
-      date = new Date(timestamp);
-    }
-
-    if (Number.isNaN(date.getTime())) {
+    try {
+      date =
+        timestamp.toDate
+          ? timestamp.toDate()
+          : new Date(timestamp);
+    } catch {
       return "";
     }
 
@@ -1394,30 +1152,105 @@
         minute: "2-digit"
       }
     );
+  }
 
+
+  function timestampMillis(timestamp) {
+
+    if (!timestamp) return 0;
+
+    if (typeof timestamp.toMillis === "function") {
+      return timestamp.toMillis();
+    }
+
+    if (timestamp instanceof Date) {
+      return timestamp.getTime();
+    }
+
+    return 0;
+  }
+
+
+  function matchIdFor(uid1, uid2) {
+
+    return [uid1, uid2]
+      .sort()
+      .join("_");
   }
 
 
   /* =====================================================
-     AUTH ERROR
+     PAGE NAVIGATION
   ===================================================== */
 
-  function showAuthError(message) {
+  function showPage(pageId) {
 
-    authError.textContent = message;
+    document
+      .querySelectorAll(
+        "#mainScreen > section"
+      )
+      .forEach(section => {
+        section.classList.add("hidden");
+      });
 
-    authError.classList.remove("hidden");
+    const page =
+      document.getElementById(pageId);
 
+    if (page) {
+      page.classList.remove("hidden");
+    }
+
+    document
+      .querySelectorAll(".nav button")
+      .forEach(button => {
+        button.classList.remove("active");
+      });
+
+    const active =
+      document.querySelector(
+        `.nav button[data-page="${pageId}"]`
+      );
+
+    if (active) {
+      active.classList.add("active");
+    }
+
+    if (pageId === "recommendPage") {
+      loadRecommendations();
+    }
+
+    if (pageId === "postPage") {
+      loadPosts();
+    }
+
+    if (pageId === "matchPage") {
+      showMatchList();
+    }
   }
 
 
-  function clearAuthError() {
+  document
+    .querySelectorAll(".nav button")
+    .forEach(button => {
 
-    authError.textContent = "";
+      button.addEventListener(
+        "click",
+        () => {
 
-    authError.classList.add("hidden");
+          const page =
+            button.dataset.page;
 
-  }
+          if (page === "chatDummy") {
+
+            showPage("matchPage");
+
+            return;
+          }
+
+          showPage(page);
+        }
+      );
+    });
 
 
   /* =====================================================
@@ -1425,40 +1258,145 @@
   ===================================================== */
 
   document
+    .getElementById("registerBtn")
+    .addEventListener(
+      "click",
+      async () => {
+
+        const email =
+          document
+            .getElementById("emailInput")
+            .value
+            .trim();
+
+        const password =
+          document
+            .getElementById("passwordInput")
+            .value;
+
+        const ageOK =
+          document
+            .getElementById("ageCheck")
+            .checked;
+
+        if (!email || !password) {
+
+          showMessage(
+            authMessage,
+            "メールアドレスとパスワードを入力してください。",
+            "error"
+          );
+
+          return;
+        }
+
+        if (password.length < 6) {
+
+          showMessage(
+            authMessage,
+            "パスワードは6文字以上にしてください。",
+            "error"
+          );
+
+          return;
+        }
+
+        if (!ageOK) {
+
+          showMessage(
+            authMessage,
+            "18歳以上であることを確認してください。",
+            "error"
+          );
+
+          return;
+        }
+
+        try {
+
+          showMessage(
+            authMessage,
+            "アカウントを作成しています..."
+          );
+
+          const result =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+          await setDoc(
+            doc(db, "users", result.user.uid),
+            {
+              uid: result.user.uid,
+              email: email,
+              name: "",
+              age: 18,
+              gender: "",
+              prefecturePid: "",
+              prefecture: "",
+              municipality: "",
+              bio: "",
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp()
+            }
+          );
+
+          showMessage(
+            authMessage,
+            "登録しました。プロフィールを入力してください。",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            authMessage,
+            firebaseErrorMessage(error),
+            "error"
+          );
+        }
+      }
+    );
+
+
+  document
     .getElementById("loginBtn")
     .addEventListener(
       "click",
       async () => {
 
-        clearAuthError();
-
         const email =
-          emailInput.value.trim();
+          document
+            .getElementById("emailInput")
+            .value
+            .trim();
 
         const password =
-          passwordInput.value;
-
-        if (!ageCheck.checked) {
-
-          showAuthError(
-            "18歳以上であることを確認してください。"
-          );
-
-          return;
-
-        }
+          document
+            .getElementById("passwordInput")
+            .value;
 
         if (!email || !password) {
 
-          showAuthError(
-            "メールアドレスとパスワードを入力してください。"
+          showMessage(
+            authMessage,
+            "メールアドレスとパスワードを入力してください。",
+            "error"
           );
 
           return;
-
         }
 
         try {
+
+          showMessage(
+            authMessage,
+            "ログインしています..."
+          );
 
           await signInWithEmailAndPassword(
             auth,
@@ -1470,103 +1408,46 @@
 
           console.error(error);
 
-          showAuthError(
-            firebaseAuthError(error)
+          showMessage(
+            authMessage,
+            firebaseErrorMessage(error),
+            "error"
           );
-
         }
-
       }
     );
 
 
-  document
-    .getElementById("registerBtn")
-    .addEventListener(
-      "click",
-      async () => {
+  function firebaseErrorMessage(error) {
 
-        clearAuthError();
+    const code =
+      error?.code || "";
 
-        const email =
-          emailInput.value.trim();
-
-        const password =
-          passwordInput.value;
-
-        if (!ageCheck.checked) {
-
-          showAuthError(
-            "18歳以上であることを確認してください。"
-          );
-
-          return;
-
-        }
-
-        if (!email || !password) {
-
-          showAuthError(
-            "メールアドレスとパスワードを入力してください。"
-          );
-
-          return;
-
-        }
-
-        if (password.length < 6) {
-
-          showAuthError(
-            "パスワードは6文字以上にしてください。"
-          );
-
-          return;
-
-        }
-
-        try {
-
-          await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-        } catch (error) {
-
-          console.error(error);
-
-          showAuthError(
-            firebaseAuthError(error)
-          );
-
-        }
-
-      }
-    );
-
-
-  function firebaseAuthError(error) {
-
-    switch (error.code) {
-
-      case "auth/invalid-email":
-        return "メールアドレスが正しくありません。";
-
-      case "auth/email-already-in-use":
-        return "このメールアドレスはすでに登録されています。";
-
-      case "auth/weak-password":
-        return "パスワードは6文字以上にしてください。";
-
-      case "auth/invalid-credential":
-        return "メールアドレスまたはパスワードが違います。";
-
-      default:
-        return "エラーが発生しました。もう一度試してください。";
-
+    if (code.includes("invalid-credential")) {
+      return "メールアドレスまたはパスワードが違います。";
     }
 
+    if (code.includes("invalid-email")) {
+      return "メールアドレスの形式が正しくありません。";
+    }
+
+    if (code.includes("email-already-in-use")) {
+      return "このメールアドレスはすでに登録されています。";
+    }
+
+    if (code.includes("weak-password")) {
+      return "パスワードが弱すぎます。6文字以上にしてください。";
+    }
+
+    if (code.includes("network-request-failed")) {
+      return "通信エラーです。インターネット接続を確認してください。";
+    }
+
+    if (code.includes("permission-denied")) {
+      return "Firebaseの権限設定を確認してください。";
+    }
+
+    return "エラーが発生しました。もう一度試してください。";
   }
 
 
@@ -1578,128 +1459,273 @@
     auth,
     async user => {
 
-      if (user) {
-
-        currentUser = user;
-
-        authScreen.classList.add("hidden");
-
-        mainScreen.classList.remove("hidden");
-
-        await loadMunicipalities();
-
-        await loadProfile();
-
-        await loadMatches();
-
-        await loadRecommendations();
-
-        await loadPosts();
-
-      } else {
+      if (!user) {
 
         currentUser = null;
 
-        currentProfile = null;
-
-        currentMatches = [];
-
-        selectedMatchId = null;
-
-        selectedPartner = null;
-
-        if (unsubscribeMessages) {
-          unsubscribeMessages();
-          unsubscribeMessages = null;
-        }
-
-        mainScreen.classList.add("hidden");
-
         authScreen.classList.remove("hidden");
+        mainScreen.classList.add("hidden");
+        nav.classList.add("hidden");
 
+        return;
       }
 
+      currentUser = user;
+
+      authScreen.classList.add("hidden");
+      mainScreen.classList.remove("hidden");
+      nav.classList.remove("hidden");
+
+      await loadProfile();
+
+      await loadLocations();
+
+      startMatchesListener();
+
+      loadRecommendations();
+
+      loadPosts();
+
+      showPage("profilePage");
     }
   );
 
 
   /* =====================================================
-     LOGOUT
+     PROFILE
   ===================================================== */
 
+  async function loadProfile() {
+
+    if (!currentUser) return;
+
+    const snap =
+      await getDoc(
+        doc(db, "users", currentUser.uid)
+      );
+
+    if (snap.exists()) {
+
+      currentProfile =
+        snap.data();
+
+      fillProfileForm(
+        currentProfile
+      );
+
+    } else {
+
+      currentProfile = {
+        uid: currentUser.uid,
+        email: currentUser.email || "",
+        name: "",
+        age: 18,
+        gender: "",
+        prefecturePid: "",
+        prefecture: "",
+        municipality: "",
+        bio: ""
+      };
+    }
+  }
+
+
+  function fillProfileForm(profile) {
+
+    document
+      .getElementById("nameInput")
+      .value =
+      profile.name || "";
+
+    document
+      .getElementById("ageInput")
+      .value =
+      profile.age || 18;
+
+    document
+      .getElementById("genderInput")
+      .value =
+      profile.gender || "";
+
+    document
+      .getElementById("bioInput")
+      .value =
+      profile.bio || "";
+  }
+
+
   document
-    .getElementById("logoutBtn")
+    .getElementById("saveProfileBtn")
     .addEventListener(
       "click",
-      async () => {
-
-        await signOut(auth);
-
-      }
+      saveProfile
     );
 
 
-  /* =====================================================
-     TABS
-  ===================================================== */
+  async function saveProfile() {
 
-  document
-    .querySelectorAll(".nav button")
-    .forEach(button => {
+    if (!currentUser) return;
 
-      button.addEventListener(
-        "click",
-        async () => {
+    const name =
+      document
+        .getElementById("nameInput")
+        .value
+        .trim();
 
-          const tab =
-            button.dataset.tab;
-
-          document
-            .querySelectorAll(".nav button")
-            .forEach(b => {
-              b.classList.remove("active");
-            });
-
-          button.classList.add("active");
-
-          document
-            .querySelectorAll(".tab")
-            .forEach(section => {
-              section.classList.add("hidden");
-            });
-
-          const target =
-            document.getElementById(
-              tab + "Tab"
-            );
-
-          if (target) {
-            target.classList.remove("hidden");
-          }
-
-          if (tab === "recommend") {
-            await loadRecommendations();
-          }
-
-          if (tab === "matches") {
-            await loadMatches();
-          }
-
-          if (tab === "talk") {
-            await loadPosts();
-          }
-
-        }
+    const age =
+      Number(
+        document
+          .getElementById("ageInput")
+          .value
       );
 
-    });
+    const gender =
+      document
+        .getElementById("genderInput")
+        .value;
+
+    const prefecture =
+      document
+        .getElementById("prefectureInput");
+
+    const municipality =
+      document
+        .getElementById("municipalityInput");
+
+    const bio =
+      document
+        .getElementById("bioInput")
+        .value
+        .trim();
+
+    if (!name) {
+
+      showMessage(
+        profileMessage,
+        "ニックネームを入力してください。",
+        "error"
+      );
+
+      return;
+    }
+
+    if (age < 18 || age > 120) {
+
+      showMessage(
+        profileMessage,
+        "年齢は18歳以上で入力してください。",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!gender) {
+
+      showMessage(
+        profileMessage,
+        "性別を選択してください。",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!prefecture.value) {
+
+      showMessage(
+        profileMessage,
+        "都道府県を選択してください。",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!municipality.value) {
+
+      showMessage(
+        profileMessage,
+        "市区町村を選択してください。",
+        "error"
+      );
+
+      return;
+    }
+
+    try {
+
+      const data = {
+
+        uid: currentUser.uid,
+
+        email:
+          currentUser.email || "",
+
+        name,
+
+        age,
+
+        gender,
+
+        prefecturePid:
+          prefecture.selectedOptions[0]
+            ?.dataset.pid || "",
+
+        prefecture:
+          prefecture.value,
+
+        municipality:
+          municipality.value,
+
+        bio,
+
+        updatedAt:
+          serverTimestamp()
+      };
+
+      await setDoc(
+        doc(db, "users", currentUser.uid),
+        data,
+        { merge: true }
+      );
+
+      currentProfile = {
+        ...currentProfile,
+        ...data
+      };
+
+      showMessage(
+        profileMessage,
+        "プロフィールを保存しました 💕",
+        "success"
+      );
+
+      loadRecommendations();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        profileMessage,
+        "プロフィールの保存に失敗しました。",
+        "error"
+      );
+    }
+  }
 
 
   /* =====================================================
-     MUNICIPALITIES
+     LOCATION
   ===================================================== */
 
-  async function loadMunicipalities() {
+  async function loadLocations() {
+
+    const pref =
+      document.getElementById(
+        "prefectureInput"
+      );
 
     try {
 
@@ -1708,407 +1734,169 @@
           "https://code4fukui.github.io/localgovjp/localgovjp.json"
         );
 
-      municipalityData =
+      if (!response.ok) {
+        throw new Error("location fetch failed");
+      }
+
+      allLocations =
         await response.json();
 
-      const prefectureSelect =
-        document.getElementById("prefecture");
+      const prefectures = [];
 
-      prefectureSelect.innerHTML =
+      const seen =
+        new Set();
+
+      for (const item of allLocations) {
+
+        if (
+          !item.pref ||
+          !item.pid
+        ) continue;
+
+        const key =
+          `${item.pid}_${item.pref}`;
+
+        if (seen.has(key)) continue;
+
+        seen.add(key);
+
+        prefectures.push({
+          pid: item.pid,
+          pref: item.pref
+        });
+      }
+
+      pref.innerHTML =
         `<option value="">選択してください</option>`;
 
-      const prefectures =
-        [
-          ...new Set(
-            municipalityData.map(
-              item =>
-                item.pref
-                || item.prefecture
-                || item.name
-            )
-          )
-        ]
-        .filter(Boolean)
-        .sort(
-          (a, b) =>
-            a.localeCompare(b, "ja")
-        );
-
-
-      prefectures.forEach(pref => {
+      prefectures.forEach(item => {
 
         const option =
           document.createElement("option");
 
-        option.value = pref;
+        option.value =
+          item.pref;
 
-        option.textContent = pref;
+        option.textContent =
+          item.pref;
 
-        prefectureSelect.appendChild(
-          option
-        );
+        option.dataset.pid =
+          item.pid;
 
+        pref.appendChild(option);
       });
 
+      if (
+        currentProfile &&
+        currentProfile.prefecture
+      ) {
+
+        pref.value =
+          currentProfile.prefecture;
+
+        populateMunicipalities(
+          currentProfile.prefecture
+        );
+      }
 
     } catch (error) {
 
-      console.error(
-        "自治体データ読み込みエラー",
-        error
-      );
+      console.error(error);
 
-      const select =
-        document.getElementById("prefecture");
-
-      select.innerHTML =
+      pref.innerHTML =
         `<option value="">読み込み失敗</option>`;
 
+      showMessage(
+        profileMessage,
+        "市区町村データを読み込めませんでした。通信状態を確認してください。",
+        "error"
+      );
     }
-
   }
 
 
   document
-    .getElementById("prefecture")
+    .getElementById("prefectureInput")
     .addEventListener(
       "change",
-      () => {
+      event => {
 
-        const pref =
-          document.getElementById(
-            "prefecture"
-          ).value;
-
-        const citySelect =
-          document.getElementById("city");
-
-        citySelect.innerHTML =
-          `<option value="">選択してください</option>`;
-
-
-        if (!pref) {
-          return;
-        }
-
-
-        const cities =
-          municipalityData
-            .filter(item => {
-
-              const itemPref =
-                item.pref
-                || item.prefecture
-                || "";
-
-              return itemPref === pref;
-
-            })
-            .map(item => {
-
-              return item.city
-                || item.city_name
-                || item.name
-                || "";
-
-            })
-            .filter(Boolean);
-
-
-        [
-          ...new Set(cities)
-        ]
-        .sort(
-          (a, b) =>
-            a.localeCompare(b, "ja")
-        )
-        .forEach(city => {
-
-          const option =
-            document.createElement("option");
-
-          option.value = city;
-
-          option.textContent = city;
-
-          citySelect.appendChild(
-            option
-          );
-
-        });
-
+        populateMunicipalities(
+          event.target.value
+        );
       }
     );
 
 
-  /* =====================================================
-     PROFILE LOAD
-  ===================================================== */
-
-  async function loadProfile() {
-
-    if (!currentUser) {
-      return;
-    }
-
-    try {
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          currentUser.uid
-        );
-
-      const snap =
-        await getDoc(userRef);
-
-
-      if (snap.exists()) {
-
-        currentProfile =
-          snap.data();
-
-        fillProfileForm(
-          currentProfile
-        );
-
-      } else {
-
-        currentProfile = {
-          nickname: "",
-          age: "",
-          gender: "",
-          prefecture: "",
-          city: "",
-          bio: ""
-        };
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "プロフィール読み込みエラー",
-        error
-      );
-
-    }
-
-  }
-
-
-  function fillProfileForm(data) {
-
-    document.getElementById(
-      "nickname"
-    ).value =
-      data.nickname || "";
-
-
-    document.getElementById(
-      "age"
-    ).value =
-      data.age || "";
-
-
-    document.getElementById(
-      "gender"
-    ).value =
-      data.gender || "";
-
-
-    document.getElementById(
-      "bio"
-    ).value =
-      data.bio || "";
-
-
-    const pref =
-      document.getElementById(
-        "prefecture"
-      );
-
-    pref.value =
-      data.prefecture || "";
-
-
-    if (data.prefecture) {
-
-      pref.dispatchEvent(
-        new Event("change")
-      );
-
-      setTimeout(() => {
-
-        document.getElementById(
-          "city"
-        ).value =
-          data.city || "";
-
-      }, 100);
-
-    }
-
-  }
-
-
-  /* =====================================================
-     PROFILE SAVE
-  ===================================================== */
-
-  document
-    .getElementById("saveProfileBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        if (!currentUser) {
-          return;
-        }
-
-        const nickname =
-          document
-            .getElementById("nickname")
-            .value
-            .trim();
-
-        const age =
-          Number(
-            document
-              .getElementById("age")
-              .value
-          );
-
-        const gender =
-          document
-            .getElementById("gender")
-            .value;
-
-        const prefecture =
-          document
-            .getElementById("prefecture")
-            .value;
-
-        const city =
-          document
-            .getElementById("city")
-            .value;
-
-        const bio =
-          document
-            .getElementById("bio")
-            .value
-            .trim();
-
-
-        if (!nickname) {
-
-          showProfileMessage(
-            "ニックネームを入力してください。",
-            true
-          );
-
-          return;
-
-        }
-
-
-        if (
-          !age ||
-          age < 18 ||
-          age > 120
-        ) {
-
-          showProfileMessage(
-            "年齢は18歳以上で入力してください。",
-            true
-          );
-
-          return;
-
-        }
-
-
-        const data = {
-
-          nickname,
-
-          age,
-
-          gender,
-
-          prefecture,
-
-          city,
-
-          bio,
-
-          updatedAt:
-            serverTimestamp()
-
-        };
-
-
-        try {
-
-          await setDoc(
-            doc(
-              db,
-              "users",
-              currentUser.uid
-            ),
-            data,
-            {
-              merge: true
-            }
-          );
-
-
-          currentProfile = {
-            ...currentProfile,
-            ...data
-          };
-
-
-          showProfileMessage(
-            "プロフィールを保存しました 💕",
-            false
-          );
-
-
-          await loadRecommendations();
-
-        } catch (error) {
-
-          console.error(error);
-
-          showProfileMessage(
-            "保存できませんでした。",
-            true
-          );
-
-        }
-
-      }
-    );
-
-
-  function showProfileMessage(
-    message,
-    isError
+  function populateMunicipalities(
+    prefecture
   ) {
 
-    const box =
+    const select =
       document.getElementById(
-        "profileMessage"
+        "municipalityInput"
       );
 
-    box.innerHTML =
-      `<div class="${isError ? "error" : "success"}">
-        ${escapeHtml(message)}
-      </div>`;
+    select.innerHTML =
+      `<option value="">選択してください</option>`;
 
+    if (!prefecture) return;
+
+    const cities =
+      allLocations.filter(
+        item =>
+          item.pref === prefecture &&
+          item.city
+      );
+
+    cities.forEach(item => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        item.city;
+
+      option.textContent =
+        item.city;
+
+      option.dataset.cid =
+        item.cid || "";
+
+      select.appendChild(option);
+    });
+
+    if (
+      currentProfile &&
+      currentProfile.prefecture === prefecture &&
+      currentProfile.municipality
+    ) {
+
+      const exists =
+        [...select.options]
+          .some(
+            option =>
+              option.value ===
+              currentProfile.municipality
+          );
+
+      if (!exists) {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          currentProfile.municipality;
+
+        option.textContent =
+          currentProfile.municipality;
+
+        select.appendChild(option);
+      }
+
+      select.value =
+        currentProfile.municipality;
+    }
   }
 
 
@@ -2118,412 +1906,199 @@
 
   async function loadRecommendations() {
 
-    const list =
+    if (!currentUser) return;
+
+    const container =
       document.getElementById(
         "recommendList"
       );
 
-
-    if (!currentUser) {
-      return;
-    }
-
-
-    list.innerHTML =
+    container.innerHTML =
       `<div class="loading">
         <div class="spinner"></div>
-        読み込み中...
+        <p>読み込み中...</p>
       </div>`;
-
 
     try {
 
-      const usersSnapshot =
+      const usersSnap =
+        await getDocs(
+          collection(db, "users")
+        );
+
+      allUsers =
+        usersSnap.docs
+          .map(docSnap => ({
+            id: docSnap.id,
+            ...docSnap.data()
+          }))
+          .filter(
+            user =>
+              user.id !== currentUser.uid
+          );
+
+      const likesSnap =
         await getDocs(
           collection(
             db,
+            "likes",
+            currentUser.uid,
             "users"
           )
         );
 
-
-      const likesSnapshot =
-        await getDocs(
-          collection(
-            db,
-            "likes"
+      likedUsers =
+        new Set(
+          likesSnap.docs.map(
+            d => d.id
           )
         );
 
-
-      const likedIds =
-        new Set();
-
-
-      likesSnapshot.forEach(
-        snap => {
-
-          const data =
-            snap.data();
-
-          if (
-            data.from ===
-              currentUser.uid
-          ) {
-
-            likedIds.add(
-              data.to
-            );
-
-          }
-
-        }
-      );
-
-
-      const blocksSnapshot =
-        await getDocs(
-          collection(
-            db,
-            "blocks"
-          )
-        );
-
-
-      const blockedIds =
-        new Set();
-
-
-      blocksSnapshot.forEach(
-        snap => {
-
-          const data =
-            snap.data();
-
-          if (
-            data.from ===
-              currentUser.uid
-          ) {
-
-            blockedIds.add(
-              data.to
-            );
-
-          }
-
-          if (
-            data.to ===
-              currentUser.uid
-          ) {
-
-            blockedIds.add(
-              data.from
-            );
-
-          }
-
-        }
-      );
-
-
-      const users = [];
-
-
-      usersSnapshot.forEach(
-        snap => {
-
-          if (
-            snap.id ===
-            currentUser.uid
-          ) {
-            return;
-          }
-
-
-          if (
-            blockedIds.has(
-              snap.id
-            )
-          ) {
-            return;
-          }
-
-
-          const data =
-            snap.data();
-
-
-          users.push({
-            id: snap.id,
-            ...data
-          });
-
-        }
-      );
-
-
-      if (users.length === 0) {
-
-        list.innerHTML =
-          `<div class="empty">
-            まだおすすめできる人がいません 💕
-          </div>`;
-
-        return;
-
-      }
-
-
-      list.innerHTML =
-        users
-          .map(
-            user =>
-              createUserCard(
-                user,
-                likedIds.has(user.id)
-              )
-          )
-          .join("");
-
-
-      list
-        .querySelectorAll(
-          "[data-like]"
-        )
-        .forEach(button => {
-
-          button.addEventListener(
-            "click",
-            async () => {
-
-              await likeUser(
-                button.dataset.like
-              );
-
-            }
-          );
-
-        });
-
-
-      list
-        .querySelectorAll(
-          "[data-block]"
-        )
-        .forEach(button => {
-
-          button.addEventListener(
-            "click",
-            async () => {
-
-              await blockUser(
-                button.dataset.block
-              );
-
-            }
-          );
-
-        });
-
+      renderRecommendations();
 
     } catch (error) {
 
       console.error(error);
 
-      list.innerHTML =
-        `<div class="error">
+      container.innerHTML =
+        `<div class="message error">
           おすすめの読み込みに失敗しました。
         </div>`;
-
     }
-
   }
 
 
-  function createUserCard(
-    user,
-    alreadyLiked
-  ) {
+  function renderRecommendations() {
 
-    const location =
-      [
-        user.prefecture,
-        user.city
-      ]
-      .filter(Boolean)
-      .join("");
+    const container =
+      document.getElementById(
+        "recommendList"
+      );
 
+    if (!allUsers.length) {
 
-    return `
+      container.innerHTML =
+        `<div class="card center">
+          まだ登録しているユーザーがいません。
+        </div>`;
 
-      <div class="user-card">
-
-        <div class="user-top">
-
-          <div class="avatar">
-            💕
-          </div>
-
-          <div>
-
-            <div class="user-name">
-              ${escapeHtml(
-                user.nickname ||
-                "名前未設定"
-              )}
-            </div>
-
-            <div class="user-info">
-
-              ${user.age ? escapeHtml(user.age + "歳") : ""}
-
-              ${user.gender ? "・" + escapeHtml(user.gender) : ""}
-
-              ${location ? "・" + escapeHtml(location) : ""}
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="user-bio">
-
-          ${escapeHtml(
-            user.bio ||
-            "自己紹介はまだありません。"
-          )}
-
-        </div>
-
-
-        <div class="user-actions">
-
-          <button
-            class="btn btn-like"
-            data-like="${escapeHtml(user.id)}"
-          >
-
-            ${alreadyLiked
-              ? "💕 いいね済み"
-              : "💗 いいね"}
-
-          </button>
-
-
-          <button
-            class="btn btn-secondary"
-            data-block="${escapeHtml(user.id)}"
-          >
-            🚫 ブロック
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* =====================================================
-     LIKE
-  ===================================================== */
-
-  async function likeUser(
-    targetUid
-  ) {
-
-    if (!currentUser) {
       return;
     }
 
+    container.innerHTML =
+      allUsers
+        .map(user => {
+
+          const liked =
+            likedUsers.has(user.id);
+
+          return `
+            <div class="user-card">
+
+              <div class="user-name">
+                ${escapeHtml(user.name || "名前未設定")}
+              </div>
+
+              <div class="user-info">
+                ${escapeHtml(String(user.age || ""))}歳
+                ・
+                ${escapeHtml(user.gender || "")}
+              </div>
+
+              <div class="user-info">
+                📍
+                ${escapeHtml(user.prefecture || "")}
+                ${escapeHtml(user.municipality || "")}
+              </div>
+
+              <div class="user-bio">
+                ${escapeHtml(user.bio || "自己紹介はありません。")}
+              </div>
+
+              <button
+                class="like-button ${liked ? "liked" : ""}"
+                data-like="${escapeHtml(user.id)}"
+                ${liked ? "disabled" : ""}
+              >
+                ${liked ? "💕 いいね済み" : "💕 いいね"}
+              </button>
+
+            </div>
+          `;
+        })
+        .join("");
+
+    container
+      .querySelectorAll(
+        "[data-like]"
+      )
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            likeUser(
+              button.dataset.like
+            );
+          }
+        );
+      });
+  }
+
+
+  async function likeUser(targetUid) {
+
+    if (!currentUser) return;
 
     try {
-
-      const likeId =
-        currentUser.uid +
-        "_" +
-        targetUid;
-
-
-      const reverseLikeId =
-        targetUid +
-        "_" +
-        currentUser.uid;
-
 
       await setDoc(
         doc(
           db,
           "likes",
-          likeId
+          currentUser.uid,
+          "users",
+          targetUid
         ),
         {
           from: currentUser.uid,
           to: targetUid,
-          createdAt:
-            serverTimestamp()
+          createdAt: serverTimestamp()
         }
       );
 
+      likedUsers.add(targetUid);
 
       const reverseSnap =
         await getDoc(
           doc(
             db,
             "likes",
-            reverseLikeId
+            targetUid,
+            "users",
+            currentUser.uid
           )
         );
 
-
       if (reverseSnap.exists()) {
 
-        const matchId =
-          [currentUser.uid, targetUid]
-            .sort()
-            .join("_");
-
-
-        await setDoc(
-          doc(
-            db,
-            "matches",
-            matchId
-          ),
-          {
-            users: [
-              currentUser.uid,
-              targetUid
-            ],
-            createdAt:
-              serverTimestamp()
-          },
-          {
-            merge: true
-          }
+        await createMatch(
+          currentUser.uid,
+          targetUid
         );
-
 
         alert(
-          "💕 マッチしました！"
+          "🎉 マッチしました！\nマッチ画面からチャットできます💕"
         );
-
-        await loadMatches();
-
       } else {
 
         alert(
-          "いいねしました 💕"
+          "💕 いいねしました！"
         );
-
       }
 
-
-      await loadRecommendations();
+      renderRecommendations();
 
     } catch (error) {
 
@@ -2532,473 +2107,467 @@
       alert(
         "いいねに失敗しました。"
       );
-
     }
-
   }
 
 
   /* =====================================================
-     BLOCK
+     MATCH
   ===================================================== */
 
-  async function blockUser(
-    targetUid
+  async function createMatch(
+    uid1,
+    uid2
   ) {
 
-    if (!currentUser) {
-      return;
-    }
-
-
-    if (
-      !confirm(
-        "このユーザーをブロックしますか？"
-      )
-    ) {
-      return;
-    }
-
-
-    try {
-
-      const blockId =
-        currentUser.uid +
-        "_" +
-        targetUid;
-
-
-      await setDoc(
-        doc(
-          db,
-          "blocks",
-          blockId
-        ),
-        {
-          from: currentUser.uid,
-          to: targetUid,
-          createdAt:
-            serverTimestamp()
-        }
+    const id =
+      matchIdFor(
+        uid1,
+        uid2
       );
 
-
-      alert(
-        "ブロックしました。"
+    const user1Snap =
+      await getDoc(
+        doc(db, "users", uid1)
       );
 
-
-      await loadRecommendations();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        "ブロックに失敗しました。"
+    const user2Snap =
+      await getDoc(
+        doc(db, "users", uid2)
       );
 
-    }
+    const user1 =
+      user1Snap.exists()
+        ? user1Snap.data()
+        : {};
 
+    const user2 =
+      user2Snap.exists()
+        ? user2Snap.data()
+        : {};
+
+    await setDoc(
+      doc(db, "matches", id),
+      {
+        users: [uid1, uid2],
+
+        user1: uid1,
+
+        user2: uid2,
+
+        user1Name:
+          user1.name || "ユーザー",
+
+        user2Name:
+          user2.name || "ユーザー",
+
+        updatedAt:
+          serverTimestamp(),
+
+        readAt: {}
+      },
+      { merge: true }
+    );
   }
 
 
-  /* =====================================================
-     MATCHES
-  ===================================================== */
+  function startMatchesListener() {
 
-  async function loadMatches() {
+    if (!currentUser) return;
 
-    const list =
+    if (unsubscribeMatches) {
+      unsubscribeMatches();
+    }
+
+    const q =
+      query(
+        collection(db, "matches"),
+        where(
+          "users",
+          "array-contains",
+          currentUser.uid
+        )
+      );
+
+    unsubscribeMatches =
+      onSnapshot(
+        q,
+        snapshot => {
+
+          const matches =
+            snapshot.docs
+              .map(d => ({
+                id: d.id,
+                ...d.data()
+              }))
+              .sort(
+                (a,b) =>
+                  timestampMillis(b.updatedAt)
+                  -
+                  timestampMillis(a.updatedAt)
+              );
+
+          renderMatchList(
+            matches
+          );
+
+          updateUnreadBadge(
+            matches
+          );
+        },
+        error => {
+
+          console.error(
+            "match listener",
+            error
+          );
+        }
+      );
+  }
+
+
+  function renderMatchList(
+    matches
+  ) {
+
+    const container =
       document.getElementById(
         "matchList"
       );
 
+    if (!matches.length) {
 
-    if (!currentUser) {
+      container.innerHTML =
+        `<div class="card center">
+          <div style="font-size:35px;">💕</div>
+          <p>まだマッチしていません。</p>
+          <p class="small">
+            おすすめから「いいね」してみましょう。
+          </p>
+        </div>`;
+
       return;
     }
 
+    container.innerHTML =
+      matches
+        .map(match => {
 
-    list.innerHTML =
-      `<div class="loading">
-        <div class="spinner"></div>
-        読み込み中...
-      </div>`;
+          const partnerUid =
+            match.users.find(
+              uid =>
+                uid !== currentUser.uid
+            );
 
+          const partnerName =
+            partnerUid === match.user1
+              ? match.user1Name
+              : match.user2Name;
 
-    try {
-
-      const snapshot =
-        await getDocs(
-          collection(
-            db,
-            "matches"
-          )
-        );
-
-
-      currentMatches = [];
-
-
-      for (
-        const snap of snapshot.docs
-      ) {
-
-        const data =
-          snap.data();
-
-
-        if (
-          !Array.isArray(
-            data.users
-          )
-        ) {
-          continue;
-        }
-
-
-        if (
-          !data.users.includes(
-            currentUser.uid
-          )
-        ) {
-          continue;
-        }
-
-
-        const partnerId =
-          data.users.find(
-            uid =>
-              uid !==
+          const readAt =
+            match.readAt?.[
               currentUser.uid
-          );
+            ];
 
+          const unread =
+            match.lastMessageFrom &&
+            match.lastMessageFrom !==
+              currentUser.uid &&
+            timestampMillis(
+              match.updatedAt
+            ) >
+            timestampMillis(
+              readAt
+            );
 
-        if (!partnerId) {
-          continue;
-        }
+          let preview =
+            match.lastMessageText ||
+            "チャットできます 💕";
 
+          return `
+            <div
+              class="match-item"
+              data-match="${escapeHtml(match.id)}"
+            >
 
-        const partnerSnap =
-          await getDoc(
-            doc(
-              db,
-              "users",
-              partnerId
-            )
-          );
+              <div class="match-icon">
+                💕
+              </div>
 
+              <div class="match-main">
 
-        if (
-          !partnerSnap.exists()
-        ) {
-          continue;
-        }
+                <div class="matchNameRow">
 
+                  <span>
+                    ${escapeHtml(partnerName || "ユーザー")}
+                  </span>
 
-        currentMatches.push({
-
-          id: snap.id,
-
-          ...data,
-
-          partnerId,
-
-          partner:
-            partnerSnap.data()
-
-        });
-
-      }
-
-
-      if (
-        currentMatches.length === 0
-      ) {
-
-        list.innerHTML =
-          `<div class="empty">
-            まだマッチしていません 💕
-          </div>`;
-
-        return;
-
-      }
-
-
-      list.innerHTML =
-        currentMatches
-          .map(match => {
-
-            const p =
-              match.partner;
-
-
-            const location =
-              [
-                p.prefecture,
-                p.city
-              ]
-              .filter(Boolean)
-              .join("");
-
-
-            return `
-
-              <div
-                class="match-item"
-                data-match="${escapeHtml(match.id)}"
-              >
-
-                <div class="match-left">
-
-                  <div class="match-avatar">
-                    💕
-                  </div>
-
-                  <div>
-
-                    <div class="match-name">
-                      ${escapeHtml(
-                        p.nickname ||
-                        "名前未設定"
-                      )}
-                    </div>
-
-                    <div class="match-location">
-                      ${escapeHtml(location)}
-                    </div>
-
-                  </div>
+                  ${
+                    unread
+                      ? `<span class="unreadText">
+                          未読
+                         </span>`
+                      : ""
+                  }
 
                 </div>
 
-
-                <button
-                  class="btn btn-primary btn-small"
-                  data-open-chat="${escapeHtml(match.id)}"
-                >
-                  💬 チャット
-                </button>
+                <div class="last-message">
+                  ${escapeHtml(preview)}
+                </div>
 
               </div>
 
-            `;
+              ${
+                unread
+                  ? `<span class="unreadBadge">
+                      ●
+                     </span>`
+                  : ""
+              }
 
-          })
-          .join("");
-
-
-      list
-        .querySelectorAll(
-          "[data-open-chat]"
-        )
-        .forEach(button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              const matchId =
-                button.dataset.openChat;
-
-              openChat(
-                matchId
-              );
-
-            }
-          );
-
-        });
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      list.innerHTML =
-        `<div class="error">
-          マッチ情報の読み込みに失敗しました。
-        </div>`;
-
-    }
-
-  }
-
-
-  /* =====================================================
-     OPEN CHAT
-  ===================================================== */
-
-  async function openChat(
-    matchId
-  ) {
-
-    const match =
-      currentMatches.find(
-        item =>
-          item.id === matchId
-      );
-
-
-    if (!match) {
-
-      await loadMatches();
-
-      const retry =
-        currentMatches.find(
-          item =>
-            item.id === matchId
-        );
-
-      if (!retry) {
-        return;
-      }
-
-      return openChat(matchId);
-
-    }
-
-
-    selectedMatchId =
-      matchId;
-
-    selectedPartner =
-      match.partner;
-
-
-    document
-      .querySelectorAll(".nav button")
-      .forEach(
-        b => b.classList.remove("active")
-      );
-
-
-    document
-      .querySelector(
-        '[data-tab="chat"]'
-      )
-      .classList.add("active");
-
-
-    document
-      .querySelectorAll(".tab")
-      .forEach(
-        section =>
-          section.classList.add("hidden")
-      );
-
-
-    document
-      .getElementById("chatTab")
-      .classList.remove("hidden");
-
-
-    document
-      .getElementById("chatSelectArea")
-      .classList.add("hidden");
-
-
-    document
-      .getElementById("chatArea")
-      .classList.remove("hidden");
-
-
-    document
-      .getElementById("chatPartnerName")
-      .textContent =
-        selectedPartner.nickname ||
-        "名前未設定";
-
-
-    document
-      .getElementById("chatPartnerLocation")
-      .textContent =
-        [
-          selectedPartner.prefecture,
-          selectedPartner.city
-        ]
-        .filter(Boolean)
+            </div>
+          `;
+        })
         .join("");
 
+    container
+      .querySelectorAll(
+        "[data-match]"
+      )
+      .forEach(item => {
 
-    listenMessages();
+        item.addEventListener(
+          "click",
+          () => {
 
+            openChat(
+              item.dataset.match
+            );
+          }
+        );
+      });
   }
 
 
-  /* =====================================================
-     BACK CHAT
-  ===================================================== */
+  function updateUnreadBadge(
+    matches
+  ) {
 
-  document
-    .getElementById("backChatBtn")
-    .addEventListener(
-      "click",
-      () => {
+    let count = 0;
 
-        selectedMatchId = null;
+    for (const match of matches) {
 
-        selectedPartner = null;
+      const readAt =
+        match.readAt?.[
+          currentUser.uid
+        ];
 
-        if (unsubscribeMessages) {
+      const unread =
+        match.lastMessageFrom &&
+        match.lastMessageFrom !==
+          currentUser.uid &&
+        timestampMillis(
+          match.updatedAt
+        ) >
+        timestampMillis(
+          readAt
+        );
 
-          unsubscribeMessages();
-
-          unsubscribeMessages = null;
-
-        }
-
-
-        document
-          .getElementById("chatArea")
-          .classList.add("hidden");
-
-
-        document
-          .getElementById("chatSelectArea")
-          .classList.remove("hidden");
-
-
-        loadMatches();
-
+      if (unread) {
+        count++;
       }
-    );
-
-
-  /* =====================================================
-     MESSAGE LISTENER
-  ===================================================== */
-
-  function listenMessages() {
-
-    if (
-      !selectedMatchId ||
-      !currentUser
-    ) {
-      return;
     }
 
+    const badges =
+      [
+        document.getElementById(
+          "navUnread"
+        ),
+        document.getElementById(
+          "navChatUnread"
+        )
+      ];
+
+    badges.forEach(badge => {
+
+      if (count > 0) {
+
+        badge.textContent =
+          count > 99
+            ? "99+"
+            : String(count);
+
+        badge.classList.remove(
+          "hidden"
+        );
+
+      } else {
+
+        badge.classList.add(
+          "hidden"
+        );
+      }
+    });
+  }
+
+
+  function showMatchList() {
+
+    document
+      .getElementById(
+        "matchListPage"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+    document
+      .getElementById(
+        "chatPage"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+    currentMatchId = null;
+    currentChatPartner = null;
 
     if (unsubscribeMessages) {
 
       unsubscribeMessages();
 
       unsubscribeMessages = null;
+    }
+  }
 
+
+  /* =====================================================
+     CHAT
+  ===================================================== */
+
+  async function openChat(matchId) {
+
+    currentMatchId =
+      matchId;
+
+    const matchSnap =
+      await getDoc(
+        doc(
+          db,
+          "matches",
+          matchId
+        )
+      );
+
+    if (!matchSnap.exists()) {
+
+      alert(
+        "マッチ情報が見つかりません。"
+      );
+
+      return;
     }
 
+    const match =
+      matchSnap.data();
+
+    const partnerUid =
+      match.users.find(
+        uid =>
+          uid !== currentUser.uid
+      );
+
+    const partnerName =
+      partnerUid === match.user1
+        ? match.user1Name
+        : match.user2Name;
+
+    currentChatPartner = {
+      uid: partnerUid,
+      name: partnerName || "ユーザー"
+    };
+
+    document
+      .getElementById(
+        "chatPartnerName"
+      )
+      .textContent =
+      currentChatPartner.name;
+
+    document
+      .getElementById(
+        "matchListPage"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+    document
+      .getElementById(
+        "chatPage"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+    document
+      .getElementById(
+        "chatText"
+      )
+      .focus();
+
+    await markChatAsRead();
+
+    listenMessages();
+  }
+
+
+  async function markChatAsRead() {
+
+    if (!currentUser || !currentMatchId) {
+      return;
+    }
+
+    try {
+
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          currentMatchId
+        ),
+        {
+          [`readAt.${currentUser.uid}`]:
+            serverTimestamp()
+        }
+      );
+
+    } catch (error) {
+
+      console.error(
+        "mark read",
+        error
+      );
+    }
+  }
+
+
+  function listenMessages() {
+
+    if (!currentMatchId) return;
+
+    if (unsubscribeMessages) {
+      unsubscribeMessages();
+    }
 
     const messagesRef =
       collection(
         db,
         "matches",
-        selectedMatchId,
+        currentMatchId,
         "messages"
       );
-
 
     unsubscribeMessages =
       onSnapshot(
@@ -3007,115 +2576,58 @@
 
           const messages =
             snapshot.docs
-              .map(docSnap => ({
-                id: docSnap.id,
-                ...docSnap.data()
+              .map(d => ({
+                id: d.id,
+                ...d.data()
               }))
               .sort(
-                (a, b) => {
-
-                  const at =
-                    getTimestampValue(
-                      a.createdAt
-                    );
-
-                  const bt =
-                    getTimestampValue(
-                      b.createdAt
-                    );
-
-                  return at - bt;
-
-                }
+                (a,b) =>
+                  timestampMillis(a.createdAt)
+                  -
+                  timestampMillis(b.createdAt)
               );
-
 
           renderMessages(
             messages
           );
 
+          setTimeout(
+            scrollChatToBottom,
+            50
+          );
         },
         error => {
 
           console.error(
-            "メッセージ監視エラー",
+            "message listener",
             error
           );
-
-          document
-            .getElementById(
-              "chatMessages"
-            )
-            .innerHTML =
-              `<div class="error">
-                メッセージを読み込めませんでした。
-              </div>`;
-
         }
       );
-
   }
 
-
-  function getTimestampValue(
-    timestamp
-  ) {
-
-    if (!timestamp) {
-      return 0;
-    }
-
-    if (
-      typeof timestamp.toMillis ===
-      "function"
-    ) {
-      return timestamp.toMillis();
-    }
-
-    if (
-      timestamp.seconds !==
-      undefined
-    ) {
-      return (
-        timestamp.seconds * 1000
-      );
-    }
-
-    return new Date(
-      timestamp
-    ).getTime() || 0;
-
-  }
-
-
-  /* =====================================================
-     RENDER MESSAGES
-  ===================================================== */
 
   function renderMessages(
     messages
   ) {
 
-    const box =
+    const container =
       document.getElementById(
         "chatMessages"
       );
 
+    if (!messages.length) {
 
-    if (messages.length === 0) {
-
-      box.innerHTML =
-        `<div class="empty">
+      container.innerHTML =
+        `<div class="center small" style="padding:30px;">
           まだメッセージはありません。<br>
           最初のメッセージを送ってみよう 💕
         </div>`;
 
       return;
-
     }
 
-
-    box.innerHTML =
+    container.innerHTML =
       messages
         .map(message => {
 
@@ -3123,110 +2635,108 @@
             message.from ===
             currentUser.uid;
 
-
-          const rowClass =
-            mine
-              ? "message-row mine"
-              : "message-row";
-
-
-          const time =
-            formatDate(
-              message.createdAt
-            );
-
+          let content = "";
 
           if (
             message.type ===
-              "image" &&
-            message.imageUrl
+            "image"
           ) {
 
-            return `
+            content = `
+              <img
+                src="${escapeHtml(message.imageUrl || "")}"
+                class="chat-image"
+                alt="送信された写真"
+                onclick="window.open(this.src,'_blank')"
+              >
 
-              <div class="${rowClass}">
-
-                <div>
-
-                  <div class="message-bubble photo-message">
-
-                    <a
-                      href="${escapeHtml(message.imageUrl)}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="chat-image-link"
-                    >
-
-                      <img
-                        src="${escapeHtml(message.imageUrl)}"
-                        class="chat-image"
-                        alt="送信された写真"
-                        loading="lazy"
-                      >
-
-                    </a>
-
-                  </div>
-
-                  <div class="message-time">
-                    ${escapeHtml(time)}
-                  </div>
-
-                </div>
-
+              <div class="image-message-label">
+                📷 写真
               </div>
-
             `;
 
+          } else {
+
+            content =
+              `<div>
+                ${escapeHtml(message.text || "")}
+              </div>`;
           }
 
-
           return `
+            <div class="bubble-row ${mine ? "mine" : ""}">
 
-            <div class="${rowClass}">
+              <div class="bubble">
 
-              <div>
+                ${content}
 
-                <div class="message-bubble">
-
+                <div class="bubble-time">
                   ${escapeHtml(
-                    message.text || ""
+                    formatTime(
+                      message.createdAt
+                    )
                   )}
-
                 </div>
 
-                <div class="message-time">
-                  ${escapeHtml(time)}
-                </div>
+                ${
+                  mine
+                    ? `
+                      <button
+                        class="delete-message"
+                        data-delete-message="${escapeHtml(message.id)}"
+                      >
+                        🗑️ 削除
+                      </button>
+                    `
+                    : ""
+                }
 
               </div>
 
             </div>
-
           `;
-
         })
         .join("");
 
+    container
+      .querySelectorAll(
+        "[data-delete-message]"
+      )
+      .forEach(button => {
 
-    requestAnimationFrame(
-      () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-        box.scrollTop =
-          box.scrollHeight;
+            deleteMessage(
+              button.dataset.deleteMessage
+            );
+          }
+        );
+      });
+  }
 
-      }
-    );
 
+  function scrollChatToBottom() {
+
+    const box =
+      document.getElementById(
+        "chatMessages"
+      );
+
+    box.scrollTop =
+      box.scrollHeight;
   }
 
 
   /* =====================================================
-     SEND TEXT MESSAGE
+     TEXT MESSAGE
   ===================================================== */
 
   document
-    .getElementById("sendMessageBtn")
+    .getElementById(
+      "sendMessageBtn"
+    )
     .addEventListener(
       "click",
       sendTextMessage
@@ -3234,7 +2744,9 @@
 
 
   document
-    .getElementById("chatInput")
+    .getElementById(
+      "chatText"
+    )
     .addEventListener(
       "keydown",
       event => {
@@ -3247,9 +2759,7 @@
           event.preventDefault();
 
           sendTextMessage();
-
         }
-
       }
     );
 
@@ -3258,47 +2768,31 @@
 
     if (
       !currentUser ||
-      !selectedMatchId
-    ) {
+      !currentMatchId
+    ) return;
 
-      alert(
-        "先にチャット相手を選んでください。"
-      );
-
-      return;
-
-    }
-
-
-    const input =
+    const textarea =
       document.getElementById(
-        "chatInput"
+        "chatText"
       );
-
 
     const text =
-      input.value.trim();
+      textarea.value.trim();
 
-
-    if (!text) {
-      return;
-    }
-
-
-    input.disabled = true;
-
+    if (!text) return;
 
     try {
+
+      textarea.value = "";
 
       await addDoc(
         collection(
           db,
           "matches",
-          selectedMatchId,
+          currentMatchId,
           "messages"
         ),
         {
-
           from:
             currentUser.uid,
 
@@ -3309,13 +2803,31 @@
 
           createdAt:
             serverTimestamp()
-
         }
       );
 
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          currentMatchId
+        ),
+        {
+          lastMessageFrom:
+            currentUser.uid,
 
-      input.value = "";
+          lastMessageText:
+            text.substring(0, 100),
 
+          lastMessageType:
+            "text",
+
+          updatedAt:
+            serverTimestamp()
+        }
+      );
+
+      await markChatAsRead();
 
     } catch (error) {
 
@@ -3324,52 +2836,35 @@
       alert(
         "メッセージを送信できませんでした。"
       );
-
-    } finally {
-
-      input.disabled = false;
-
-      input.focus();
-
     }
-
   }
 
 
   /* =====================================================
-     PHOTO BUTTON
+     PHOTO
   ===================================================== */
 
   document
-    .getElementById("photoButton")
+    .getElementById(
+      "photoBtn"
+    )
     .addEventListener(
       "click",
       () => {
 
-        if (
-          !selectedMatchId
-        ) {
-
-          alert(
-            "先にチャット相手を選んでください。"
-          );
-
-          return;
-
-        }
-
         document
           .getElementById(
-            "chatImageInput"
+            "photoInput"
           )
           .click();
-
       }
     );
 
 
   document
-    .getElementById("chatImageInput")
+    .getElementById(
+      "photoInput"
+    )
     .addEventListener(
       "change",
       async event => {
@@ -3377,320 +2872,138 @@
         const file =
           event.target.files?.[0];
 
-
         event.target.value = "";
 
+        if (!file) return;
 
-        if (!file) {
-          return;
-        }
-
-
-        await sendChatImage(
-          file
-        );
-
+        await sendPhoto(file);
       }
     );
 
 
-  /* =====================================================
-     COMPRESS IMAGE
-  ===================================================== */
-
-  async function compressImage(
-    file
-  ) {
-
-    const maxWidth = 1280;
-
-    const maxHeight = 1280;
-
-    const quality = 0.78;
-
-
-    const dataUrl =
-      await new Promise(
-        (resolve, reject) => {
-
-          const reader =
-            new FileReader();
-
-
-          reader.onload =
-            () => resolve(
-              reader.result
-            );
-
-
-          reader.onerror =
-            reject;
-
-
-          reader.readAsDataURL(
-            file
-          );
-
-        }
-      );
-
-
-    const image =
-      await new Promise(
-        (resolve, reject) => {
-
-          const img =
-            new Image();
-
-
-          img.onload =
-            () => resolve(img);
-
-
-          img.onerror =
-            () =>
-              reject(
-                new Error(
-                  "画像を読み込めませんでした。"
-                )
-              );
-
-
-          img.src =
-            dataUrl;
-
-        }
-      );
-
-
-    let width =
-      image.width;
-
-    let height =
-      image.height;
-
-
-    const scale =
-      Math.min(
-        1,
-        maxWidth / width,
-        maxHeight / height
-      );
-
-
-    width =
-      Math.round(
-        width * scale
-      );
-
-
-    height =
-      Math.round(
-        height * scale
-      );
-
-
-    const canvas =
-      document.createElement(
-        "canvas"
-      );
-
-
-    canvas.width =
-      width;
-
-    canvas.height =
-      height;
-
-
-    const ctx =
-      canvas.getContext(
-        "2d"
-      );
-
-
-    ctx.drawImage(
-      image,
-      0,
-      0,
-      width,
-      height
-    );
-
-
-    const blob =
-      await new Promise(
-        resolve => {
-
-          canvas.toBlob(
-            resolve,
-            "image/jpeg",
-            quality
-          );
-
-        }
-      );
-
-
-    if (!blob) {
-
-      throw new Error(
-        "画像の圧縮に失敗しました。"
-      );
-
-    }
-
-
-    return blob;
-
-  }
-
-
-  /* =====================================================
-     SEND CHAT IMAGE
-  ===================================================== */
-
-  async function sendChatImage(
-    file
-  ) {
+  async function sendPhoto(file) {
 
     if (
       !currentUser ||
-      !selectedMatchId
+      !currentMatchId
+    ) return;
+
+    if (
+      !file.type.startsWith("image/")
     ) {
+
+      alert(
+        "画像ファイルを選択してください。"
+      );
+
       return;
     }
 
+    /*
+      大きすぎる元画像を制限
+    */
 
-    const status =
-      document.getElementById(
-        "uploadStatus"
+    if (
+      file.size >
+      10 * 1024 * 1024
+    ) {
+
+      alert(
+        "写真は10MB以下にしてください。"
       );
 
+      return;
+    }
 
     try {
 
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        alert(
-          "画像ファイルを選択してください。"
+      const progress =
+        document.getElementById(
+          "uploadProgress"
         );
 
-        return;
+      progress.textContent =
+        "📷 写真を準備しています...";
 
-      }
+      /*
+        画像を最大1280pxに縮小
+      */
 
-
-      const maxOriginalSize =
-        10 * 1024 * 1024;
-
-
-      if (
-        file.size >
-        maxOriginalSize
-      ) {
-
-        alert(
-          "写真は10MB以下にしてください。"
+      const resizedBlob =
+        await resizeImage(
+          file,
+          1280,
+          0.82
         );
 
-        return;
-
-      }
-
-
-      status.textContent =
-        "📷 写真を圧縮しています...";
-
-
-      const compressed =
-        await compressImage(
-          file
-        );
-
-
-      const maxUploadSize =
-        5 * 1024 * 1024;
-
-
-      if (
-        compressed.size >
-        maxUploadSize
-      ) {
-
-        alert(
-          "圧縮後も写真が5MBを超えています。別の写真を選んでください。"
-        );
-
-        status.textContent = "";
-
-        return;
-
-      }
-
-
-      status.textContent =
-        "☁️ 写真をアップロードしています...";
-
-
-      const safeName =
-        Date.now() +
-        "_" +
-        Math.random()
+      const fileName =
+        `${Date.now()}_${Math.random()
           .toString(36)
-          .substring(2, 10) +
-        ".jpg";
+          .substring(2)}.jpg`;
 
+      const storagePath =
+        `chatPhotos/${currentMatchId}/${currentUser.uid}/${fileName}`;
 
-      const path =
-        "chatImages/" +
-        selectedMatchId +
-        "/" +
-        currentUser.uid +
-        "/" +
-        safeName;
-
-
-      const imageRef =
+      const storageRef =
         ref(
           storage,
-          path
+          storagePath
         );
 
+      const uploadTask =
+        uploadBytesResumable(
+          storageRef,
+          resizedBlob,
+          {
+            contentType:
+              "image/jpeg"
+          }
+        );
 
-      await uploadBytes(
-        imageRef,
-        compressed,
-        {
-          contentType:
-            "image/jpeg"
+      await new Promise(
+        (resolve, reject) => {
+
+          uploadTask.on(
+            "state_changed",
+
+            snapshot => {
+
+              const percent =
+                Math.round(
+                  (
+                    snapshot.bytesTransferred /
+                    snapshot.totalBytes
+                  ) * 100
+                );
+
+              progress.textContent =
+                `📷 写真を送信中... ${percent}%`;
+            },
+
+            error => {
+              reject(error);
+            },
+
+            () => {
+              resolve();
+            }
+          );
         }
       );
 
-
-      status.textContent =
-        "💬 チャットに送信しています...";
-
-
       const imageUrl =
         await getDownloadURL(
-          imageRef
+          uploadTask.snapshot.ref
         );
-
 
       await addDoc(
         collection(
           db,
           "matches",
-          selectedMatchId,
+          currentMatchId,
           "messages"
         ),
         {
-
           from:
             currentUser.uid,
 
@@ -3700,183 +3013,343 @@
           imageUrl,
 
           imagePath:
-            path,
+            storagePath,
+
+          storagePath,
 
           createdAt:
             serverTimestamp()
-
         }
       );
 
+      await updateDoc(
+        doc(
+          db,
+          "matches",
+          currentMatchId
+        ),
+        {
+          lastMessageFrom:
+            currentUser.uid,
 
-      status.textContent =
+          lastMessageText:
+            "📷 写真",
+
+          lastMessageType:
+            "image",
+
+          updatedAt:
+            serverTimestamp()
+        }
+      );
+
+      await markChatAsRead();
+
+      progress.textContent =
         "📷 写真を送信しました 💕";
-
 
       setTimeout(
         () => {
-          status.textContent = "";
+          progress.textContent = "";
         },
         2000
       );
 
-
     } catch (error) {
 
       console.error(
-        "写真送信エラー",
+        "PHOTO ERROR:",
         error
       );
 
-
-      status.textContent = "";
-
+      document
+        .getElementById(
+          "uploadProgress"
+        )
+        .textContent = "";
 
       if (
-        error.code ===
+        error?.code ===
         "storage/unauthorized"
       ) {
 
         alert(
-          "写真を送信する権限がありません。Firebase Storage Rulesを確認してください。"
+          "Storageの権限設定が必要です。"
         );
 
       } else if (
-        error.code ===
+        error?.code ===
         "storage/quota-exceeded"
       ) {
 
         alert(
-          "Storageの容量制限を超えています。"
+          "Storageの容量上限を確認してください。"
         );
 
       } else {
 
         alert(
-          "写真を送信できませんでした。\n\n" +
-          "Firebase Storageが有効になっているか確認してください。"
+          "写真を送信できませんでした。"
         );
-
       }
-
     }
-
   }
 
 
-  /* =====================================================
-     PHOTO MODAL
-  ===================================================== */
-
-  document
-    .getElementById(
-      "photoModalClose"
-    )
-    .addEventListener(
-      "click",
-      closePhotoModal
-    );
-
-
-  document
-    .getElementById(
-      "photoModal"
-    )
-    .addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target.id ===
-          "photoModal"
-        ) {
-
-          closePhotoModal();
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      "chatMessages"
-    )
-    .addEventListener(
-      "click",
-      event => {
-
-        const image =
-          event.target.closest(
-            ".chat-image"
-          );
-
-
-        if (!image) {
-          return;
-        }
-
-
-        event.preventDefault();
-
-
-        openPhotoModal(
-          image.src
-        );
-
-      }
-    );
-
-
-  function openPhotoModal(
-    src
+  function resizeImage(
+    file,
+    maxSize,
+    quality
   ) {
 
-    document
-      .getElementById(
-        "photoModalImage"
-      )
-      .src = src;
+    return new Promise(
+      (resolve, reject) => {
 
+        const reader =
+          new FileReader();
 
-    document
-      .getElementById(
-        "photoModal"
-      )
-      .classList.remove(
-        "hidden"
-      );
+        reader.onload =
+          event => {
 
-  }
+            const img =
+              new Image();
 
+            img.onload =
+              () => {
 
-  function closePhotoModal() {
+                let width =
+                  img.width;
 
-    document
-      .getElementById(
-        "photoModal"
-      )
-      .classList.add(
-        "hidden"
-      );
+                let height =
+                  img.height;
 
+                if (
+                  width > maxSize ||
+                  height > maxSize
+                ) {
 
-    document
-      .getElementById(
-        "photoModalImage"
-      )
-      .src = "";
+                  if (
+                    width > height
+                  ) {
 
+                    height =
+                      Math.round(
+                        height *
+                        maxSize /
+                        width
+                      );
+
+                    width =
+                      maxSize;
+
+                  } else {
+
+                    width =
+                      Math.round(
+                        width *
+                        maxSize /
+                        height
+                      );
+
+                    height =
+                      maxSize;
+                  }
+                }
+
+                const canvas =
+                  document.createElement(
+                    "canvas"
+                  );
+
+                canvas.width =
+                  width;
+
+                canvas.height =
+                  height;
+
+                const ctx =
+                  canvas.getContext(
+                    "2d"
+                  );
+
+                ctx.drawImage(
+                  img,
+                  0,
+                  0,
+                  width,
+                  height
+                );
+
+                canvas.toBlob(
+                  blob => {
+
+                    if (!blob) {
+
+                      reject(
+                        new Error(
+                          "画像変換失敗"
+                        )
+                      );
+
+                      return;
+                    }
+
+                    resolve(blob);
+                  },
+
+                  "image/jpeg",
+
+                  quality
+                );
+              };
+
+            img.onerror =
+              () => {
+
+                reject(
+                  new Error(
+                    "画像を読み込めません"
+                  )
+                );
+              };
+
+            img.src =
+              event.target.result;
+          };
+
+        reader.onerror =
+          () => {
+
+            reject(
+              new Error(
+                "ファイル読み込み失敗"
+              )
+            );
+          };
+
+        reader.readAsDataURL(file);
+      }
+    );
   }
 
 
   /* =====================================================
-     TALK BOARD
+     DELETE MESSAGE
+  ===================================================== */
+
+  async function deleteMessage(
+    messageId
+  ) {
+
+    if (
+      !currentUser ||
+      !currentMatchId
+    ) return;
+
+    const ok =
+      confirm(
+        "このメッセージを削除しますか？"
+      );
+
+    if (!ok) return;
+
+    try {
+
+      const messageRef =
+        doc(
+          db,
+          "matches",
+          currentMatchId,
+          "messages",
+          messageId
+        );
+
+      const snap =
+        await getDoc(messageRef);
+
+      if (!snap.exists()) return;
+
+      const data =
+        snap.data();
+
+      if (
+        data.from !==
+        currentUser.uid
+      ) {
+
+        alert(
+          "自分のメッセージだけ削除できます。"
+        );
+
+        return;
+      }
+
+      /*
+        写真ならStorageからも削除
+      */
+
+      if (
+        data.storagePath
+      ) {
+
+        try {
+
+          await deleteObject(
+            ref(
+              storage,
+              data.storagePath
+            )
+          );
+
+        } catch (storageError) {
+
+          console.warn(
+            "Storage delete error",
+            storageError
+          );
+        }
+      }
+
+      await deleteDoc(
+        messageRef
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "メッセージの削除に失敗しました。"
+      );
+    }
+  }
+
+
+  /* =====================================================
+     CHAT BACK
   ===================================================== */
 
   document
-    .getElementById("postBtn")
+    .getElementById(
+      "backChatBtn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        showMatchList();
+      }
+    );
+
+
+  /* =====================================================
+     POSTS
+  ===================================================== */
+
+  document
+    .getElementById(
+      "postBtn"
+    )
     .addEventListener(
       "click",
       createPost
@@ -3885,20 +3358,15 @@
 
   async function createPost() {
 
-    if (!currentUser) {
-      return;
-    }
-
+    if (!currentUser) return;
 
     const textarea =
       document.getElementById(
         "postText"
       );
 
-
     const text =
       textarea.value.trim();
-
 
     if (!text) {
 
@@ -3907,9 +3375,7 @@
       );
 
       return;
-
     }
-
 
     try {
 
@@ -3919,28 +3385,25 @@
           "posts"
         ),
         {
-
           uid:
             currentUser.uid,
 
-          nickname:
-            currentProfile?.nickname ||
-            "匿名",
+          name:
+            currentProfile?.name ||
+            "ユーザー",
 
           text,
 
           createdAt:
             serverTimestamp()
-
         }
       );
 
-
       textarea.value = "";
 
-
-      await loadPosts();
-
+      alert(
+        "投稿しました 💕"
+      );
 
     } catch (error) {
 
@@ -3949,139 +3412,131 @@
       alert(
         "投稿できませんでした。"
       );
-
     }
-
   }
 
 
-  async function loadPosts() {
+  function loadPosts() {
 
-    const list =
+    if (!currentUser) return;
+
+    if (unsubscribePosts) {
+      unsubscribePosts();
+    }
+
+    unsubscribePosts =
+      onSnapshot(
+        collection(
+          db,
+          "posts"
+        ),
+        snapshot => {
+
+          const posts =
+            snapshot.docs
+              .map(d => ({
+                id: d.id,
+                ...d.data()
+              }))
+              .sort(
+                (a,b) =>
+                  timestampMillis(b.createdAt)
+                  -
+                  timestampMillis(a.createdAt)
+              );
+
+          renderPosts(posts);
+        },
+        error => {
+
+          console.error(
+            "posts",
+            error
+          );
+        }
+      );
+  }
+
+
+  function renderPosts(
+    posts
+  ) {
+
+    const container =
       document.getElementById(
         "postList"
       );
 
+    if (!posts.length) {
 
-    if (!currentUser) {
+      container.innerHTML =
+        `<div class="center small">
+          まだ投稿がありません。
+        </div>`;
+
       return;
     }
 
+    container.innerHTML =
+      posts
+        .map(post => {
 
-    list.innerHTML =
-      `<div class="loading">
-        <div class="spinner"></div>
-        読み込み中...
-      </div>`;
+          return `
+            <div class="post">
 
-
-    try {
-
-      const snapshot =
-        await getDocs(
-          collection(
-            db,
-            "posts"
-          )
-        );
-
-
-      const posts =
-        snapshot.docs
-          .map(docSnap => ({
-            id:
-              docSnap.id,
-            ...docSnap.data()
-          }))
-          .sort(
-            (a, b) =>
-              getTimestampValue(
-                b.createdAt
-              ) -
-              getTimestampValue(
-                a.createdAt
-              )
-          );
-
-
-      if (posts.length === 0) {
-
-        list.innerHTML =
-          `<div class="empty">
-            まだ投稿はありません。<br>
-            最初のひとことを投稿してみよう 💕
-          </div>`;
-
-        return;
-
-      }
-
-
-      list.innerHTML =
-        posts
-          .map(post => {
-
-            return `
-
-              <div class="post">
-
-                <div class="post-name">
-
-                  ${escapeHtml(
-                    post.nickname ||
-                    "匿名"
-                  )}
-
-                  <span class="post-time">
-
-                    ${escapeHtml(
-                      formatDate(
-                        post.createdAt
-                      )
-                    )}
-
-                  </span>
-
-                </div>
-
-
-                <div class="post-text">
-
-                  ${escapeHtml(
-                    post.text || ""
-                  )}
-
-                </div>
-
+              <div class="post-name">
+                ${escapeHtml(
+                  post.name || "ユーザー"
+                )}
               </div>
 
-            `;
+              <div class="post-text">
+                ${escapeHtml(
+                  post.text || ""
+                )}
+              </div>
 
-          })
-          .join("");
+              <div class="post-time">
+                ${escapeHtml(
+                  formatTime(
+                    post.createdAt
+                  )
+                )}
+              </div>
 
-
-    } catch (error) {
-
-      console.error(error);
-
-      list.innerHTML =
-        `<div class="error">
-          投稿の読み込みに失敗しました。
-        </div>`;
-
-    }
-
+            </div>
+          `;
+        })
+        .join("");
   }
 
 
   /* =====================================================
-     INITIAL
+     LOGOUT
   ===================================================== */
 
-  console.log(
-    "ゼロ円マッチ 💕 起動しました"
-  );
+  document
+    .getElementById(
+      "logoutBtn"
+    )
+    .addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await signOut(auth);
+
+        } catch (error) {
+
+          console.error(error);
+
+          alert(
+            "ログアウトできませんでした。"
+          );
+        }
+      }
+    );
 
 </script>
 
